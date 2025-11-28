@@ -255,12 +255,12 @@ License: For each use you must have a valid license purchased only from above li
 															
 															<div class="col-md-7 mb-4">
 																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="meta_title" value="" placeholder="Nombre del comercio"/>
+																<input type="text" class="form-control form-control-solid" name="meta_title" value="{{ $comercio->comercio ?? '' }}" placeholder="Nombre del comercio"/>
 																<!--end::Input-->
 															</div>
 															<div class="col-md-5">
 																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="meta_title" value="" placeholder="Direccion de recolecta"/>
+																<input type="text" class="form-control form-control-solid" name="meta_title" value="{{ $comercio->direccion ?? '' }}" placeholder="Direccion de recolecta"/>
 																<!--end::Input-->
 															</div>
 														</div>

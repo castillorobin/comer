@@ -11,13 +11,17 @@ use Illuminate\Support\Facades\Auth;
 use PDF; 
 use Carbon\Carbon;
 use App\Models\Hestado;
+use App\Models\Comercio;
 
 class EnvioController extends Controller
 {
 
     public function inicio()
     {
-        return view('guias.crearguia');
+
+        $comercio = Comercio::where('comercio', Auth::user()->name)->first();
+
+        return view('guias.crearguia', compact('comercio'));
     }
 
     public function cambiarEstado(Request $request)
