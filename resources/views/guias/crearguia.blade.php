@@ -4598,9 +4598,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Templates (Blade dentro de strings)
     const tplPuntoFijo = `
-        <div class="form-floating col-lg-12 mb-4" style="height: 50px;">
+        <div class="form-floating col-lg-12" style="height: 45px;">
             <select class="form-select form-select-solid mi-selector" data-control="select2" name="punto" id="punto">
-                <option value="" style="height: 50px;"> </option>
+                <option value="" style="height: 45px;"> </option>
                 @foreach ($puntos as $punto)
                     <option value="{{ $punto->id }}">{{ $punto->punto }}</option>
                 @endforeach
@@ -4611,7 +4611,7 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
 
     const tplCasillero = `
-        <div class="form-floating col-lg-12 mb-4">
+        <div class="form-floating col-lg-12">
             <select class="form-select form-select-solid" name="agencia" id="agencia" aria-label="Floating label select example">
                 @foreach($agencias as $agencia)
                     <option value="{{ $agencia->nombre }}">{{ $agencia->nombre }}</option>
@@ -4622,7 +4622,7 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
 
     const tplPersonalizado = `
-        <div class="form-floating col-lg-12 mb-4">
+        <div class="form-floating col-lg-12">
             <input type="text" class="form-control form-control-solid" name="direccionp" id="direccionp" placeholder="Dirección" value="" />
             <label for="direccionp" style="padding-left: 25px;">Dirección</label>
         </div>
