@@ -4617,7 +4617,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <option value="{{ $agencia->nombre }}">{{ $agencia->nombre }}</option>
                 @endforeach
             </select>
-            <label for="agencia" style="padding-left: 25px;">Agencia</label>
+           
         </div>
     `;
 
