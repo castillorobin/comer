@@ -51,6 +51,44 @@ License: For each use you must have a valid license purchased only from above li
     color: #212529; /* Color de texto normal */
 }
 		</style>
+<style>
+/* contenedor */
+.form-floating.col-lg-12.mb-4 { width: 100%; }
+
+/* === SELECT2 (Metronic) === */
+.select2-container { width: 100% !important; }
+
+.select2-container .select2-selection--single.form-select,
+.select2-container--bootstrap5 .select2-selection--single,
+.select2-container--default .select2-selection--single {
+  height: 45px !important;
+  min-height: 45px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 12px !important;
+}
+
+/* texto */
+.select2-container--bootstrap5 .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 45px !important;
+  padding-left: 0 !important;
+  padding-right: 24px !important;
+}
+
+/* flecha */
+.select2-container--bootstrap5 .select2-selection--single .select2-selection__arrow,
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 45px !important;
+  top: 0 !important;
+}
+
+/* opcional: que el dropdown no se vea raro con padding */
+.select2-container--bootstrap5 .select2-dropdown,
+.select2-container--default .select2-dropdown {
+  border-radius: .475rem;
+}
+</style>
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -273,7 +311,7 @@ License: For each use you must have a valid license purchased only from above li
 														</div>
 														<!--end::Input group-->
 														<!--begin::Input group-->
-														<div class="row fv-row mb-7">
+														<div class="row fv-row mb-4">
 															
 															<div class="col-md-6 mb-4">
 																<!--begin::Input-->
@@ -293,7 +331,7 @@ License: For each use you must have a valid license purchased only from above li
 														</div>
 
 														<!--begin::Input group-->
-														<div class="row fv-row mb-4">
+														<div class="row fv-row ">
 
 														<div class="col-md-4 mb-4">
 																<!--begin::Input-->
@@ -4567,7 +4605,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <option value="{{ $punto->id }}">{{ $punto->punto }}</option>
                 @endforeach
             </select>
-            <label for="punto" style="padding-left: 25px; height: 50px;">Buscar punto</label>
+            
             <br>
         </div>
     `;
