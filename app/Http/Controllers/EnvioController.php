@@ -12,6 +12,8 @@ use PDF;
 use Carbon\Carbon;
 use App\Models\Hestado;
 use App\Models\Comercio;
+use App\Models\Rutas;
+use App\Models\Agencia;
 
 class EnvioController extends Controller
 {
@@ -19,9 +21,12 @@ class EnvioController extends Controller
     public function inicio()
     {
 
-        $comercio = Comercio::where('comercio', Auth::user()->name)->first();
+        $puntos = Rutas::all();
 
-        return view('guias.crearguia', compact('comercio'));
+        $comercio = Comercio::where('comercio', Auth::user()->name)->first();
+        $agencias = Agencia::all();
+
+        return view('guias.crearguia', compact('comercio', 'agencias', 'puntos'));
     }
 
     public function cambiarEstado(Request $request)
@@ -395,6 +400,55 @@ public function verificarGuia(Request $request)
         'entregado' => false,
         'envio' => $envio
     ]);
+}
+
+
+public function store(Request $request)
+{
+     //  dd('ENTRÓ', $request->all());
+    $request->validate([
+        'comercio' => 'required|string|max:255',
+        'direccion_recolecta' => 'nullable|string|max:255',
+        'destinatario' => 'required|string|max:255',
+        'telefono' => 'nullable|string|max:30',
+        'whatsapp' => 'nullable|string|max:30',
+        'tipo' => 'required|in:Punto fijo,Personalizado,Personalizado departamental,Casillero',
+        'punto' => 'nullable|required_if:tipo,Punto fijo',
+        'agencia' => 'nullable|required_if:tipo,Casillero',
+        'direccionp' => 'nullable|required_if:tipo,Personalizado|required_if:tipo,Personalizado departamental',
+        'fecha_entrega' => 'nullable|date',
+        'nota' => 'nullable|string',
+        'total' => 'required|numeric|min:0',
+    ]);
+
+    // Armar la "direccion final" según el tipo
+    $direccionFinal = null;
+
+    if ($request->tipo === 'Punto fijo') {
+        // Aquí puedes guardar el ID del punto o también traer el nombre del punto si quieres
+        $direccionFinal = $request->punto;
+    } elseif ($request->tipo === 'Casillero') {
+        $direccionFinal = $request->agencia;
+    } else {
+        $direccionFinal = $request->direccionp;
+    }
+
+    $envio = Envio::create([
+        'comercio' => $request->comercio,
+        'dircomercio' => $request->direccion_recolecta,
+        'destinatario' => $request->destinatario,
+        'telefono' => $request->telefono,
+        'whatsapp' => $request->whatsapp,
+        'tipo' => $request->tipo,
+        'direccion' => $direccionFinal,
+        'fecha_entrega' => $request->fecha_entrega,
+        'nota' => $request->nota,
+        'total' => $request->total,
+        'estado' => 'Creado', // o el estado inicial que uses
+        'usuario' => Auth::user()->name, // si tienes ese campo
+    ]);
+
+    return redirect()->back()->with('success', 'Envío creado correctamente. ID: ' . $envio->id);
 }
 
 

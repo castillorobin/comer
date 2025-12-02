@@ -248,19 +248,26 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin:::Tab pane-->
 												<div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
 													<!--begin::Form-->
-													<form id="kt_ecommerce_settings_general_form" class="form" action="#">
+													<form id="form_envio" class="form" action="{{ route('envios.store') }}" method="POST">
+    													@csrf
 														
 														<!--begin::Input group-->
 														<div class="row fv-row mb-4">
-															
+															@if ($errors->any())
+  <div class="alert alert-danger">
+    <ul class="mb-0">
+      @foreach($errors->all() as $e) <li>{{ $e }}</li> @endforeach
+    </ul>
+  </div>
+@endif
 															<div class="col-md-7 mb-4">
 																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="meta_title" value="{{ $comercio->comercio ?? '' }}" placeholder="Nombre del comercio"/>
+																<input type="text" class="form-control form-control-solid" name="comercio" value="{{ $comercio->comercio ?? '' }}" placeholder="Nombre del comercio"/>
 																<!--end::Input-->
 															</div>
 															<div class="col-md-5">
 																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="meta_title" value="{{ $comercio->direccion ?? '' }}" placeholder="Direccion de recolecta"/>
+																<input type="text" class="form-control form-control-solid" name="direccion_recolecta" value="{{ $comercio->direccion ?? '' }}" placeholder="Direccion de recolecta"/>
 																<!--end::Input-->
 															</div>
 														</div>
@@ -270,17 +277,17 @@ License: For each use you must have a valid license purchased only from above li
 															
 															<div class="col-md-6 mb-4">
 																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="meta_title" value="" placeholder="Destinatario"/>
+																<input type="text" class="form-control form-control-solid" name="destinatario" value="" placeholder="Destinatario"/>
 																<!--end::Input-->
 															</div>
 															<div class="col-md-3 mb-4">
 																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="meta_title" value="" placeholder="Telefono"/>
+																<input type="text" class="form-control form-control-solid" name="telefono" value="" placeholder="Telefono"/>
 																<!--end::Input-->
 															</div>
 															<div class="col-md-3">
 																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="meta_title" value="" placeholder="WhatsApp"/>
+																<input type="text" class="form-control form-control-solid" name="whatsapp" value="" placeholder="WhatsApp"/>
 																<!--end::Input-->
 															</div>
 														</div>
@@ -292,8 +299,8 @@ License: For each use you must have a valid license purchased only from above li
 																<!--begin::Input-->
 																
 																<select name="tipo" id="tipo" class="form-control form-control-solid placeholder-select">
-																	<option value="" disabled selected hidden>Seleccionar tipo</option>
-																	<option value="Punto fijo">Punto fijo</option>
+																	<option value="" disabled hidden>Seleccionar tipo</option>
+																	<option value="Punto fijo" selected>Punto fijo</option>
 																	<option value="Personalizado">Personalizado</option>
 																	<option value="Personalizado departamental">Personalizado departamental</option>
 																	<option value="Casillero">Casillero</option>
@@ -302,9 +309,8 @@ License: For each use you must have a valid license purchased only from above li
 															</div>
 															
 															<div class="col-md-8 mb-4">
-																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="meta_title" value="" placeholder="Direccion"/>
-																<!--end::Input-->
+																<!-- Aquí se inyecta el campo según el tipo -->
+																<div id="contenedor-direccion"></div>
 															</div>
 															
 														</div>
@@ -317,13 +323,13 @@ License: For each use you must have a valid license purchased only from above li
 															
 															<div class="col-md-6 mb-4">
 																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="meta_title" value="" placeholder="Creado" readonly/>
+																<input type="text" class="form-control form-control-solid" name="estado" value="" placeholder="Creado" readonly/>
 																<!--end::Input-->
 															</div>
 
 															<div class="col-md-6">
 																<!--begin::Input-->
-																<input type="date" class="form-control form-control-solid" name="meta_title" value="" placeholder="Fecha de entrega"/>
+																<input type="date" class="form-control form-control-solid" name="fecha_entrega" value="" placeholder="Fecha de entrega"/>
 																<!--end::Input-->
 															</div>
 														</div>
@@ -333,7 +339,8 @@ License: For each use you must have a valid license purchased only from above li
 															
 															<div class="col-md-12">
 																<!--begin::Input-->
-																<textarea name="nota" class="form-control form-control-solid" id="nota" cols="30" rows="4" placeholder="Nota"></textarea>
+																
+																	<textarea name="nota" class="form-control form-control-solid" id="nota" cols="30" rows="4" placeholder="Nota"></textarea>
 																<!--end::Input-->
 															</div>
 														</div>
@@ -351,7 +358,7 @@ License: For each use you must have a valid license purchased only from above li
 																	<span class="text-nowrap text-muted">Total a Cobrar: </span>
 																</label>
 																
-																<input type="text" class="form-control form-control-solid" name="meta_title" value="" placeholder="$0.00"/>
+																<input type="text" class="form-control form-control-solid" name="total" value="" placeholder="$0.00"/>
 															</div>
 														</div>
 														</div>
@@ -370,13 +377,12 @@ License: For each use you must have a valid license purchased only from above li
 													<div class="row py-5">
     <div class="col-12">
         <div class="d-flex justify-content-end">
-            <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancelar</button>
-            <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                <span class="indicator-label">Guardar</span>
-                <span class="indicator-progress">Por favor espera... 
-                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                </span>
-            </button>
+<a href="/dashboard">
+            <button type="button" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancelar</button>
+			</a>
+            <button type="submit" class="btn btn-primary">
+    Guardar
+</button>
             </div>
     </div>
 </div>
@@ -4546,6 +4552,80 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
+
+		<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const tipo = document.getElementById("tipo");
+    const contenedor = document.getElementById("contenedor-direccion");
+
+    // Templates (Blade dentro de strings)
+    const tplPuntoFijo = `
+        <div class="form-floating col-lg-12 mb-4" style="height: 50px;">
+            <select class="form-select form-select-solid mi-selector" data-control="select2" name="punto" id="punto">
+                <option value="" style="height: 50px;"> </option>
+                @foreach ($puntos as $punto)
+                    <option value="{{ $punto->id }}">{{ $punto->punto }}</option>
+                @endforeach
+            </select>
+            <label for="punto" style="padding-left: 25px; height: 50px;">Buscar punto</label>
+            <br>
+        </div>
+    `;
+
+    const tplCasillero = `
+        <div class="form-floating col-lg-12 mb-4">
+            <select class="form-select form-select-solid" name="agencia" id="agencia" aria-label="Floating label select example">
+                @foreach($agencias as $agencia)
+                    <option value="{{ $agencia->nombre }}">{{ $agencia->nombre }}</option>
+                @endforeach
+            </select>
+            <label for="agencia" style="padding-left: 25px;">Agencia</label>
+        </div>
+    `;
+
+    const tplPersonalizado = `
+        <div class="form-floating col-lg-12 mb-4">
+            <input type="text" class="form-control form-control-solid" name="direccionp" id="direccionp" placeholder="Dirección" value="" />
+            <label for="direccionp" style="padding-left: 25px;">Dirección</label>
+        </div>
+    `;
+
+    function renderCampoDireccion() {
+        const valor = (tipo.value || "").trim();
+
+        if (valor === "Punto fijo") {
+            contenedor.innerHTML = tplPuntoFijo;
+            // Si estás usando Select2 de Metronic
+            initSelect2("#punto");
+        } else if (valor === "Casillero") {
+            contenedor.innerHTML = tplCasillero;
+            initSelect2("#agencia");
+        } else if (valor === "Personalizado" || valor === "Personalizado departamental") {
+            contenedor.innerHTML = tplPersonalizado;
+        } else {
+            contenedor.innerHTML = ""; // nada si no ha elegido
+        }
+    }
+
+    function initSelect2(selector) {
+        // Metronic suele exponer jQuery. Si no existe, no hace nada.
+        if (window.jQuery && jQuery().select2) {
+            const $el = jQuery(selector);
+            // Evita doble init
+            if ($el.length && !$el.hasClass("select2-hidden-accessible")) {
+                $el.select2({ dropdownParent: $el.closest('form') });
+            }
+        }
+    }
+
+    // Evento change
+    tipo.addEventListener("change", renderCampoDireccion);
+
+    // Por si viene preseleccionado (editar)
+    renderCampoDireccion();
+});
+</script>
+
 	</body>
 	<!--end::Body-->
 </html>

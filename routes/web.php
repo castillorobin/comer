@@ -37,6 +37,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Guias
     Route::get('/guias/inicio', [EnvioController::class, 'inicio'])->name('envios.inicio');
 
+    Route::post('/envios', [EnvioController::class, 'store'])->name('envios.store');
+
 Route::get('/logout', function () {
     Auth::logout();
     session()->invalidate();
