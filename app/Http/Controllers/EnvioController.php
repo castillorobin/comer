@@ -405,6 +405,8 @@ public function verificarGuia(Request $request)
 
 public function store(Request $request)
 {
+
+ 
      //  dd('ENTRÓ', $request->all());
     $request->validate([
         'comercio' => 'required|string|max:255',
@@ -448,7 +450,56 @@ public function store(Request $request)
         'usuario' => Auth::user()->name, // si tienes ese campo
     ]);
 
-    return redirect()->back()->with('success', 'Envío creado correctamente. ID: ' . $envio->id);
+    $envio->guia = 'MEL-' . now()->year . '-' . $envio->id;
+    $envio->save();
+
+   // return redirect()->back()->with('success', 'Envío creado correctamente. ID: ' . $envio->id);
+
+   
+    // Si NO quiere imprimir, igual que hoy
+    if ((int)$request->input('print', 0) !== 1) {
+        return redirect()->back()->with('success', 'Envío creado correctamente. ID: ' . $envio->id);
+    }
+
+    // Si sí quiere imprimir: armar data para tu plantilla
+    // Ajusta estos textos fijos si quieres (origen por ejemplo).
+    $guia = (object)[
+        // Si tienes un campo "codigo/guia" úsalo aquí. Si no, puedes usar el ID con prefijo:
+        'codigo'            => $envio->guia,
+
+        'comercio'          => $envio->comercio,
+
+        // En tu form esto es recolecta (origen)
+        'origen_direccion'  => $envio->dircomercio ?? 'AGENCIA METROGALERIA',
+        'origen_tel'        => $envio->telefono,
+        'origen_wa'         => $envio->whatsapp,
+
+        'destinatario'      => $envio->destinatario,
+        // En tu tabla "direccion" es la entrega final (punto/agencia/direccionp)
+        'entrega_direccion' => $envio->direccion,
+        'dest_tel'          => $envio->telefono,
+        'dest_wa'           => $envio->whatsapp,
+
+        'nota'              => $envio->nota ?? '',
+        'total_cobrar'      => $envio->total ?? 0,
+
+        // QR: puede ser el mismo código o un link si luego tienes tracking
+        'qr_text'           => $envio->guia,
+    ];
+
+    $pdf = PDF::loadView('guias.ticket', compact('guia'));
+
+    $customPaper = [0, 0, 250, 600];
+    $pdf->setPaper($customPaper);
+
+    // Abre el PDF en el navegador (más cómodo para imprimir)
+    return $pdf->stream('ticket-'.$guia->codigo.'.pdf');
+
+    // Si prefieres descarga directa:
+    // return $pdf->download('ticket-'.$guia->codigo.'.pdf');
+
+
+
 }
 
 

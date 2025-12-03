@@ -288,7 +288,7 @@ License: For each use you must have a valid license purchased only from above li
 													<!--begin::Form-->
 													<form id="form_envio" class="form" action="{{ route('envios.store') }}" method="POST">
     													@csrf
-														
+														<input type="hidden" name="print" id="print" value="0">
 														<!--begin::Input group-->
 														<div class="row fv-row mb-4">
 															@if ($errors->any())
@@ -418,9 +418,16 @@ License: For each use you must have a valid license purchased only from above li
 <a href="/dashboard">
             <button type="button" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancelar</button>
 			</a>
-            <button type="submit" class="btn btn-primary">
-    Guardar
-</button>
+
+			 {{-- Guardar normal --}}
+                <button type="submit" class="btn btn-primary me-2" onclick="document.getElementById('print').value='0'">
+                    Guardar
+                </button>
+
+                {{-- Guardar e imprimir --}}
+                <button type="submit" class="btn btn-success" onclick="document.getElementById('print').value='1'">
+                    Guardar e imprimir
+                </button>
             </div>
     </div>
 </div>
