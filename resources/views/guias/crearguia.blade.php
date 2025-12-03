@@ -420,14 +420,17 @@ License: For each use you must have a valid license purchased only from above li
 			</a>
 
 			 {{-- Guardar normal --}}
-                <button type="submit" class="btn btn-primary me-2" onclick="document.getElementById('print').value='0'">
-                    Guardar
-                </button>
+             
+<button type="submit" class="btn btn-primary me-2"
+        onclick="document.getElementById('print').value='0'; document.getElementById('form_envio').target='_self';">
+  Guardar
+</button>
 
-                {{-- Guardar e imprimir --}}
-                <button type="submit" class="btn btn-success" onclick="document.getElementById('print').value='1'">
-                    Guardar e imprimir
-                </button>
+{{-- Guardar e imprimir (abre nueva pestaña) --}}
+<button type="submit" class="btn btn-success"
+        onclick="document.getElementById('print').value='1'; document.getElementById('form_envio').target='_blank';">
+  Guardar e imprimir
+</button>
             </div>
     </div>
 </div>

@@ -123,10 +123,6 @@
         <span class="value"> {{ $guia->origen_direccion ?? '' }}</span>
       </div>
       <div class="kv md" style="margin-top:4px;">
-        <span class="label">Dirección de origen:</span>
-        <span class="value"> {{ $guia->origen_direccion ?? '' }}</span>
-      </div>
-      <div class="kv md" style="margin-top:4px;">
         <span class="label">Teléfono de origen:</span> <br>
         <span class="value"> {{ $guia->origen_tel ?? '' }}</span>
       </div>
