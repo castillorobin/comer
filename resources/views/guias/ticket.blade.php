@@ -91,15 +91,14 @@
   <div class="center">
     {{-- Ajusta ruta del logo según tu proyecto --}}
     <img src="../public/fotos/logoticket.jpeg" alt="Melo Express" style="max-width: 55mm; height: auto;">
-  
 
-    <div class="sm" style="margin-top: 6px;">
+    <div class="sm" style="margin-top: 16px;">
       <div class="bold">www.meloexpress.com.sv</div>
       <div>Centro Comercial Metrogaleria local 3-9</div>
     </div>
 
     <div class="md bold" style="margin-top: 6px;">
-      7164 4480 - 2233 8690
+     <img src="../public/fotos/what.png" alt="" style="max-width: 15px; height: auto; margin-right: 4px;"> 7164 4480 - 2233 8690
     </div>
   </div>
 
@@ -188,7 +187,7 @@
   <div class="barcode">
     @if (!empty($guia->codigo))
       {!! DNS1D::getBarcodeHTML($guia->codigo, 'C39', 1.2, 42) !!}
-      <div class="sm bold" style="margin-top: 3px;">{{ $guia->codigo }}</div>
+      <div class="sm bold" style="margin-top: 16px;">{{ $guia->codigo }}</div>
     @endif
     <div class="sm" style="margin-top: 6px;">¡¡Gracias por preferirnos!!</div>
   </div>
