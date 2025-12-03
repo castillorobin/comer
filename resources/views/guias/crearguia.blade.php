@@ -4674,6 +4674,35 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+
+<script>
+  (function () {
+    const form = document.getElementById('form_envio');
+    const printInput = document.getElementById('print');
+
+    form.addEventListener('submit', function () {
+      // Si fue "Guardar e imprimir"
+      if (printInput && printInput.value === '1') {
+        // Espera un poquito para no interferir con el submit
+        setTimeout(() => {
+          form.reset();
+
+          // Si tienes contenedores dinámicos (como tu #contenedor-direccion)
+          const cont = document.getElementById('contenedor-direccion');
+          if (cont) cont.innerHTML = '';
+
+          // Regresa el hidden a 0 por seguridad
+          printInput.value = '0';
+
+          // Si quieres volver a valor por defecto en selects:
+          const tipo = document.getElementById('tipo');
+          if (tipo) tipo.selectedIndex = 0; // o el índice que quieras
+        }, 50);
+      }
+    });
+  })();
+</script>
+
 	</body>
 	<!--end::Body-->
 </html>
