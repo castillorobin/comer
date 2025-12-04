@@ -44,6 +44,18 @@ class EnvioController extends Controller
         return view('guias.mistickets', compact('envios', 'comercio', 'ticketpago'));
     }
 
+    public function misenvios($id)
+    {
+
+        $comercio = Comercio::where('comercio', Auth::user()->name)->first();
+        $envios = Envio::where('pagoticket', $id)
+                        ->orderBy('created_at', 'desc')
+                        ->take(10)
+                        ->get();
+
+        return view('guias.guiaslista', compact('envios', 'comercio'));
+    }
+
     public function filtrarTicket(Request $request)
 {
     $comercio = Comercio::where('comercio', Auth::user()->name)->first();

@@ -40,6 +40,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/envios', [EnvioController::class, 'store'])->name('envios.store');
 
     Route::get('/guias/mistickets', [EnvioController::class, 'mistickets'])->name('envios.mistickets');
+    Route::get('/guias/misenvios/{id}', [EnvioController::class, 'misenvios'])->name('envios.misenvios');
 
     Route::get('/envios/filtrarticket', [EnvioController::class, 'filtrarTicket'])->name('envios.filtrarticket');
 

@@ -16,7 +16,7 @@ License: For each use you must have a valid license purchased only from above li
 	<!--begin::Head-->
 	<head>
 <base href="../../" />
-		<title>Mis Tickets</title>
+		<title>Ticket</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="The most advanced Bootstrap 5 Admin Theme with 40 unique prebuilt layouts on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel versions. Grab your copy now and get life-time updates for free." />
 		<meta name="keywords" content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
@@ -356,7 +356,7 @@ if (searchText == "") {
 									<!--begin::Page title-->
 									<div class="page-title me-5">
 										<!--begin::Title-->
-										<h1 class="page-heading d-flex text-white fw-bold fs-2 flex-column justify-content-center my-0">Mis Tickets
+										<h1 class="page-heading d-flex text-white fw-bold fs-2 flex-column justify-content-center my-0">Listado de envios
 										<!--begin::Description-->
 										<span class="page-desc text-gray-600 fw-semibold fs-6 pt-3"></span>
 										<!--end::Description--></h1>
@@ -603,7 +603,7 @@ if (searchText == "") {
     <!--begin::Title-->
     <div class="d-flex flex-wrap align-items-center my-1">
                     <h3 class="fw-bold me-5 my-1">
-                {{ count($ticketpago) }} Tickets encontrados
+                {{ count($envios) }} Envios encontrados
            
             </h3> 
             </div>
@@ -618,12 +618,16 @@ if (searchText == "") {
         <!--begin::Actions-->
      <div class="d-flex flex-column flex-md-row gap-3 align-items-stretch justify-content-md-end my-0 w-100 ">
 
-  <form action="/envios/filtrarticket" method="GET" class="w-100 w-md-auto">
+  <form action="/envios/filtrarestado" method="GET" class="w-100 w-md-auto">
     <div class="input-group w-100 w-md-300px">
-      <input class="form-control"
-             placeholder="Rango"
-             id="kt_ecommerce_report_shipping_daterangepicker"
-             name="rango" />
+      <select class="form-select" name="estado" id="">
+        <option value="" selected>Filtrar por estado</option>
+        <option value="Entregado">Entregado</option>
+        <option value="No entregado">No entregado</option>
+        <option value="En ruta">En ruta</option>
+        <option value="Reprogramado">Reprogramado</option>
+        <option value="Devuelto al comercio">Devuelto al comercio</option>
+      </select>
       <button type="submit" class="btn btn-primary">Filtrar</button>
     </div>
   </form>
@@ -659,16 +663,24 @@ if (searchText == "") {
 			<table id="kt_ecommerce_report_shipping_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable" style="width: 100%;">
                 <thead class="fs-7 text-gray-500 text-uppercase">
                     <tr>
-						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " data-dt-column="0" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">ID Ticket</span><span class="dt-column-order" role="button" aria-label="Manager: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " data-dt-column="0" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Guia</span><span class="dt-column-order" role="button" aria-label="Manager: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
-						<th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="1" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Fecha</span><span class="dt-column-order" role="button" aria-label="Date: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="1" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Destinatario</span><span class="dt-column-order" role="button" aria-label="Date: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
+						<th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Destino</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
+						</th>
+					
+						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " style="text-align: right;" data-dt-column="3" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Tipo</span><span class="dt-column-order" role="button" aria-label="Status: Activate to sort" tabindex="0"></span></div>
+						</th>
 						<th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Estado</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
 						</th>
-					
-						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " style="text-align: right;" data-dt-column="3" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Accion</span><span class="dt-column-order" role="button" aria-label="Status: Activate to sort" tabindex="0"></span></div>
+
+						<th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Ubicacion</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
+						</th>
+
+						<th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Fecha</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
 						
@@ -676,14 +688,14 @@ if (searchText == "") {
 					</tr>
                 </thead>
                 <tbody class="fs-6 text-gray-500">
-				@foreach($ticketpago as $ticket)
+				@foreach($envios as $envio)
 				<tr>
                             <td >
                                 <!--begin::User-->
                                 
 									<!--begin::Wrapper-->
 									
-										<a href="/guias/misenvios/{{ $ticket->id }}" class="text-gray-500 text-hover-primary mb-1">{{ $ticket->id }}</a>
+										{{ $envio->id }}
 										
 									
 									<!--end::Wrapper-->
@@ -691,15 +703,24 @@ if (searchText == "") {
                                 <!--end::User-->
                             </td>
 
-                            <td class="text-center">{{ $ticket->created_at->format('d/m/Y') }}</td>
+                            <td class="text-center">{{ $envio->destinatario }}</td>
                             
                             <td class="text-center">
-                                <span class="badge badge-light-success fw-bold px-4 py-3">
-                                   {{ $ticket->estado }}                               </span>
+                               
+                                   {{ $envio->direccion }}                            
                             </td>
 
                             <td style="text-align: right;"	>
-                                <a href="#" class="btn btn-light btn-sm">Ver</a>
+                                {{ $envio->tipo }}
+                            </td>
+                            <td class="text-center">
+                                {{ $envio->estado }}
+                            </td>
+                            <td class="text-center">
+                                {{ $envio->agenciaubi }}
+                            </td>
+                            <td class="text-center">
+                                {{ $envio->created_at->format('d/m/Y') }}
                             </td>
                         </tr>
 				@endforeach
@@ -720,8 +741,8 @@ if (searchText == "") {
 			</div>
 			
 			</div>
-			<div class="w-100 text-end" style="margin-top: 15px;">
-			<a href="/dashboard">
+			<div class="w-100 text-end">
+			<a href="/guias/mistickets">
   <button class="btn btn-secondary">Cerrar</button>
   </a>
 </div>
