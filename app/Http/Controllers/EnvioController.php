@@ -15,6 +15,7 @@ use App\Models\Comercio;
 use App\Models\Rutas;
 use App\Models\Agencia;
 
+
 class EnvioController extends Controller
 {
 
@@ -42,6 +43,36 @@ class EnvioController extends Controller
 
         return view('guias.mistickets', compact('envios', 'comercio', 'ticketpago'));
     }
+
+    public function filtrarTicket(Request $request)
+{
+    $comercio = Comercio::where('comercio', Auth::user()->name)->first();
+        
+
+    $query = Ticktpago::where('comercio', Auth::user()->name);
+
+    if ($request->filled('rango')) {
+        // "11/20/2025 - 12/04/2025"
+        [$start, $end] = array_map('trim', explode('-', $request->rango));
+
+        // OJO: el formato que viene es m/d/Y (11/20/2025)
+        $startDate = Carbon::createFromFormat('m/d/Y', $start)->startOfDay();
+        $endDate   = Carbon::createFromFormat('m/d/Y', $end)->endOfDay();
+
+        // Si tu fecha real del pago es fechapago:
+        $query->whereBetween('created_at', [$startDate, $endDate]);
+
+        // Si en vez de fechapago quieres created_at, usa:
+        // $query->whereBetween('created_at', [$startDate, $endDate]);
+    }
+
+    $ticketpago = $query->orderBy('fechapago', 'desc')->take(10)->get();
+
+    // Regresas la misma vista que lista tickets
+    return view('guias.mistickets', compact('ticketpago' , 'comercio', ));
+}
+
+
 
     public function cambiarEstado(Request $request)
     { 

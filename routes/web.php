@@ -41,6 +41,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/guias/mistickets', [EnvioController::class, 'mistickets'])->name('envios.mistickets');
 
+    Route::get('/envios/filtrarticket', [EnvioController::class, 'filtrarTicket'])->name('envios.filtrarticket');
+
 Route::get('/logout', function () {
     Auth::logout();
     session()->invalidate();

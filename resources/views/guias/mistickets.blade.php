@@ -39,7 +39,7 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 		<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
-
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
 		<style>
 			/* Coloca este código en tu archivo CSS */
 .placeholder-select:required:invalid {
@@ -89,7 +89,123 @@ License: For each use you must have a valid license purchased only from above li
   border-radius: .475rem;
 }
 </style>
+
+<style>
+        .table th,
+        .table td {
+            padding: 0.10rem;
+            /* Ajusta el valor según sea necesario */
+        }
+
+        .dataTables_filter {
+            display: none;
+        }
+
+       
+/*
+        #kt_ecommerce_report_shipping_table_previous{
+            display: none;
+        }
+        #kt_ecommerce_report_shipping_table_next{
+            display: none;
+        }
+            */
+    </style>
+
 	</head>
+
+	
+<script>
+    function doSearch()
+
+{
+
+const tableReg = document.getElementById('kt_ecommerce_report_shipping_table');
+
+const searchText = document.getElementById('searchTerm').value.toLowerCase();
+
+let total = 0;
+
+
+
+// Recorremos todas las filas con contenido de la tabla
+
+for (let i = 1; i < tableReg.rows.length; i++) {
+
+    // Si el td tiene la clase "noSearch" no se busca en su cntenido
+
+    if (tableReg.rows[i].classList.contains("noSearch")) {
+
+        continue;
+
+    }
+
+
+
+    let found = false;
+
+    const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+
+    // Recorremos todas las celdas
+
+    for (let j = 0; j < cellsOfRow.length && !found; j++) {
+
+        const compareWith = cellsOfRow[j].innerHTML.toLowerCase();
+
+        // Buscamos el texto en el contenido de la celda
+
+        if (searchText.length == 0 || compareWith.indexOf(searchText) > -1) {
+
+            found = true;
+
+            total++;
+
+        }
+
+    }
+
+    if (found) {
+
+        tableReg.rows[i].style.display = '';
+
+    } else {
+
+       
+
+        tableReg.rows[i].style.display = 'none';
+
+    }
+
+}
+
+
+
+// mostramos las coincidencias
+
+const lastTR=tableReg.rows[tableReg.rows.length-1];
+
+const td=lastTR.querySelector("td");
+
+lastTR.classList.remove("hide", "red");
+
+if (searchText == "") {
+
+    lastTR.classList.add("hide");
+
+} else if (total) {
+
+    td.innerHTML="";
+
+} else {
+
+    lastTR.classList.add("red");
+
+    td.innerHTML="";
+
+}
+
+}
+</script>
 	<!--end::Head-->
 	<!--begin::Body-->
 	<body id="kt_app_body" data-kt-app-header-fixed-mobile="true" data-kt-app-toolbar-enabled="true" class="app-default">
@@ -281,7 +397,7 @@ License: For each use you must have a valid license purchased only from above li
                 <!--begin::Input group-->
                 <div class="position-relative w-md-400px me-md-2">
                     <i class="ki-outline ki-magnifier fs-3 text-gray-500 position-absolute top-50 translate-middle ms-6"></i>
-                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Buscar ticket" />
+                    <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Buscar ticket" id="searchTerm" onkeyup="doSearch()" />
                 </div>
                 <!--end::Input group-->
 
@@ -505,20 +621,22 @@ License: For each use you must have a valid license purchased only from above li
         <!--begin::Actions-->
         <div class="d-flex my-0">
             <!--begin::Select-->
-            <select name="status" data-control="select2" data-hide-search="true" data-placeholder="Filter" class="form-select form-select-sm border-body bg-body w-150px me-5 select2-hidden-accessible" data-select2-id="select2-data-7-0qb2" tabindex="-1" aria-hidden="true" data-kt-initialized="1">
-                <option value="1" data-select2-id="select2-data-9-40sr">Recently Updated</option>
-                <option value="2">Last Month</option>
-                <option value="3">Last Quarter</option>
-                <option value="4">Last Year</option>
-            </select><span class="select2 select2-container select2-container--bootstrap5" dir="ltr" data-select2-id="select2-data-8-ffnj" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single form-select form-select-sm border-body bg-body w-150px me-5" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-status-m8-container" aria-controls="select2-status-m8-container"><span class="select2-selection__rendered" id="select2-status-m8-container" role="textbox" aria-readonly="true" title="Recently Updated">Recently Updated</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+			<form action="/envios/filtrarticket" method="GET">
+
+            <div class="input-group w-300px">
+            <input class="form-control" placeholder="Rango" id="kt_ecommerce_report_shipping_daterangepicker" name="rango" />
+			<button type="submit" class="btn btn-primary " class="btn-cancelar"  style="margin-right: 10px;">Filtrar</button>
+            </div>
+
+			</form>
             <!--end::Select-->
 
             <!--begin::Select-->
-            <select name="status" data-control="select2" data-hide-search="true" data-placeholder="Export" class="form-select form-select-sm border-body bg-body w-100px select2-hidden-accessible" data-select2-id="select2-data-10-bykc" tabindex="-1" aria-hidden="true" data-kt-initialized="1">
-                <option value="1" data-select2-id="select2-data-12-0u74">Excel</option>
+            <select name="status"  data-placeholder="Exportar" class="form-select form-select border-body bg-body w-100px " style="margin-right: 10px;"  >
+                <option value="1" >Excel</option>
                 <option value="1">PDF</option>
-                <option value="2">Print</option>
-            </select><span class="select2 select2-container select2-container--bootstrap5" dir="ltr" data-select2-id="select2-data-11-25fi" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single form-select form-select-sm border-body bg-body w-100px" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-status-us-container" aria-controls="select2-status-us-container"><span class="select2-selection__rendered" id="select2-status-us-container" role="textbox" aria-readonly="true" title="Excel">Excel</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+             
+            </select>
             <!--end::Select-->
         </div>
         <!--end::Actions-->
@@ -540,47 +658,50 @@ License: For each use you must have a valid license purchased only from above li
         <!--begin::Table container-->
         <div class="table-responsive">
             <!--begin::Table-->
-            <div id="kt_project_users_table_wrapper" class="dt-container dt-bootstrap5 dt-empty-footer"><div id="" class="table-responsive"><table id="" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable" style="width: 100%;"><colgroup><col data-dt-column="0" style="width: 364.688px;"><col data-dt-column="1" style="width: 218.812px;"><col data-dt-column="2" style="width: 131.281px;"><col data-dt-column="3" style="width: 154.062px;"><col data-dt-column="4" style="width: 97.6562px;"></colgroup>
+            <div id="kt_project_users_table_wrapper" class="dt-container dt-bootstrap5 dt-empty-footer"><div id="" class="table-responsive">
+			<table id="kt_ecommerce_report_shipping_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable" style="width: 100%;">
                 <thead class="fs-7 text-gray-500 text-uppercase">
                     <tr>
-						<th class="min-w-250px dt-orderable-asc dt-orderable-desc" data-dt-column="0" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">ID Ticket</span><span class="dt-column-order" role="button" aria-label="Manager: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " data-dt-column="0" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">ID Ticket</span><span class="dt-column-order" role="button" aria-label="Manager: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
-						<th class="min-w-150px dt-orderable-asc dt-orderable-desc" data-dt-column="1" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Fecha</span><span class="dt-column-order" role="button" aria-label="Date: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " data-dt-column="1" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Fecha</span><span class="dt-column-order" role="button" aria-label="Date: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
-						<th class="min-w-90px dt-type-numeric dt-orderable-asc dt-orderable-desc" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Estado</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Estado</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
-						<th class="min-w-90px dt-orderable-asc dt-orderable-desc" data-dt-column="3" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Accion</span><span class="dt-column-order" role="button" aria-label="Status: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " data-dt-column="3" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Accion</span><span class="dt-column-order" role="button" aria-label="Status: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
 						
 					
 					</tr>
                 </thead>
-                <tbody class="fs-6">
+                <tbody class="fs-6 text-gray-500">
 				@foreach($ticketpago as $ticket)
 				<tr>
-                            <td>
+                            <td >
                                 <!--begin::User-->
-                                <div class="d-flex align-items-center">
+                                
 									<!--begin::Wrapper-->
-									<div class="d-flex flex-column">
-										<a href="#" class="text-gray-800 text-hover-primary mb-1">{{ $ticket->id }}</a>
+									
+										<a href="#" class="text-gray-500 text-hover-primary mb-1">{{ $ticket->id }}</a>
 										
-									</div>
+									
 									<!--end::Wrapper-->
-                                                                   </div>
+                                                        
                                 <!--end::User-->
                             </td>
-                            <td >{{ $ticket->created_at->format('d/m/Y') }}</td>
+
+                            <td>{{ $ticket->created_at->format('d/m/Y') }}</td>
                             
-                            <td>
+                            <td >
                                 <span class="badge badge-light-success fw-bold px-4 py-3">
                                    {{ $ticket->estado }}                               </span>
                             </td>
-                            <td class="text-end">
+
+                            <td style="text-align: right;"	>
                                 <a href="#" class="btn btn-light btn-sm">Ver</a>
                             </td>
                         </tr>
@@ -650,7 +771,9 @@ License: For each use you must have a valid license purchased only from above li
 	
 		 
         <!--begin::Javascript-->
-					<script>var hostUrl = "assets/";</script>	
+					<script>
+					var hostUrl = "assets/";
+					</script>	
 
                     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
                             <script src="assets/plugins/global/plugins.bundle.js"></script>
@@ -670,6 +793,9 @@ License: For each use you must have a valid license purchased only from above li
                             <script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
                             <script src="assets/js/custom/utilities/modals/new-target.js"></script>
                             <script src="assets/js/custom/utilities/modals/users-search.js"></script>
+
+							    <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="assets/js/custom/apps/ecommerce/reports/shipping/shipping.js"></script>
                         <!--end::Custom Javascript-->
                 <!--end::Javascript-->
 
