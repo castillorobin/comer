@@ -609,37 +609,37 @@ if (searchText == "") {
             </div>
     <!--end::Title-->
 
-    <!--begin::Controls-->
-    <div class="d-flex flex-wrap my-1">
+    <!--begin::Controls--> 
+   
         <!--begin::Tab nav-->
         
         <!--end::Tab nav-->
 
         <!--begin::Actions-->
-        <div class="d-flex my-0">
-            <!--begin::Select-->
-			<form action="/envios/filtrarticket" method="GET">
+     <div class="d-flex flex-column flex-md-row gap-3 align-items-stretch justify-content-md-end my-0 w-100 ">
 
-            <div class="input-group w-300px">
-            <input class="form-control" placeholder="Rango" id="kt_ecommerce_report_shipping_daterangepicker" name="rango" />
-			<button type="submit" class="btn btn-primary " class="btn-cancelar"  style="margin-right: 10px;">Filtrar</button>
-            </div>
+  <form action="/envios/filtrarticket" method="GET" class="w-100 w-md-auto">
+    <div class="input-group w-100 w-md-300px">
+      <input class="form-control"
+             placeholder="Rango"
+             id="kt_ecommerce_report_shipping_daterangepicker"
+             name="rango" />
+      <button type="submit" class="btn btn-primary">Filtrar</button>
+    </div>
+  </form>
 
-			</form>
-            <!--end::Select-->
+  <select name="status"
+          data-placeholder="Exportar"
+          class="form-select border-body bg-body w-100 w-md-150px">
+    <option value="excel">Excel</option>
+    <option value="pdf">PDF</option>
+  </select>
 
-            <!--begin::Select-->
-            <select name="status"  data-placeholder="Exportar" class="form-select form-select border-body bg-body w-100px " style="margin-right: 10px;"  >
-                <option value="1" >Excel</option>
-                <option value="1">PDF</option>
-             
-            </select>
-            <!--end::Select-->
-        </div>
+</div>
         <!--end::Actions-->
     </div>
     <!--end::Controls-->
-</div>
+
 <!--end::Toolbar-->
 
 <!--begin::Tab Content-->
