@@ -28,6 +28,20 @@ class EnvioController extends Controller
 
         return view('guias.crearguia', compact('comercio', 'agencias', 'puntos'));
     }
+    public function mistickets()
+    {
+        $comercio = Comercio::where('comercio', Auth::user()->name)->first();
+        $envios = Envio::where('comercio', Auth::user()->name)
+                        ->orderBy('created_at', 'desc')
+                        ->take(10)
+                        ->get();
+        $ticketpago = Ticktpago::where('comercio', Auth::user()->name)
+                        ->orderBy('fechapago', 'desc')
+                        ->take(10)
+                        ->get();
+
+        return view('guias.mistickets', compact('envios', 'comercio', 'ticketpago'));
+    }
 
     public function cambiarEstado(Request $request)
     { 

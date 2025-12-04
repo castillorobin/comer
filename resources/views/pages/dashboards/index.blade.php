@@ -233,9 +233,9 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Col-->
 												<div class="col-6">
 													<!--begin::Card-->
-													<a class="card flex-column justfiy-content-start align-items-start text-start w-100 text-gray-800 text-hover-primary p-10" href="account/statements.html">
+													<a class="card flex-column justfiy-content-start align-items-start text-start w-100 text-gray-800 text-hover-primary p-10" href="/guias/mistickets">
 														<i class="ki-outline ki-technology-2 fs-2tx mb-5 ms-n1 text-gray-500"></i>
-														<span class="fs-4 fw-bold">Mis paquetes</span>
+														<span class="fs-4 fw-bold">Mis Tickets</span>
 													</a>
 													<!--end::Card-->
 												</div>
