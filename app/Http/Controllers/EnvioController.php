@@ -429,14 +429,12 @@ public function store(Request $request)
     if ($request->tipo === 'Punto fijo') {
         // Aquí puedes guardar el ID del punto o también traer el nombre del punto si quieres
 
-        $direccionFinal = $puntos = Rutas::where('id', $request->punto)->value('punto');
+        $direccionFinal =  $request->punto;
     } elseif ($request->tipo === 'Casillero') {
         $direccionFinal = $request->agencia;
     } else {
         $direccionFinal = $request->direccionp;
     }
-
-    dd($direccionFinal);
 
     $envio = Envio::create([
         'comercio' => $request->comercio,
@@ -466,6 +464,10 @@ public function store(Request $request)
         return redirect()->back()->with('success', 'Envío creado correctamente. ID: ' . $envio->id);
     }
 
+    if ($request->tipo === 'Punto fijo') {
+        $direccionFinal = Rutas::where('id', $request->punto)->value('punto');
+    }
+
     // Si sí quiere imprimir: armar data para tu plantilla
     // Ajusta estos textos fijos si quieres (origen por ejemplo).
     $guia = (object)[
@@ -481,7 +483,7 @@ public function store(Request $request)
 
         'destinatario'      => $envio->destinatario,
         // En tu tabla "direccion" es la entrega final (punto/agencia/direccionp)
-        'entrega_direccion' => $envio->direccion,
+        'entrega_direccion' => $direccionFinal,
         'dest_tel'          => $envio->telefono,
         'dest_wa'           => $envio->whatsapp,
 
