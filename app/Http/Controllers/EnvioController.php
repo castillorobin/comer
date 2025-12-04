@@ -428,12 +428,15 @@ public function store(Request $request)
 
     if ($request->tipo === 'Punto fijo') {
         // Aquí puedes guardar el ID del punto o también traer el nombre del punto si quieres
-        $direccionFinal = $request->punto;
+
+        $direccionFinal = $puntos = Rutas::where('id', $request->punto)->value('punto');
     } elseif ($request->tipo === 'Casillero') {
         $direccionFinal = $request->agencia;
     } else {
         $direccionFinal = $request->direccionp;
     }
+
+    dd($direccionFinal);
 
     $envio = Envio::create([
         'comercio' => $request->comercio,
@@ -452,6 +455,8 @@ public function store(Request $request)
 
     $envio->guia = 'MEL-' . now()->year . '-' . $envio->id;
     $envio->save();
+
+   
 
    // return redirect()->back()->with('success', 'Envío creado correctamente. ID: ' . $envio->id);
 
