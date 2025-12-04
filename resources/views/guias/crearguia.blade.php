@@ -411,30 +411,33 @@ License: For each use you must have a valid license purchased only from above li
 
 
 
-														<!--begin::Action buttons-->
 													<div class="row py-5">
-    <div class="col-12">
-        <div class="d-flex justify-content-end">
-<a href="/dashboard">
-            <button type="button" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancelar</button>
-			</a>
+  <div class="col-12">
+    <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
+      
+      <a href="/dashboard" class="w-100 w-md-auto">
+        <button type="button"
+                data-kt-ecommerce-settings-type="cancel"
+                class="btn btn-light w-100">
+          Cancelar
+        </button>
+      </a>
 
-			 {{-- Guardar normal --}}
-             
-<button type="submit" class="btn btn-primary me-2"
-        onclick="document.getElementById('print').value='0'; document.getElementById('form_envio').target='_self';">
-  Guardar
-</button>
+      <button type="submit"
+              class="btn btn-primary w-100 w-md-auto"
+              onclick="document.getElementById('print').value='0'; document.getElementById('form_envio').target='_self';">
+        Guardar
+      </button>
 
-{{-- Guardar e imprimir (abre nueva pestaña) --}}
-<button type="submit" class="btn btn-success"
-        onclick="document.getElementById('print').value='1'; document.getElementById('form_envio').target='_blank';">
-  Guardar e imprimir
-</button>
-            </div>
+      <button type="submit"
+              class="btn btn-success w-100 w-md-auto"
+              onclick="document.getElementById('print').value='1'; document.getElementById('form_envio').target='_blank';">
+        Guardar e imprimir
+      </button>
+
     </div>
+  </div>
 </div>
-														<!--end::Action buttons-->
 													</form>
 													<!--end::Form-->
 												</div>
