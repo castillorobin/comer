@@ -402,10 +402,7 @@ if (searchText == "") {
                 <!--end::Input group-->
 
                 <!--begin:Action-->
-                <div class="d-flex align-items-center">               
-                    <button type="submit" class="btn btn-primary me-5">Buscar</button>
                 
-                </div>
                 <!--end:Action-->
             </div>
             <!--end::Compact form-->
@@ -665,10 +662,10 @@ if (searchText == "") {
 						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " data-dt-column="0" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">ID Ticket</span><span class="dt-column-order" role="button" aria-label="Manager: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
-						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " data-dt-column="1" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Fecha</span><span class="dt-column-order" role="button" aria-label="Date: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="1" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Fecha</span><span class="dt-column-order" role="button" aria-label="Date: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
-						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Estado</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Estado</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
 						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " style="text-align: right;" data-dt-column="3" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Accion</span><span class="dt-column-order" role="button" aria-label="Status: Activate to sort" tabindex="0"></span></div>
@@ -694,9 +691,9 @@ if (searchText == "") {
                                 <!--end::User-->
                             </td>
 
-                            <td>{{ $ticket->created_at->format('d/m/Y') }}</td>
+                            <td class="text-center">{{ $ticket->created_at->format('d/m/Y') }}</td>
                             
-                            <td >
+                            <td class="text-center">
                                 <span class="badge badge-light-success fw-bold px-4 py-3">
                                    {{ $ticket->estado }}                               </span>
                             </td>
@@ -715,8 +712,21 @@ if (searchText == "") {
 			<div id="" class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
 			<div class="dt-paging paging_simple_numbers">
 			<nav aria-label="pagination">
-			</nav></div></div></div><div class="dt-autosize" style="width: 100%; height: 0px;"></div></div>
+			
+			
+			
+			</nav></div></div></div><div class="dt-autosize" style="width: 100%; height: 0px;">
+			
+			</div>
+			
+			</div>
+			<div class="w-100 text-end">
+			<a href="/dashboard">
+  <button class="btn btn-secondary">Cancelar</button>
+  </a>
+</div>
             <!--end::Table-->
+			
         </div>
         <!--end::Table container-->    
     </div>
