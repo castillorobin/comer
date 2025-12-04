@@ -671,7 +671,7 @@ if (searchText == "") {
 						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Estado</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
-						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " data-dt-column="3" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Accion</span><span class="dt-column-order" role="button" aria-label="Status: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " style="text-align: right;" data-dt-column="3" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Accion</span><span class="dt-column-order" role="button" aria-label="Status: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
 						
