@@ -628,12 +628,45 @@ if (searchText == "") {
     </div>
   </form>
 
-  <select name="status"
-          data-placeholder="Exportar"
-          class="form-select border-body bg-body w-100 w-md-150px">
-    <option value="excel">Excel</option>
-    <option value="pdf">PDF</option>
-  </select>
+<div style="float:right">
+                                    <button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" >
+                                        <i class="ki-duotone ki-exit-up fs-2">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                        </i>Exportar Reporte</button>
+                                            <!--begin::Menu-->
+                                    
+                                         <div id="kt_ecommerce_report_shipping_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
+                                        <!--begin::Menu item
+                                     
+                                        -->
+                                        <!--end::Menu item-->
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <form action="/guias/reporteticketexcel/" method="GET">
+
+                                                
+                                     
+
+                                            <button type="submit" class="btn btn-outline-primary"  >Exportar a Excel</button>
+
+                                            </form >
+                                        </div>
+                                        
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                               <form action="/guias/reporteticketpdf" method="GET" target="_blank">
+
+                                                
+                                       
+
+                                            <button type="submit" class="btn btn-outline-primary"  >Exportar a PDF</button>
+
+                                            </form >
+                                        </div>
+                                        <!--end::Menu item-->
+                                    </div>
+                                </div>
 
 </div>
         <!--end::Actions-->

@@ -15,6 +15,7 @@ use App\Models\Comercio;
 use App\Models\Rutas;
 use App\Models\Agencia;
 use App\Exports\EnviolistaExport;
+use App\Exports\TicketlistaExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -62,6 +63,45 @@ class EnvioController extends Controller
 
     return Excel::download(new EnviolistaExport($tickets), $filename);
 }
+
+public function reporteticketpdf(Request $request)
+    {
+        $comercio = Comercio::where('comercio', Auth::user()->name)->first();
+        $idticket = $request->input('ticketid');
+
+        $envios = Ticktpago::where('comercio', $comercio->comercio)
+                        ->orderBy('created_at', 'desc')
+                        ->take(100)
+                        ->get();
+
+        $pdf = PDF::loadView('guias.exportarticketpdf', compact('envios', 'comercio'))->setPaper('letter', 'landscape');;
+
+        //$customPaper = array(0,0,612,792,'landscape'); // Carta
+        ///$pdf->setPaper($customPaper);
+
+        return $pdf->stream();
+    }
+
+    public function reporteticketexcel(Request $request)
+    {
+        $comercio = Comercio::where('comercio', Auth::user()->name)->first();
+        $idticket = $request->input('ticketid');
+
+       
+
+       $tickets = Ticktpago::where('comercio', $comercio->comercio)
+        ->select(['id','created_at','estado'])
+        ->orderBy('created_at', 'desc')
+        ->take(100)
+        ->get();
+
+    $filename = 'reporte_tickets_' . now()->format('Ymd_His') . '.xlsx';
+
+    return Excel::download(new TicketlistaExport($tickets), $filename);
+    }
+
+
+
 
         
 
