@@ -44,6 +44,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/envios/filtrarticket', [EnvioController::class, 'filtrarTicket'])->name('envios.filtrarticket');
     Route::get('/envios/filtrarestado/{id}', [EnvioController::class, 'filtrarestado'])->name('envios.filtrarestado');
+    Route::get('/guias/reportelistapdf', [EnvioController::class, 'reportelistapdf'])->name('envios.reportelistapdf');
+    Route::get('/guias/reportelistaexcel', [EnvioController::class, 'reportelistaexcel'])->name('envios.reportelistaexcel');
 
 
 Route::get('/logout', function () {

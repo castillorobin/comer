@@ -14,6 +14,8 @@ use App\Models\Hestado;
 use App\Models\Comercio;
 use App\Models\Rutas;
 use App\Models\Agencia;
+use App\Exports\EnviolistaExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class EnvioController extends Controller
@@ -29,6 +31,44 @@ class EnvioController extends Controller
 
         return view('guias.crearguia', compact('comercio', 'agencias', 'puntos'));
     }
+
+    public function reportelistapdf(Request $request)
+    {
+        $comercio = Comercio::where('comercio', Auth::user()->name)->first();
+        $idticket = $request->input('ticketid');
+        $envios = Envio::where('pagoticket', $idticket)
+                        ->orderBy('created_at', 'desc')
+                        ->take(100)
+                        ->get();
+
+        $pdf = PDF::loadView('guias.exportarlistapdf', compact('envios', 'comercio'))->setPaper('letter', 'landscape');;
+
+        //$customPaper = array(0,0,612,792,'landscape'); // Carta
+        ///$pdf->setPaper($customPaper);
+
+        return $pdf->stream();
+    }
+    public function reportelistaexcel(Request $request)
+    {
+         $idticket = $request->input('ticketid');
+
+    $tickets = Envio::where('pagoticket', $idticket)
+        ->select(['guia','destinatario','direccion','tipo','estado','agenciaubi','created_at'])
+        ->orderBy('created_at', 'desc')
+        ->take(100)
+        ->get();
+
+    $filename = 'reporte_guias_' . now()->format('Ymd_His') . '.xlsx';
+
+    return Excel::download(new EnviolistaExport($tickets), $filename);
+}
+
+        
+
+
+    
+
+
     public function mistickets()
     {
         $comercio = Comercio::where('comercio', Auth::user()->name)->first();
