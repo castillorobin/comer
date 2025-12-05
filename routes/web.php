@@ -43,6 +43,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/guias/misenvios/{id}', [EnvioController::class, 'misenvios'])->name('envios.misenvios');
 
     Route::get('/envios/filtrarticket', [EnvioController::class, 'filtrarTicket'])->name('envios.filtrarticket');
+    Route::get('/envios/filtrarestado/{id}', [EnvioController::class, 'filtrarestado'])->name('envios.filtrarestado');
+
 
 Route::get('/logout', function () {
     Auth::logout();

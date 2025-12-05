@@ -53,8 +53,26 @@ class EnvioController extends Controller
                         ->take(10)
                         ->get();
 
-        return view('guias.guiaslista', compact('envios', 'comercio'));
+        return view('guias.guiaslista', compact('envios', 'comercio', 'id'));
     }
+
+    public function filtrarestado(Request $request, $id)
+{
+    $comercio = Comercio::where('comercio', Auth::user()->name)->first();
+
+    $query = Envio::where('pagoticket', $id);
+
+    // Si no viene "todos", aplico filtro por estado
+    if ($request->filled('estado') && $request->estado !== 'todos') {
+        $query->where('estado', $request->estado);
+    }
+
+    $envios = $query->orderBy('created_at', 'desc')
+                    ->take(10)
+                    ->get();
+
+    return view('guias.guiaslista', compact('envios', 'comercio', 'id'));
+}
 
     public function filtrarTicket(Request $request)
 {

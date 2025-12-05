@@ -618,16 +618,16 @@ if (searchText == "") {
         <!--begin::Actions-->
      <div class="d-flex flex-column flex-md-row gap-3 align-items-stretch justify-content-md-end my-0 w-100 ">
 
-  <form action="/envios/filtrarestado" method="GET" class="w-100 w-md-auto">
+  <form action="{{ route('envios.filtrarestado', $id) }}" method="GET" class="w-100 w-md-auto">
     <div class="input-group w-100 w-md-300px">
-      <select class="form-select" name="estado" id="">
-        <option value="" selected>Filtrar por estado</option>
-        <option value="Entregado">Entregado</option>
-        <option value="No entregado">No entregado</option>
-        <option value="En ruta">En ruta</option>
-        <option value="Reprogramado">Reprogramado</option>
-        <option value="Devuelto al comercio">Devuelto al comercio</option>
-      </select>
+      <select class="form-select" name="estado">
+  <option value="todos" {{ request('estado','todos')=='todos' ? 'selected' : '' }}>Todos</option>
+  <option value="Entregado" {{ request('estado')=='Entregado' ? 'selected' : '' }}>Entregado</option>
+  <option value="No entregado" {{ request('estado')=='No entregado' ? 'selected' : '' }}>No entregado</option>
+  <option value="En ruta" {{ request('estado')=='En ruta' ? 'selected' : '' }}>En ruta</option>
+  <option value="Reprogramado" {{ request('estado')=='Reprogramado' ? 'selected' : '' }}>Reprogramado</option>
+  <option value="Devuelto al comercio" {{ request('estado')=='Devuelto al comercio' ? 'selected' : '' }}>Devuelto al comercio</option>
+</select>
       <button type="submit" class="btn btn-primary">Filtrar</button>
     </div>
   </form>
@@ -695,7 +695,7 @@ if (searchText == "") {
                                 
 									<!--begin::Wrapper-->
 									
-										{{ $envio->id }}
+										{{ $envio->guia }}
 										
 									
 									<!--end::Wrapper-->
