@@ -19,7 +19,7 @@
     width:350px;
 }
 .centrar{
-    
+     
     text-align: center;
 }
 .izqui{
@@ -56,10 +56,10 @@
    <span > Fecha: {{ now()->Format('d/m/Y')}} </span>
    <span style="float:right; ">Hora: {{ now()->Format('H:i A')}}</span> 
    </div>
- <hr>
+ 
     
    <div class="centrar">
-    <table class="centrar" style="width: 100%; display:table; " >
+    <table class="centrar" style="width:100%; border-collapse:collapse;" >
         <thead  class="centrar" style="border-top: 2px solid black; border-bottom: 2px solid black; ">
             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
             <th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="0" rowspan="1" colspan="1" aria-label="Date: Activate to sort" tabindex="0">
