@@ -93,7 +93,7 @@
         </tr>
         </thead>
         
-            <tbody style=" height: 500px;">
+            <tbody style=" height: 500px; font-size: 12px;">
          
                
                  @foreach ($envios as $envio) 
