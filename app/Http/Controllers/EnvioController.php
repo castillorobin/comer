@@ -117,10 +117,11 @@ public function reporteticketpdf(Request $request)
                         ->orderBy('created_at', 'desc')
                         ->take(10)
                         ->get();
-        $ticketpago = Ticketc::where('comercio', Auth::user()->name)
-                        ->orderBy('created_at', 'desc')
-                        ->take(10)
-                        ->get();
+       $ticketpago = Ticketc::where('comercio', Auth::user()->name)
+    ->where('created_at', '>=', now()->subDays(7)->startOfDay())
+    ->orderBy('created_at', 'desc')
+    ->take(10)
+    ->get();
 
         return view('guias.mistickets', compact('envios', 'comercio', 'ticketpago'));
     }
