@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Envio;
+use App\Models\Envioscomer;
 use Illuminate\Http\Request;
 use App\Models\Empleado;
 use App\Models\Ticktpago;
@@ -595,7 +596,7 @@ public function store(Request $request)
         $direccionFinal = $request->direccionp;
     }
 
-    $envio = Envio::create([
+    $envio = Envioscomer::create([
         'comercio' => $request->comercio,
         'dircomercio' => $request->direccion_recolecta,
         'destinatario' => $request->destinatario,
@@ -610,7 +611,7 @@ public function store(Request $request)
         'usuario' => Auth::user()->name, // si tienes ese campo
     ]);
 
-    $envio->guia = 'MEL-' . now()->year . '-' . $envio->id;
+    $envio->guia = 'MEL-C' . now()->year . '-' . $envio->id;
     $envio->save();
 
    
