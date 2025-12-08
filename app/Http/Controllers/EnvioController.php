@@ -646,6 +646,7 @@ public function store(Request $request)
         'entrega_direccion' => $direccionFinal,
         'dest_tel'          => $envio->telefono,
         'dest_wa'           => $envio->whatsapp,
+        'tipo'              => $envio->tipo ?? '',
 
         'nota'              => $envio->nota ?? '',
         'total_cobrar'      => $envio->total ?? 0,

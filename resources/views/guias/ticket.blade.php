@@ -151,6 +151,11 @@
     {{ $guia->entrega_direccion ?? '' }}
   </div>
 
+  <div class="md bold" style="margin-bottom: 3px;">Tipo de paquete:</div>
+  <div class="md" style="margin-bottom: 6px;">
+    {{ $guia->tipo ?? '' }}
+  </div>
+
   <div class="kv md">
     <span class="label">Teléfono</span><br>
     <span class="value">{{ $guia->dest_tel ?? '' }}</span>
