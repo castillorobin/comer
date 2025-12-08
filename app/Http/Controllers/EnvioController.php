@@ -6,6 +6,7 @@ use App\Models\Envio;
 use Illuminate\Http\Request;
 use App\Models\Empleado;
 use App\Models\Ticktpago;
+use App\Models\Ticketc;
 use App\Models\Entrega;
 use Illuminate\Support\Facades\Auth;
 use PDF; 
@@ -37,7 +38,7 @@ class EnvioController extends Controller
     {
         $comercio = Comercio::where('comercio', Auth::user()->name)->first();
         $idticket = $request->input('ticketid');
-        $envios = Envio::where('pagoticket', $idticket)
+        $envios = Envio::where('ticketc', $idticket)
                         ->orderBy('created_at', 'desc')
                         ->take(100)
                         ->get();
@@ -53,7 +54,7 @@ class EnvioController extends Controller
     {
          $idticket = $request->input('ticketid');
 
-    $tickets = Envio::where('pagoticket', $idticket)
+    $tickets = Envio::where('ticketc', $idticket)
         ->select(['guia','destinatario','direccion','tipo','estado','agenciaubi','created_at'])
         ->orderBy('created_at', 'desc')
         ->take(100)
@@ -69,7 +70,7 @@ public function reporteticketpdf(Request $request)
         $comercio = Comercio::where('comercio', Auth::user()->name)->first();
         $idticket = $request->input('ticketid');
 
-        $envios = Ticktpago::where('comercio', $comercio->comercio)
+        $envios = Ticketc::where('comercio', $comercio->comercio)
                         ->orderBy('created_at', 'desc')
                         ->take(100)
                         ->get();
@@ -89,8 +90,8 @@ public function reporteticketpdf(Request $request)
 
        
 
-       $tickets = Ticktpago::where('comercio', $comercio->comercio)
-        ->select(['id','created_at','estado'])
+       $tickets = Ticketc::where('comercio', $comercio->comercio)
+        ->select(['codigo','created_at','estado'])
         ->orderBy('created_at', 'desc')
         ->take(100)
         ->get();
@@ -116,10 +117,11 @@ public function reporteticketpdf(Request $request)
                         ->orderBy('created_at', 'desc')
                         ->take(10)
                         ->get();
-        $ticketpago = Ticktpago::where('comercio', Auth::user()->name)
-                        ->orderBy('fechapago', 'desc')
-                        ->take(10)
-                        ->get();
+       $ticketpago = Ticketc::where('comercio', Auth::user()->name)
+    ->where('created_at', '>=', now()->subDays(7)->startOfDay())
+    ->orderBy('created_at', 'desc')
+    ->take(10)
+    ->get();
 
         return view('guias.mistickets', compact('envios', 'comercio', 'ticketpago'));
     }
@@ -128,7 +130,7 @@ public function reporteticketpdf(Request $request)
     {
 
         $comercio = Comercio::where('comercio', Auth::user()->name)->first();
-        $envios = Envio::where('pagoticket', $id)
+        $envios = Envio::where('ticketc', $id)
                         ->orderBy('created_at', 'desc')
                         ->take(10)
                         ->get();
@@ -140,7 +142,7 @@ public function reporteticketpdf(Request $request)
 {
     $comercio = Comercio::where('comercio', Auth::user()->name)->first();
 
-    $query = Envio::where('pagoticket', $id);
+    $query = Envio::where('ticketc', $id);
 
     // Si no viene "todos", aplico filtro por estado
     if ($request->filled('estado') && $request->estado !== 'todos') {
@@ -159,7 +161,7 @@ public function reporteticketpdf(Request $request)
     $comercio = Comercio::where('comercio', Auth::user()->name)->first();
         
 
-    $query = Ticktpago::where('comercio', Auth::user()->name);
+    $query = Ticketc::where('comercio', Auth::user()->name);
 
     if ($request->filled('rango')) {
         // "11/20/2025 - 12/04/2025"
@@ -176,7 +178,7 @@ public function reporteticketpdf(Request $request)
         // $query->whereBetween('created_at', [$startDate, $endDate]);
     }
 
-    $ticketpago = $query->orderBy('fechapago', 'desc')->take(10)->get();
+    $ticketpago = $query->orderBy('created_at', 'desc')->take(10)->get();
 
     // Regresas la misma vista que lista tickets
     return view('guias.mistickets', compact('ticketpago' , 'comercio', ));

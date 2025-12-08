@@ -716,7 +716,7 @@ if (searchText == "") {
                                 
 									<!--begin::Wrapper-->
 									
-										<a href="/guias/misenvios/{{ $ticket->id }}" class="text-gray-500 text-hover-primary mb-1">{{ $ticket->id }}</a>
+										<a href="/guias/misenvios/{{ $ticket->codigo }}" class="text-gray-500 text-hover-primary mb-1">{{ $ticket->codigo }}</a>
 										
 									
 									<!--end::Wrapper-->
