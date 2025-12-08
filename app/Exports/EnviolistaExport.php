@@ -13,6 +13,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
 use Illuminate\Support\Carbon;
 
+
 class EnviolistaExport implements
     FromCollection, WithHeadings, WithMapping, WithColumnFormatting,
     ShouldAutoSize, WithEvents, WithDrawings, WithCustomStartCell
@@ -104,8 +105,10 @@ class EnviolistaExport implements
                 $s->getStyle('A5')->getAlignment()->setHorizontal('center');
 
                 // Fecha y hora (alineado al centro, como en el PDF)
-                $s->setCellValue('A6', 'Fecha: ' . now()->format('d/m/Y') . '    Hora: ' . now()->format('h:i A'));
-                $s->getStyle('A6')->getAlignment()->setHorizontal('center');
+                $s->setCellValue('A6', 'Fecha: ' . Carbon::now('America/El_Salvador')->format('d/m/Y')
+    . '    Hora: ' . Carbon::now('America/El_Salvador')->format('h:i A'));
+
+$s->getStyle('A6')->getAlignment()->setHorizontal('center');
 
                 // Estilos de encabezados de la tabla (fila 8)
                 $s->getStyle("A8:{$lastCol}8")->getFont()->setBold(true);
