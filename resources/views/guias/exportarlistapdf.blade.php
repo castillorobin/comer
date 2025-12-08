@@ -52,10 +52,10 @@
   
    </div>
    
-   <div class="fecha ">
-   <span > Fecha: {{ now()->Format('d/m/Y')}} </span>
-   <span style="float:right; ">Hora: {{ now()->Format('H:i A')}}</span> 
-   </div>
+   <div class="fecha">
+  <span>Fecha: {{ now('America/El_Salvador')->format('d/m/Y') }}</span>
+  <span style="float:right;">Hora: {{ now('America/El_Salvador')->format('h:i A') }}</span>
+</div>
  
     
    <div class="centrar">

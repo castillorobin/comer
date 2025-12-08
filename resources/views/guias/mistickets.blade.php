@@ -726,10 +726,12 @@ if (searchText == "") {
 
                             <td class="text-center">{{ $ticket->created_at->format('d/m/Y') }}</td>
                             
-                            <td class="text-center">
-                                <span class="badge badge-light-success fw-bold px-4 py-3">
-                                   {{ $ticket->estado }}                               </span>
-                            </td>
+                           <td class="text-center">
+  <span class="badge fw-bold px-4 py-3
+    {{ $ticket->estado === 'Pagado' ? 'badge-light-success' : 'badge-light-danger' }}">
+    {{ $ticket->estado }}
+  </span>
+</td>
 
                             <td style="text-align: right;"	>
                                 <a href="#" class="btn btn-light btn-sm">Ver</a>

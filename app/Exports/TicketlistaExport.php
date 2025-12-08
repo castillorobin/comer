@@ -56,7 +56,7 @@ class TicketlistaExport implements
     public function map($row): array
     {
         return [
-            $row->id,                 // # de ticket
+            $row->codigo,                 // # de ticket
             $this->toExcelDate($row->created_at ?? null), // Fecha
             $row->estado,                 // Estado
         ];

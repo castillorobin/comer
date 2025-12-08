@@ -71,6 +71,7 @@ public function reporteticketpdf(Request $request)
         $idticket = $request->input('ticketid');
 
         $envios = Ticketc::where('comercio', $comercio->comercio)
+                        ->where('created_at', '>=', Carbon::now()->subDays(7))
                         ->orderBy('created_at', 'desc')
                         ->take(100)
                         ->get();
@@ -91,6 +92,7 @@ public function reporteticketpdf(Request $request)
        
 
        $tickets = Ticketc::where('comercio', $comercio->comercio)
+       ->where('created_at', '>=', Carbon::now()->subDays(7))
         ->select(['codigo','created_at','estado'])
         ->orderBy('created_at', 'desc')
         ->take(100)
