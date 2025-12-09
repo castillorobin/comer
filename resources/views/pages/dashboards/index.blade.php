@@ -64,8 +64,8 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Logo-->
 						<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-18">
 							<a href="/dashboard">
-								<img alt="Logo" src="assets/media/logos/demo34-small.svg" class="h-25px d-sm-none" />
-								<img alt="Logo" src="assets/media/logos/demo34.png" class="h-25px d-none d-sm-block" />
+								<img alt="Logo" src="/fotos/logoticket.jpeg" class="h-25px d-sm-none" />
+								<img alt="Logo" src="/fotos/logoticket.jpeg" class="h-25px d-none d-sm-block" />
 							</a>
 						</div>
 						<!--end::Logo-->
@@ -89,7 +89,7 @@ License: For each use you must have a valid license purchased only from above li
 									<!--begin:Menu item-->
 									<div data-kt-menu-placement="bottom-start" class="menu-item here show menu-here-bg me-0 me-lg-2">
 										<!--begin:Menu link-->
-										<a href="/guias/misguias" class="menu-link">
+										<a href="/guias/generadas" class="menu-link">
 										<span >
 
 											<span class="menu-title">Guias generadas</span>

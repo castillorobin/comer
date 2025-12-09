@@ -35,6 +35,50 @@ class EnvioController extends Controller
         return view('guias.crearguia', compact('comercio', 'agencias', 'puntos'));
     }
 
+    public function generadas(Request $request)
+{
+    $tz = 'America/El_Salvador';
+
+    $comercio = Comercio::where('comercio', Auth::user()->name)->first();
+
+    // Por defecto: hoy
+    $rango = $request->get('rango', 'hoy');
+
+    // Calculamos inicio/fin según selección
+    $hoy = now($tz);
+
+    switch ($rango) {
+        case 'ayer':
+            $inicio = $hoy->copy()->subDay()->startOfDay();
+            $fin    = $hoy->copy()->subDay()->endOfDay();
+            break;
+
+        case 'ultimos7dias':
+            $inicio = $hoy->copy()->subDays(6)->startOfDay(); // incluye hoy (7 días)
+            $fin    = $hoy->copy()->endOfDay();
+            break;
+
+        case 'ultimos15dias':
+            $inicio = $hoy->copy()->subDays(14)->startOfDay(); // incluye hoy (15 días)
+            $fin    = $hoy->copy()->endOfDay();
+            break;
+
+        case 'hoy':
+        default:
+            $inicio = $hoy->copy()->startOfDay();
+            $fin    = $hoy->copy()->endOfDay();
+            break;
+    }
+
+    $envios = Envioscomer::where('comercio', $comercio->comercio)
+        ->whereBetween('created_at', [$inicio, $fin])
+        ->orderBy('created_at', 'desc')
+        ->take(10)
+        ->get();
+
+    return view('guias.guiasgeneradas', compact('envios', 'comercio', 'rango'));
+}
+
     public function reportelistapdf(Request $request)
     {
         $comercio = Comercio::where('comercio', Auth::user()->name)->first();
