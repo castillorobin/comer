@@ -734,9 +734,39 @@ if (searchText == "") {
 </td>
 
                             <td style="text-align: right;"	>
-                                <a href="#" class="btn btn-light btn-sm">Ver</a>
+                                 <button class="btn btn-active-light-secondary edit " value="{{$ticket->codigo}}" id="kt_drawer_example_basic_button" >Ver</button>
                             </td>
                         </tr>
+
+
+
+
+                         
+                                                    <span hidden id="id{{ $ticket->codigo }}"> {{ $ticket->id }}</span>
+                                                    <span hidden id="com{{ $ticket->codigo }}"> {{ $ticket->comercio }}</span>
+                                                    <span hidden id="fec{{ $ticket->codigo }}"> {{date('d/m/Y', strtotime($ticket->created_at)) }}</span>
+                                                    <span hidden id="hor{{ $ticket->codigo }}"> {{ date('H:i:s', strtotime($ticket->created_at)) }}</span>
+                                                    <span hidden id="per{{ $ticket->codigo }}"> {{ $ticket->perso }}</span>
+                                                    <span hidden id="pei{{ $ticket->codigo }}"> {{ $ticket->persoi }}</span>
+                                                    <span hidden id="pun{{ $ticket->codigo }}"> {{ $ticket->punto }}</span>
+                                                    <span hidden id="pui{{ $ticket->codigo }}"> {{ $ticket->puntoi }}</span>
+                                                    <span hidden id="cas{{ $ticket->codigo }}"> {{ $ticket->casil }}</span>
+                                                    <span hidden id="cai{{ $ticket->codigo }}"> {{ $ticket->casili }}</span>
+                                                    <span hidden id="dep{{ $ticket->codigo }}"> {{ $ticket->depar }}</span>
+                                                    <span hidden id="dei{{ $ticket->codigo }}"> {{ $ticket->depari }}</span>
+                                                    <span hidden id="gui{{ $ticket->codigo }}"> {{ $ticket->guias }}</span>
+                                                    <span hidden id="gii{{ $ticket->codigo }}"> {{ $ticket->guias }}</span>
+                                                    <span hidden id="sub{{ $ticket->codigo }}"> {{ $ticket->persoi + $ticket->puntoi + $ticket->casili + $ticket->depari + $ticket->guias }}</span>
+                                                    <span hidden id="tot{{ $ticket->codigo }}"> {{ $ticket->total }}</span>
+                                                    <span hidden id="ent{{ $ticket->codigo }}"> {{ $ticket->entrega }}</span>
+                                                    <span hidden id="cam{{ $ticket->codigo }}"> {{ $ticket->cambio }}</span>
+                                                    <span hidden id="des{{ $ticket->codigo }}"> {{ $ticket->descuento }}</span>
+
+
+
+
+
+
 				@endforeach
 
 				</tbody>
@@ -813,6 +843,178 @@ if (searchText == "") {
 			<i class="ki-outline ki-arrow-up"></i>
 		</div>
 		<!--end::Scrolltop-->
+
+
+
+
+
+
+
+        
+
+        <!--begin::Ticket-->
+<div
+    id="kt_drawer_example_basic"
+
+    class="bg-white"
+    data-kt-drawer="true"
+    data-kt-drawer-activate="true"
+    data-kt-drawer-toggle="#kt_drawer_example_basic_button"
+    data-kt-drawer-close="#kt_drawer_example_basic_close"
+    data-kt-drawer-width="500px"
+>
+    
+
+
+
+
+<div style="width:100%; " class="text-center centrar">
+    <img src="/fotos/logoticket.jpeg" width="150px">
+    
+    <div class="margen "> <span>Expertos en paqueteria</span></div>
+
+    <div class="margenint " style="background-color: black; color:white; width:80%; margin-left:10%;">  <span style="background-color: black; color:white; width:100%;">Comprobante de cobro</span> </div>
+
+    <br>
+           <span>Centro Comercial Metrogaleria
+           local 3-9 <br> San Salvador </span>
+           <br>
+
+           <div style="margin-top:10px;" class="centrar">
+           <span >WWW.MELOEXPRESS.COM.SV</span></div>
+       <br>
+
+                        <div class="fecha centrar " style="font-weight: bolder;">
+   TICKET Nº <label for="" id="codigo"></label>
+  
+   
+   </div>
+   <div style="text-align: left; margin-left:10%;">
+   Comercio: <span style="font-weight: bolder;"><label for="" id="come"></label></span> 
+   </div>
+   <hr style="margin-right:10%; margin-left:10%;">
+   
+   <div style="text-align: left; margin-right:10%; margin-left:10%;">
+   <span > Fecha: <label for="" id="fech"></label> </span>
+   <span style="float:right; ">Hora: <label for="" id="hora"></label></span> 
+   </div>
+
+
+   <div class="centrar">
+<table class="centrar" style="margin-left:10%; width: 80%;">
+    <thead class="centrar" style="border-top: 2px solid black; border-bottom: 2px solid black;">
+        <tr>
+        <th style="width: 200px;">DESCRIPCION</th>
+        <TH>CANT</TH>
+        <TH>IMPORTE</TH>
+        </tr>
+
+        <tbody>
+            <tr>
+                <td style="text-align: left;">Personalizado</td>
+                <td><label for="" id="pers"></label></td>
+                <td>$<label for="" id="peri"></label></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Punto fijo</td>
+                <td><label for="" id="punt"></label></td>
+                <td>$<label for="" id="puni"></label></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Casillero</td>
+                <td><label for="" id="casi"></label></td>
+                <td>$<label for="" id="caii"></label></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Personalizado Departamental</td>
+                <td><label for="" id="depa"></label></td>
+                <td>$<label for="" id="depi"></label></td>
+            </tr>
+            <tr >
+                <td style="text-align: left; border-bottom: 2px solid black;"> Guias</td>
+                <td style="border-bottom: 2px solid black;"><label for="" id="guia"></label></td>
+                <td style="border-bottom: 2px solid black;">$<label for="" id="guii"></label></td>
+            </tr>
+            <tr >
+                <td></td>
+                <td>SUBTOTAL</td>
+                <td >$<label for="" id="subt"> </label>
+                 
+                </td>
+                
+            </tr>
+            <tr >
+                <td></td>
+                <td>DESCUENTO</td>
+                <td>$<label for="" id="desc"> </label>
+                 
+                </td>
+                
+            </tr>
+            <tr>
+                <td></td>
+                <td style="font-weight: bolder;">TOTAL</td>
+                <td >$<label for="" id="tota"> </label></td>
+            </tr>
+            <tr>
+                
+                <td colspan="2" style="text-align: right;">ENTREGA EFECTIVO:</td>
+                <td >$<label for="" id="entr"> </label></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>CAMBIO:</td>
+                <td >$<label for="" id="camb"> </label></td>
+            </tr>
+        </tbody>
+
+    </thead>
+</table>
+
+
+   
+<br>
+<div>Le atendio: {{ Auth::user()->name }}</div>
+<hr>
+<div>¡¡GRACIAS POR PREFERIRNOS!!</div>
+<hr>
+<div style="padding-left: 125px;"> {!! DNS1D::getBarcodeHTML(202401 , 'C39') !!} <span style="padding-right: 80px; font-weight: bolder;"> <label for="" id="cod2"> </label></span></div>
+
+
+
+
+
+
+</div>
+
+
+<br>
+<p></p>
+
+<button type="button" class="btn btn-secondary" data-kt-drawer-dismiss="true">Cerrar</button>
+&nbsp; &nbsp;
+<a id="impri" target="_blank">
+<button type="button" class="btn btn-dark">Imprimir</button>
+</a>
+
+
+
+</div>
+<!--end::Ticket-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 		 
         <!--begin::Javascript-->
@@ -844,7 +1046,83 @@ if (searchText == "") {
                         <!--end::Custom Javascript-->
                 <!--end::Javascript-->
 
-		
+		    <script src="assets/plugins/global/plugins.bundle.js"></script>
+    <script src="assets/js/scripts.bundle.js"></script>
+    
+        
+
+<script>
+       
+        
+    $(document).ready(function(){
+        $(document).on('click', '.edit', function(){
+           var cod=$(this).val();
+           var iden=$('#id'+cod).text();
+           var comer=$('#com'+cod).text();
+           var fecha=$('#fec'+cod).text();
+           var horas=$('#hor'+cod).text();
+           var perso=$('#per'+cod).text();
+           var persi=$('#pei'+cod).text();
+           var punto=$('#pun'+cod).text();
+           var punti=$('#pui'+cod).text();
+           var casil=$('#cas'+cod).text();
+           var casill=$('#cai'+cod).text();
+           var depar=$('#dep'+cod).text();
+           var depai=$('#dei'+cod).text();
+           var guias=$('#gui'+cod).text();
+           var guiai=$('#gii'+cod).text();
+           var subto=$('#sub'+cod).text();
+           var total=$('#tot'+cod).text();
+           var entre=$('#ent'+cod).text();
+           var cambi=$('#cam'+cod).text();
+           var desc=$('#des'+cod).text();
+            
+    //alert("HOla");
+            
+        
+            //$('#edit').modal('show');
+           $('#codigo').text(cod);
+           $('#come').text(comer);
+           $('#fech').text(fecha);
+           $('#hora').text(horas);
+           $('#pers').text(perso);
+           $('#peri').text(persi);
+           $('#punt').text(punto);
+           $('#puni').text(punti);
+           $('#casi').text(casil);
+           $('#caii').text(casill);
+           $('#depa').text(depar);
+           $('#depi').text(depai);
+           $('#guia').text(guias);
+           $('#guii').text(guiai);
+           $('#subt').text(subto);
+           $('#tota').text(total);
+           $('#entr').text(entre);
+           $('#camb').text(cambi);
+           $('#cod2').text(cod);
+           $('#desc').text(desc);
+          
+           var ide = '/cobro/ticketlistado/'+cod ;
+		   document.getElementById("impri").href = ide;
+    
+            
+    
+            //$('#impri a').prop("href", ide);
+            //$('.paginacion a').prop('href','http://nuevaUrl.com');
+    
+           // document.getElementById("impri").href = ide;
+        });
+    });
+     
+    
+    
+    
+    
+    
+    
+        </script>
+
+
 
 	</body>
 	<!--end::Body-->
