@@ -472,11 +472,20 @@ if (searchText == "") {
                     <span class="fw-bold">{{ $envio->created_at->format('d/m/Y') }}</span>
                 </td>
                 <td class="text-center dt-type-date" >
-                    <span class="fw-bold">{{ $envio->estadoco }}</span>
+      
+  
+                @if($envio->estadoco == 'Generada')
+                
+                    <span class="badge badge-warning" style="width: 75px; padding-left: 10px;">{{ $envio->estadoco }}</span>     
+                @elseif($envio->estadoco == 'Impresa')  
+                <span class="badge badge-success" style="width: 75px; padding-left: 15px;">{{ $envio->estadoco }}</span>            
+     
+                @endif
+                    
                 </td>
               
                 <td class="text-center">
-  <a href="">
+  <a href="/guias/print/{{ $envio->id }}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" target="_blank" title="Imprimir guía">
     <i class="fas fa-print" style="font-size: 22px;"></i>
   </a>
 </td>

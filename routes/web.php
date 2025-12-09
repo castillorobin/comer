@@ -51,6 +51,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/guias/reporteticketexcel', [EnvioController::class, 'reporteticketexcel'])->name('envios.reporteticketexcel');
 
     Route::get('/guias/generadas', [EnvioController::class, 'generadas'])->name('envios.generadas');
+    Route::get('/guias/print/{id}', [EnvioController::class, 'print'])->name('envios.print');
 
 
 Route::get('/logout', function () {

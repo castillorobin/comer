@@ -717,8 +717,37 @@ public function store(Request $request)
 
 
 }
+public function print($id)
+{
+    $envio = Envioscomer::findOrFail($id);
+
+    // Armar data para tu plantilla
+    $guia = (object)[
+        'codigo'            => $envio->guia,
+        'comercio'          => $envio->comercio,
+        'origen_direccion'  => $envio->dircomercio ?? 'AGENCIA METROGALERIA',
+        'origen_tel'        => $envio->telefono,
+        'origen_wa'         => $envio->whatsapp,
+        'destinatario'      => $envio->destinatario,
+        'entrega_direccion' => $envio->direccion,
+        'dest_tel'          => $envio->telefono,
+        'dest_wa'           => $envio->whatsapp,
+        'tipo'              => $envio->tipo ?? '',
+        'nota'              => $envio->nota ?? '',
+        'total_cobrar'      => $envio->total ?? 0,
+        'qr_text'           => $envio->guia,
+    ];
+
+    $pdf = PDF::loadView('guias.ticket', compact('guia'));
+
+    $customPaper = [0, 0, 250, 600];
+    $pdf->setPaper($customPaper);
+
+    return $pdf->stream('ticket-'.$guia->codigo.'.pdf');
 
 
 
 
+
+}
 }
