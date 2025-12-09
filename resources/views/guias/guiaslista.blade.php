@@ -110,6 +110,12 @@ License: For each use you must have a valid license purchased only from above li
             display: none;
         }
             */
+
+         #kt_ecommerce_report_shipping_table thead .dt-column-order,
+#kt_ecommerce_report_shipping_table thead th::before,
+#kt_ecommerce_report_shipping_table thead th::after{
+  display:none !important;
+}
     </style>
 
 	</head>
@@ -702,24 +708,24 @@ if (searchText == "") {
 			<table id="kt_ecommerce_report_shipping_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable" style="width: 100%;">
                 <thead class="fs-7 text-gray-500 text-uppercase">
                     <tr>
-						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " data-dt-column="0" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Guia</span><span class="dt-column-order" role="button" aria-label="Manager: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px " data-dt-column="0" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Guia</span><span class="dt-column-order" role="button" aria-label="Manager: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
-						<th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="1" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Destinatario</span><span class="dt-column-order" role="button" aria-label="Date: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px text-center" data-dt-column="1" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Destinatario</span><span class="dt-column-order" role="button" aria-label="Date: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
-						<th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Destino</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Destino</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
-						<th class="min-w-100px dt-orderable-asc dt-orderable-desc " style="text-align: right;" data-dt-column="3" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Tipo</span><span class="dt-column-order" role="button" aria-label="Status: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px " style="text-align: right;" data-dt-column="3" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Tipo</span><span class="dt-column-order" role="button" aria-label="Status: Activate to sort" tabindex="0"></span></div>
 						</th>
-						<th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Estado</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Estado</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
 						</th>
 
-						<th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Ubicacion</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Ubicacion</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
 						</th>
 
-						<th class="min-w-100px dt-orderable-asc dt-orderable-desc text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Fecha</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
+						<th class="min-w-100px text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Fecha</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
 						</th>
 					
 						
