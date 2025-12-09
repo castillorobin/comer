@@ -80,18 +80,23 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin:Menu link-->
 										<span class="menu-link">
 											<span class="menu-title">Inicio</span>
-											<span class="menu-arrow d-lg-none"></span>
-										</span>
-										<!--end:Menu link-->
-										<!--begin:Menu sub-->
-										<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0 w-100 w-lg-850px">
-											<!--begin:Dashboards menu-->
-											<div class="menu-state-bg menu-extended overflow-hidden overflow-lg-visible" data-kt-menu-dismiss="true">
 											
-											</div>
-											<!--end:Dashboards menu-->
-										</div>
-										<!--end:Menu sub-->
+										</span>
+										<!--end:Menu link-->										
+									</div>
+									<!--end:Menu item-->
+
+									<!--begin:Menu item-->
+									<div data-kt-menu-placement="bottom-start" class="menu-item here show menu-here-bg me-0 me-lg-2">
+										<!--begin:Menu link-->
+										<a href="/guias/misguias" class="menu-link">
+										<span >
+
+											<span class="menu-title">Guias generadas</span>
+											
+										</span>
+										</a>
+										<!--end:Menu link-->										
 									</div>
 									<!--end:Menu item-->
 									
