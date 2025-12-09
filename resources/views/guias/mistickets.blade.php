@@ -861,7 +861,7 @@ if (searchText == "") {
     data-kt-drawer-activate="true"
     data-kt-drawer-toggle="#kt_drawer_example_basic_button"
     data-kt-drawer-close="#kt_drawer_example_basic_close"
-    data-kt-drawer-width="500px"
+    data-kt-drawer-width="400px"
 >
     
 
@@ -978,7 +978,7 @@ if (searchText == "") {
 <hr>
 <div>¡¡GRACIAS POR PREFERIRNOS!!</div>
 <hr>
-<div style="padding-left: 125px;"> {!! DNS1D::getBarcodeHTML(202401 , 'C39') !!} <span style="padding-right: 80px; font-weight: bolder;"> <label for="" id="cod2"> </label></span></div>
+<div style="padding-left: 80px;"> {!! DNS1D::getBarcodeHTML(202401 , 'C39') !!} <span style="padding-right: 80px; font-weight: bolder;"> <label for="" id="cod2"> </label></span></div>
 
 
 

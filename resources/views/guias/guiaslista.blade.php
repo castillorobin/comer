@@ -745,7 +745,7 @@ if (searchText == "") {
                             
                             <td class="text-center">
                                
-                                   {{ $envio->direccion }}                            
+                                   {{ $envio->direccion_mostrar }}                            
                             </td>
 
                             <td style="text-align: right;"	>

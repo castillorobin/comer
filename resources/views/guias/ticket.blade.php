@@ -178,10 +178,13 @@
 </div>
 
   {{-- Barcode --}}
-  <div class="barcode">
+  <div class="barcode text-center">
+
     @if (!empty($guia->codigo))
+    <div style="padding-left: 30px;"> 
       {!! DNS1D::getBarcodeHTML($guia->codigo, 'C39', 1.2, 42) !!}
-      <div class="sm bold" style="margin-top: 16px;">{{ $guia->codigo }}</div>
+    </div>
+      <div class="sm bold" style=" margin-top: 16px;">{{ $guia->codigo }}</div>
     @endif
     <div class="sm" style="margin-top: 6px;">¡¡Gracias por preferirnos!!</div>
   </div>

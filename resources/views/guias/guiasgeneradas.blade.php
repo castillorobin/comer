@@ -463,7 +463,7 @@ if (searchText == "") {
                     
                 </td>
                 <td class="text-center pe-0" data-order="Completed">
-                    {{ $envio->direccion }}
+                    {{ $envio->direccion_mostrar }}
                 </td>
                 <td class="text-center pe-0 dt-type-numeric">
                     <span class="fw-bold">{{ $envio->precio }}</span>

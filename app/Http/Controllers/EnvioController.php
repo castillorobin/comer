@@ -71,10 +71,11 @@ class EnvioController extends Controller
     }
 
     $envios = Envioscomer::where('comercio', $comercio->comercio)
-        ->whereBetween('created_at', [$inicio, $fin])
-        ->orderBy('created_at', 'desc')
-        ->take(10)
-        ->get();
+    ->whereBetween('created_at', [$inicio, $fin])
+    ->with('rutaPunto:id,punto') // solo lo necesario
+    ->orderBy('created_at', 'desc')
+    ->take(10)
+    ->get();
 
     return view('guias.guiasgeneradas', compact('envios', 'comercio', 'rango'));
 }
@@ -178,6 +179,7 @@ public function reporteticketpdf(Request $request)
 
         $comercio = Comercio::where('comercio', Auth::user()->name)->first();
         $envios = Envio::where('ticketc', $id)
+        ->with('rutaPunto:id,punto') // solo lo necesario
                         ->orderBy('created_at', 'desc')
                         ->take(10)
                         ->get();
@@ -720,6 +722,17 @@ public function store(Request $request)
 public function print($id)
 {
     $envio = Envioscomer::findOrFail($id);
+    // Armar la "direccion final" según el tipo
+    $direccionFinal = null;
+ if ($envio->tipo === 'Punto fijo') {
+ 
+        $direccionFinal = Rutas::where('id', $envio->direccion)->value('punto');
+         
+    } else {
+        $direccionFinal = $envio->direccion;
+    }
+
+   
 
     // Armar data para tu plantilla
     $guia = (object)[
@@ -729,7 +742,7 @@ public function print($id)
         'origen_tel'        => $envio->telefono,
         'origen_wa'         => $envio->whatsapp,
         'destinatario'      => $envio->destinatario,
-        'entrega_direccion' => $envio->direccion,
+        'entrega_direccion' => $direccionFinal,
         'dest_tel'          => $envio->telefono,
         'dest_wa'           => $envio->whatsapp,
         'tipo'              => $envio->tipo ?? '',
