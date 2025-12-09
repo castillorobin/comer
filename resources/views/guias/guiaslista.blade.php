@@ -627,6 +627,7 @@ if (searchText == "") {
   <option value="En ruta" {{ request('estado')=='En ruta' ? 'selected' : '' }}>En ruta</option>
   <option value="Reprogramado" {{ request('estado')=='Reprogramado' ? 'selected' : '' }}>Reprogramado</option>
   <option value="Devuelto al comercio" {{ request('estado')=='Devuelto al comercio' ? 'selected' : '' }}>Devuelto al comercio</option>
+  <option value="Fallido" {{ request('estado')=='Fallido' ? 'selected' : '' }}>Fallido</option>
 </select>
       <button type="submit" class="btn btn-primary">Filtrar</button>
     </div>
