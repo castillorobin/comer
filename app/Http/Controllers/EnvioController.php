@@ -751,6 +751,9 @@ public function print($id)
         'qr_text'           => $envio->guia,
     ];
 
+    $envio->estadoco = "Impresa";
+    $envio->save();
+
     $pdf = PDF::loadView('guias.ticket', compact('guia'));
 
     $customPaper = [0, 0, 250, 600];

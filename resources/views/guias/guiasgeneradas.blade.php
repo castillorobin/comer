@@ -466,7 +466,7 @@ if (searchText == "") {
                     {{ $envio->direccion_mostrar }}
                 </td>
                 <td class="text-center pe-0 dt-type-numeric">
-                    <span class="fw-bold">{{ $envio->precio }}</span>
+                    <span class="fw-bold">{{ $envio->total }}</span>
                 </td>
                                 <td class="text-center dt-type-date" >
                     <span class="fw-bold">{{ $envio->created_at->format('d/m/Y') }}</span>
@@ -599,6 +599,13 @@ if (searchText == "") {
         row.style.display = text.includes(q) ? '' : 'none';
       });
     });
+  });
+</script>
+
+<script>
+
+  window.addEventListener('focus', () => {
+    location.reload();
   });
 </script>
 
