@@ -11,6 +11,6 @@ class Envioscomer extends Model
      protected $table = 'envioscomer';
       protected $fillable = [
   'comercio','dircomercio','destinatario','telefono','whatsapp',
-  'tipo','direccion','fecha_entrega','nota','total','estado','usuario'
+  'tipo','direccion','fecha_entrega','nota','total','estado','usuario', 'estadoco','guia'
 ];
 }

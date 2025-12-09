@@ -665,6 +665,8 @@ public function store(Request $request)
    
     // Si NO quiere imprimir, igual que hoy
     if ((int)$request->input('print', 0) !== 1) {
+        $envio->estadoco = "Generada";
+    $envio->save();
         return redirect()->back()->with('success', 'Envío creado correctamente. ID: ' . $envio->id);
     }
 
@@ -674,6 +676,8 @@ public function store(Request $request)
 
     // Si sí quiere imprimir: armar data para tu plantilla
     // Ajusta estos textos fijos si quieres (origen por ejemplo).
+    $envio->estadoco = "Impresa";
+    $envio->save();
     $guia = (object)[
         // Si tienes un campo "codigo/guia" úsalo aquí. Si no, puedes usar el ID con prefijo:
         'codigo'            => $envio->guia,

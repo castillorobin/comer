@@ -443,7 +443,7 @@ if (searchText == "") {
             <th class="text-center min-w-100px " data-dt-column="4" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Precio</span><span class="dt-column-order" role="button" aria-label="Total: Activate to sort" tabindex="0"></span></div></th>
             
             <th class="text-center min-w-100px " data-dt-column="5" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Creacion</span><span class="dt-column-order" role="button" aria-label="Date Added: Activate to sort" tabindex="0"></span></div></th>
-            
+            <th class="text-center min-w-100px " data-dt-column="5" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Estado</span><span class="dt-column-order" role="button" aria-label="Date Added: Activate to sort" tabindex="0"></span></div></th>
                         
             <th class="text-center min-w-100px dt-orderable-none" data-dt-column="7" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Imprimir</span><span class="dt-column-order"></span></div></th>
             
@@ -470,6 +470,9 @@ if (searchText == "") {
                 </td>
                                 <td class="text-center dt-type-date" >
                     <span class="fw-bold">{{ $envio->created_at->format('d/m/Y') }}</span>
+                </td>
+                <td class="text-center dt-type-date" >
+                    <span class="fw-bold">{{ $envio->estadoco }}</span>
                 </td>
               
                 <td class="text-center">
