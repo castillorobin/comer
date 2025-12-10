@@ -221,7 +221,7 @@ if (searchText == "") {
 				<div id="kt_app_header" class="app-header" data-kt-sticky="true" data-kt-sticky-activate="{default: false, lg: true}" data-kt-sticky-name="app-header-sticky" data-kt-sticky-offset="{default: false, lg: '300px'}" style="background-color: #001d7e !important;">
 					<!--begin::Header container-->
 					<div class="app-container container-xxl d-flex align-items-stretch justify-content-between" id="kt_app_header_container">
-						<!--begin::Header mobile toggle-->
+						<!--begin::Header mobile toggle--> 
 						<div class="d-flex align-items-center d-lg-none ms-n2 me-2" title="Show sidebar menu">
 							<div class="btn btn-icon btn-active-color-primary w-35px h-35px" id="kt_app_header_menu_toggle">
 								<i class="ki-outline ki-abstract-14 fs-2"></i>
@@ -387,38 +387,41 @@ if (searchText == "") {
     
             <!--begin::Products-->
 <div class="card card-flush">
-    <!--begin::Card header-->
-    <div class="card-header align-items-center py-5 gap-2 gap-md-5">
-        <!--begin::Card title-->
-        <div class="card-title">
-            <!--begin::Search-->
-            <div class="d-flex align-items-center position-relative my-1">
-  <i class="ki-outline ki-magnifier fs-3 position-absolute ms-4"></i>
-  <input id="searchGuia" type="text"
-         class="form-control form-control-solid w-250px ps-12"
-         placeholder="Buscar guía...">
+   <!--begin::Card header-->
+<div class="card-header align-items-center py-5 gap-2 gap-md-5 flex-wrap">
+    <!--begin::Card title-->
+    <div class="card-title w-100 w-md-auto">
+        <!--begin::Search-->
+        <div class="d-flex align-items-center position-relative my-1 w-100">
+            <i class="ki-outline ki-magnifier fs-3 position-absolute ms-4"></i>
+            <input id="searchGuia" type="text"
+                   class="form-control form-control-solid w-100 w-md-250px ps-12"
+                   placeholder="Buscar guía...">
+        </div>
+        <!--end::Search-->
+    </div>
+    <!--end::Card title-->
+
+    <!--begin::Card toolbar-->
+    <div class="card-toolbar w-100 w-md-auto flex-row-fluid justify-content-end gap-2 gap-md-5">
+        <form method="GET" action="{{ url('/guias/generadas') }}"
+      class="d-flex flex-row gap-2 align-items-center w-100 w-md-auto flex-nowrap">
+
+            <div class="input-group w-100 w-md-250px">
+                <select name="rango" id="fechas" class="form-select form-select-solid w-100">
+                    <option value="hoy" {{ ($rango ?? 'hoy')=='hoy' ? 'selected' : '' }}>Hoy</option>
+                    <option value="ayer" {{ ($rango ?? '')=='ayer' ? 'selected' : '' }}>Ayer</option>
+                    <option value="ultimos7dias" {{ ($rango ?? '')=='ultimos7dias' ? 'selected' : '' }}>Últimos 7 días</option>
+                    <option value="ultimos15dias" {{ ($rango ?? '')=='ultimos15dias' ? 'selected' : '' }}>Últimos 15 días</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary flex-shrink-0">Filtrar</button>
+        </form>
+    </div>
+    <!--end::Card toolbar-->
 </div>
-            <!--end::Search-->
-        </div>
-        <!--end::Card title-->
-
-        <!--begin::Card toolbar-->
-        <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
-            <form method="GET" action="{{ url('/guias/generadas') }}" class="d-flex gap-3 align-items-center">
-    <div class="input-group w-250px">
-        <select name="rango" id="fechas" class="form-select form-select-solid">
-            <option value="hoy" {{ ($rango ?? 'hoy')=='hoy' ? 'selected' : '' }}>Hoy</option>
-            <option value="ayer" {{ ($rango ?? '')=='ayer' ? 'selected' : '' }}>Ayer</option>
-            <option value="ultimos7dias" {{ ($rango ?? '')=='ultimos7dias' ? 'selected' : '' }}>Últimos 7 días</option>
-            <option value="ultimos15dias" {{ ($rango ?? '')=='ultimos15dias' ? 'selected' : '' }}>Últimos 15 días</option>
-        </select>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Filtrar</button>
-</form>
-        </div>
-        <!--end::Card toolbar-->
-    </div>
+<!--end::Card header-->
     <!--end::Card header-->
 
     <!--begin::Card body-->
@@ -499,6 +502,11 @@ if (searchText == "") {
 <div id="" class="row">
 
 <!--end::Table-->    </div>
+<div class="w-100 text-end" style="margin-top: 15px;">
+			<a href="/dashboard">
+  <button class="btn btn-secondary">Cerrar</button>
+  </a>
+</div>
     <!--end::Card body-->
 </div>
 <!--end::Products-->        
