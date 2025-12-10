@@ -47,11 +47,11 @@ License: For each use you must have a valid license purchased only from above li
 		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
 		<!--end::Theme mode setup on page load-->
 		<!--begin::App-->
-		<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+		<div class="d-flex flex-column flex-root app-root" id="kt_app_root" >
 			<!--begin::Page-->
-			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page" >
 				<!--begin::Header-->
-				<div id="kt_app_header" class="app-header" data-kt-sticky="true" data-kt-sticky-activate="{default: false, lg: true}" data-kt-sticky-name="app-header-sticky" data-kt-sticky-offset="{default: false, lg: '300px'}">
+				<div id="kt_app_header" class="app-header" data-kt-sticky="true" data-kt-sticky-activate="{default: false, lg: true}" data-kt-sticky-name="app-header-sticky" data-kt-sticky-offset="{default: false, lg: '300px'}" style="background-color: #001d7e !important;">
 					<!--begin::Header container-->
 					<div class="app-container container-xxl d-flex align-items-stretch justify-content-between" id="kt_app_header_container">
 						<!--begin::Header mobile toggle-->
@@ -64,13 +64,13 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Logo-->
 						<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-18">
 							<a href="/dashboard">
-								<img alt="Logo" src="/fotos/logoticket.jpeg" class="h-25px d-sm-none" />
-								<img alt="Logo" src="/fotos/logoticket.jpeg" class="h-25px d-none d-sm-block" />
+								<img alt="Logo" src="/fotos/logomelo.png" class="h-25px d-sm-none" />
+								<img alt="Logo" src="/fotos/logomelo.png" class="h-25px d-none d-sm-block" />
 							</a>
 						</div>
 						<!--end::Logo-->
 						<!--begin::Header wrapper-->
-						<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper">
+						<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper" >
 							<!--begin::Menu wrapper-->
 							<div class="app-header-menu app-header-mobile-drawer align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="app-header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="250px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_header_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="{default: 'append', lg: 'prepend'}" data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}">
 								<!--begin::Menu-->
@@ -108,10 +108,10 @@ License: For each use you must have a valid license purchased only from above li
 							</div>
 							<!--end::Menu wrapper-->
 							<!--begin::Navbar-->
-							<div class="app-navbar flex-shrink-0">
+							<div class="app-navbar flex-shrink-0" >
 								
 								<!--begin::User menu-->
-								<div class="app-navbar-item ms-5" id="kt_header_user_menu_toggle">
+								<div class="app-navbar-item ms-5" id="kt_header_user_menu_toggle" >
 									<!--begin::Menu wrapper-->
 									<div class="cursor-pointer symbol symbol-35px symbol-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
 										<img class="symbol symbol-circle symbol-35px symbol-md-40px" src="assets/media/avatars/300-13.jpg" alt="user" />
@@ -160,11 +160,11 @@ License: For each use you must have a valid license purchased only from above li
 				</div>
 				<!--end::Header-->
 				<!--begin::Wrapper-->
-				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper" >
 					<!--begin::Toolbar-->
-					<div id="kt_app_toolbar" class="app-toolbar py-6">
+					<div id="kt_app_toolbar" class="app-toolbar py-6" style="background-color: #001d7e !important;">
 						<!--begin::Toolbar container-->
-						<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex align-items-start">
+						<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex align-items-start" >
 							<!--begin::Toolbar container-->
 							<div class="d-flex flex-column flex-row-fluid">
 								<!--begin::Toolbar wrapper-->
@@ -191,7 +191,7 @@ License: For each use you must have a valid license purchased only from above li
 								</div>
 								<!--end::Toolbar wrapper=-->
 								<!--begin::Toolbar wrapper=-->
-								<div class="d-flex flex-stack flex-wrap flex-lg-nowrap gap-4 gap-lg-10 pt-13 pb-6">
+								<div class="d-flex flex-stack flex-wrap flex-lg-nowrap gap-4 gap-lg-10 pt-13 pb-6" >
 									<!--begin::Page title-->
 									<div class="page-title me-5">
 										<!--begin::Title-->
