@@ -102,7 +102,7 @@ License: For each use you must have a valid license purchased only from above li
 			<!--begin::Page-->
 			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
 				<!--begin::Header-->
-				<div id="kt_app_header" class="app-header" data-kt-sticky="true" data-kt-sticky-activate="{default: false, lg: true}" data-kt-sticky-name="app-header-sticky" data-kt-sticky-offset="{default: false, lg: '300px'}">
+				<div id="kt_app_header" class="app-header" data-kt-sticky="true" data-kt-sticky-activate="{default: false, lg: true}" data-kt-sticky-name="app-header-sticky" data-kt-sticky-offset="{default: false, lg: '300px'}" style="background-color: #001d7e !important;">
 					<!--begin::Header container-->
 					<div class="app-container container-xxl d-flex align-items-stretch justify-content-between" id="kt_app_header_container">
 						<!--begin::Header mobile toggle-->
@@ -115,8 +115,8 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Logo-->
 						<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-18">
 							<a href="/dashboard">
-								<img alt="Logo" src="assets/media/logos/demo34-small.svg" class="h-25px d-sm-none" />
-								<img alt="Logo" src="assets/media/logos/demo34.png" class="h-25px d-none d-sm-block" />
+								<img alt="Logo" src="/fotos/logomelo.png" class="h-25px d-sm-none" />
+								<img alt="Logo" src="/fotos/logomelo.png" class="h-25px d-none d-sm-block" />
 							</a>
 						</div>
 						<!--end::Logo-->
@@ -207,7 +207,7 @@ License: For each use you must have a valid license purchased only from above li
 				<!--end::Header-->
 				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
 					<!--begin::Toolbar-->
-					<div id="kt_app_toolbar" class="app-toolbar py-6">
+					<div id="kt_app_toolbar" class="app-toolbar py-6" style="background-color: #001d7e !important;">
 						<!--begin::Toolbar container-->
 						<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex align-items-start">
 							<!--begin::Toolbar container-->
