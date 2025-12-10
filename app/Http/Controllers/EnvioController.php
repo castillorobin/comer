@@ -760,10 +760,25 @@ public function print($id)
     $pdf->setPaper($customPaper);
 
     return $pdf->stream('ticket-'.$guia->codigo.'.pdf');
+    }
 
+    public function imprimirti(Request $request)
+    {
+        $ticketnum = $request->get('idticket');
+        
 
+       // $ticketc = Ticketc::find($ticketnum);
 
+        $ticketact = Ticketc::where('codigo', $ticketnum)
+        ->get();
+       // dd( $ticketnum);
 
+        $pdf = PDF::loadView('guias.ticketpagos', ['ticketact'=>$ticketact]);
+        //return view('envios.ticketpagos');
+        $customPaper = array(0,0,360,650);
+        //$pdf->setPaper('b6', 'portrait');
+        $pdf->setPaper($customPaper );
+        return $pdf->stream();
 
-}
+    }
 }

@@ -52,6 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/guias/generadas', [EnvioController::class, 'generadas'])->name('envios.generadas');
     Route::get('/guias/print/{id}', [EnvioController::class, 'print'])->name('envios.print');
+    Route::get('/guias/imprimirti', [EnvioController::class, 'imprimirti'])->name('envios.imprimirti');
 
 
 Route::get('/logout', function () {

@@ -890,7 +890,8 @@ if (searchText == "") {
 
                         <div class="fecha centrar " style="font-weight: bolder;">
    TICKET Nº <label for="" id="codigo"></label>
-  
+
+
    
    </div>
    <div style="text-align: left; margin-left:10%;">
@@ -994,12 +995,13 @@ if (searchText == "") {
 
 <br>
 <p></p>
-
+<form action="/guias/imprimirti" method="GET" target="_blank">
 <button type="button" class="btn btn-secondary" data-kt-drawer-dismiss="true">Cerrar</button>
 &nbsp; &nbsp;
-<a id="impri" target="_blank">
-<button type="button" class="btn btn-dark">Imprimir</button>
-</a>
+
+    <input type="text" hidden id="idticket" name="idticket">
+<button type="submit" class="btn btn-dark" >Imprimir</button>
+</form>
 
 
 
@@ -1105,7 +1107,8 @@ if (searchText == "") {
            $('#desc').text(desc);
           
            var ide = '/cobro/ticketlistado/'+cod ;
-		   document.getElementById("impri").href = ide;
+		 //  document.getElementById("impri").href = ide;
+           document.getElementById("idticket").value = cod;
     
             
     
