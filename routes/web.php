@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnvioController;
-
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,6 +53,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/guias/generadas', [EnvioController::class, 'generadas'])->name('envios.generadas');
     Route::get('/guias/print/{id}', [EnvioController::class, 'print'])->name('envios.print');
     Route::get('/guias/imprimirti', [EnvioController::class, 'imprimirti'])->name('envios.imprimirti');
+
+
+    Route::post('/perfil/avatar', [ProfileController::class, 'updateAvatar'])
+    ->middleware('auth')
+    ->name('perfil.avatar.update');
 
 
 Route::get('/logout', function () {
