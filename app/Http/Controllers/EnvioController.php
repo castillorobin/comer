@@ -796,7 +796,7 @@ public function print($id)
 
         // 1) Generar el PDF (solo si aún no existe guardado)
         if (!Storage::disk('public')->exists($pdfPath)) {
-            $pdf = PDF::loadView('guias.plantilla_pdf', [  // <-- tu vista de DomPDF
+            $pdf = PDF::loadView('guias.ticket', [  // <-- tu vista de DomPDF
                 'envio' => $envio,
             ])->setPaper('letter');
 
