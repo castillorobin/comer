@@ -759,6 +759,8 @@ public function print($id)
 
     $pdf = PDF::loadView('guias.ticket', compact('guia'));
 
+    
+
     $customPaper = [0, 0, 250, 600];
     $pdf->setPaper($customPaper);
 
@@ -794,11 +796,36 @@ public function print($id)
         $pdfPath  = 'guias/' . $baseName . '.pdf';
         $pngPath  = 'guias/' . $baseName . '.png';
 
+            $direccionFinal = null;
+ if ($envio->tipo === 'Punto fijo') {
+ 
+        $direccionFinal = Rutas::where('id', $envio->direccion)->value('punto');
+         
+    } else {
+        $direccionFinal = $envio->direccion;
+    }
+
+
+        $guia = (object)[
+        'codigo'            => $envio->guia,
+        'comercio'          => $envio->comercio,
+        'origen_direccion'  => $envio->dircomercio ?? 'AGENCIA METROGALERIA',
+        'origen_tel'        => $envio->telefono,
+        'origen_wa'         => $envio->whatsapp,
+        'destinatario'      => $envio->destinatario,
+        'entrega_direccion' => $direccionFinal,
+        'dest_tel'          => $envio->telefono,
+        'dest_wa'           => $envio->whatsapp,
+        'tipo'              => $envio->tipo ?? '',
+        'nota'              => $envio->nota ?? '',
+        'total_cobrar'      => $envio->total ?? 0,
+        'qr_text'           => $envio->guia,
+    ];
+
+
         // 1) Generar el PDF (solo si aún no existe guardado)
         if (!Storage::disk('public')->exists($pdfPath)) {
-            $pdf = PDF::loadView('guias.ticket', [  // <-- tu vista de DomPDF
-                'envio' => $envio,
-            ])->setPaper('letter');
+            $pdf = PDF::loadView('guias.ticket', [ 'guia' => $guia])->setPaper('letter');
 
             Storage::disk('public')->put($pdfPath, $pdf->output());
         }
