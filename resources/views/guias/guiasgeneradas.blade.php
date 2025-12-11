@@ -237,7 +237,7 @@ if (searchText == "") {
 						</div>
 						<!--end::Logo-->
 						<!--begin::Header wrapper-->
-						<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper">
+						<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper" >
 							<!--begin::Menu wrapper-->
 							<div class="app-header-menu app-header-mobile-drawer align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="app-header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="250px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_header_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="{default: 'append', lg: 'prepend'}" data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}">
 								<!--begin::Menu-->
@@ -247,18 +247,23 @@ if (searchText == "") {
 										<!--begin:Menu link-->
 										<span class="menu-link">
 											<span class="menu-title">Inicio</span>
-											<span class="menu-arrow d-lg-none"></span>
-										</span>
-										<!--end:Menu link-->
-										<!--begin:Menu sub-->
-										<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0 w-100 w-lg-850px">
-											<!--begin:Dashboards menu-->
-											<div class="menu-state-bg menu-extended overflow-hidden overflow-lg-visible" data-kt-menu-dismiss="true">
 											
-											</div>
-											<!--end:Dashboards menu-->
-										</div>
-										<!--end:Menu sub-->
+										</span>
+										<!--end:Menu link-->										
+									</div>
+									<!--end:Menu item-->
+
+									<!--begin:Menu item-->
+									<div data-kt-menu-placement="bottom-start" class="menu-item here show menu-here-bg me-0 me-lg-2">
+										<!--begin:Menu link-->
+										<a href="/guias/generadas" class="menu-link">
+										<span >
+
+											<span class="menu-title">Guias generadas</span>
+											
+										</span>
+										</a>
+										<!--end:Menu link-->										
 									</div>
 									<!--end:Menu item-->
 									
@@ -270,13 +275,21 @@ if (searchText == "") {
 							</div>
 							<!--end::Menu wrapper-->
 							<!--begin::Navbar-->
-							<div class="app-navbar flex-shrink-0">
+							<div class="app-navbar flex-shrink-0" >
 								
 								<!--begin::User menu-->
-								<div class="app-navbar-item ms-5" id="kt_header_user_menu_toggle">
+								<div class="app-navbar-item ms-5" id="kt_header_user_menu_toggle" >
 									<!--begin::Menu wrapper-->
 									<div class="cursor-pointer symbol symbol-35px symbol-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-										<img class="symbol symbol-circle symbol-35px symbol-md-40px" src="assets/media/avatars/300-13.jpg" alt="user" />
+										@php
+    $avatar = Auth::user()->avatar
+        ? asset('storage/avatars/' . Auth::user()->avatar)  // ruta donde guardaremos los avatares
+        : asset('assets/media/avatars/300-13.jpg');         // avatar por defecto
+@endphp
+
+<img class="symbol symbol-circle symbol-35px symbol-md-40px"
+     src="{{ $avatar }}"
+     alt="user" />
 									</div>
 									<!--begin::User account menu-->
 									<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -284,8 +297,10 @@ if (searchText == "") {
 										<div class="menu-item px-3">
 											<div class="menu-content d-flex align-items-center px-3">
 												<!--begin::Avatar-->
-												<div class="symbol symbol-50px me-5">
-													<img alt="Logo" src="assets/media/avatars/300-13.jpg" />
+												<div class="symbol symbol-50px me-5"
+     data-bs-toggle="modal"
+     data-bs-target="#modalCambiarAvatar">
+													<img alt="Logo" src="{{ $avatar }}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Username-->
@@ -559,6 +574,50 @@ if (searchText == "") {
 			<i class="ki-outline ki-arrow-up"></i>
 		</div>
 		<!--end::Scrolltop-->
+
+		<!-- Modal para cambiar avatar -->
+<div class="modal fade" id="modalCambiarAvatar" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title">Cambiar avatar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <form action="{{ route('perfil.avatar.update') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="modal-body">
+          
+          <div class="mb-3 text-center">
+            <img src="{{ $avatar }}"
+                 alt="Avatar actual"
+                 class="rounded-circle mb-3"
+                 style="width: 100px; height: 100px; object-fit: cover;">
+          </div>
+
+          <div class="mb-3">
+            <label for="avatar" class="form-label">Selecciona una imagen</label>
+            <input type="file" name="avatar" id="avatar" class="form-control" accept="image/*" required>
+            <div class="form-text">Formatos permitidos: JPG, JPEG, PNG, WEBP. Máx: 2MB.</div>
+          </div>
+
+          @if ($errors->has('avatar'))
+            <div class="alert alert-danger py-2">{{ $errors->first('avatar') }}</div>
+          @endif
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar avatar</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+	
 	
 		 
         <!--begin::Javascript-->

@@ -130,7 +130,7 @@ License: For each use you must have a valid license purchased only from above li
 										<div class="menu-item px-3">
 											<div class="menu-content d-flex align-items-center px-3">
 												<!--begin::Avatar-->
-												<div class="cursor-pointer symbol symbol-35px symbol-md-40px"
+												<div class="symbol symbol-50px me-5"
      data-bs-toggle="modal"
      data-bs-target="#modalCambiarAvatar">
 													<img alt="Logo" src="{{ $avatar }}" />
