@@ -20,6 +20,8 @@ use App\Exports\EnviolistaExport;
 use App\Exports\TicketlistaExport;
 use Maatwebsite\Excel\Facades\Excel;
 
+use Imagick;
+
 
 class EnvioController extends Controller
 {
@@ -780,5 +782,55 @@ public function print($id)
         $pdf->setPaper($customPaper );
         return $pdf->stream();
 
+    }
+
+    public function compartir($id)
+    {
+        $envio = Envioscomer::findOrFail($id);
+
+        // Nombre base de archivos (PDF/PNG)
+        $baseName = 'guia_' . $envio->id;
+        $pdfPath  = 'guias/' . $baseName . '.pdf';
+        $pngPath  = 'guias/' . $baseName . '.png';
+
+        // 1) Generar el PDF (solo si aún no existe guardado)
+        if (!Storage::disk('public')->exists($pdfPath)) {
+            $pdf = PDF::loadView('guias.plantilla_pdf', [  // <-- tu vista de DomPDF
+                'envio' => $envio,
+            ])->setPaper('letter');
+
+            Storage::disk('public')->put($pdfPath, $pdf->output());
+        }
+
+        // 2) Generar la imagen PNG desde el PDF (solo si no existe)
+        if (!Storage::disk('public')->exists($pngPath)) {
+            $pdfFullPath = Storage::disk('public')->path($pdfPath);
+
+            $imagick = new \Imagick();
+
+            // Leer el PDF (solo la primera página: [0])
+            $imagick->setResolution(150, 150);      // calidad
+            $imagick->readImage($pdfFullPath . '[0]');
+            $imagick->setImageFormat('png');
+            $imagick->setImageCompressionQuality(90);
+
+            $imageBlob = $imagick->getImageBlob();
+            $imagick->clear();
+            $imagick->destroy();
+
+            Storage::disk('public')->put($pngPath, $imageBlob);
+        }
+
+        // 3) Obtener URL pública de la imagen
+        $imageUrl = asset('storage/' . $pngPath);
+
+        // 4) Armar el mensaje de WhatsApp
+        $mensaje = "Hola, te comparto la guía {$envio->guia} de Melo Express:\n{$imageUrl}";
+
+        // 5) URL de WhatsApp con mensaje prellenado
+        $whatsUrl = 'https://api.whatsapp.com/send?text=' . urlencode($mensaje);
+
+        // 6) Redirigir a WhatsApp
+        return redirect()->away($whatsUrl);
     }
 }

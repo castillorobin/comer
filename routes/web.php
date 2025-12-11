@@ -59,6 +59,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     ->middleware('auth')
     ->name('perfil.avatar.update');
 
+    Route::get('/guias/compartir/{id}', [EnvioController::class, 'compartir'])->name('guias.compartir');
+
 
 Route::get('/logout', function () {
     Auth::logout();

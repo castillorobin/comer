@@ -463,7 +463,7 @@ if (searchText == "") {
             <th class="text-center min-w-100px " data-dt-column="5" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Creacion</span><span class="dt-column-order" role="button" aria-label="Date Added: Activate to sort" tabindex="0"></span></div></th>
             <th class="text-center min-w-100px " data-dt-column="5" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Estado</span><span class="dt-column-order" role="button" aria-label="Date Added: Activate to sort" tabindex="0"></span></div></th>
                         
-            <th class="text-center min-w-100px dt-orderable-none" data-dt-column="7" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Imprimir</span><span class="dt-column-order"></span></div></th>
+            <th class="text-center min-w-100px dt-orderable-none" data-dt-column="7" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Acciones</span><span class="dt-column-order"></span></div></th>
             
             </tr>
     </thead>
@@ -503,8 +503,20 @@ if (searchText == "") {
                 </td>
               
                 <td class="text-center">
-  <a href="/guias/print/{{ $envio->id }}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" target="_blank" title="Imprimir guía">
+  {{-- Imprimir --}}
+  <a href="{{ url('/guias/print/' . $envio->id) }}"
+     class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
+     target="_blank"
+     title="Imprimir guía">
     <i class="fas fa-print" style="font-size: 22px;"></i>
+  </a>
+
+  {{-- Compartir por WhatsApp --}}
+  <a href="{{ route('guias.compartir', $envio->id) }}"
+     class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1"
+     target="_blank"
+     title="Compartir guía por WhatsApp">
+    <i class="fas fa-share-square" style="font-size: 22px;"></i>
   </a>
 </td>
             </tr>
