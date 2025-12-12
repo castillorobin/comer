@@ -755,8 +755,18 @@ if (searchText == "") {
 </td>
 
                             <td style="text-align: right;"	>
-                                 <button class="btn btn-active-light-secondary edit " value="{{$ticket->codigo}}" id="kt_drawer_example_basic_button" >Ver</button>
+                                 <button class="btn btn-active-light-secondary edit " value="{{$ticket->codigo}}" id="kt_drawer_example_basic_button" ><i class="fas fa-eye" style="font-size: 22px;"></i></button>
+
+                                                            {{-- Compartir por WhatsApp --}}
+  <a href="{{ route('guias.compartir', $ticket->id) }}"
+     class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1"
+     target="_blank"
+     title="Compartir guía por WhatsApp">
+    <i class="fas fa-share-square" style="font-size: 22px;"></i>
+  </a>
                             </td>
+
+  
                         </tr>
 
 
@@ -922,73 +932,89 @@ if (searchText == "") {
 
    <div class="centrar">
 <table class="centrar" style="margin-left:10%; width: 80%;">
+    {{-- Encabezado --}}
     <thead class="centrar" style="border-top: 2px solid black; border-bottom: 2px solid black;">
         <tr>
-        <th style="width: 200px;">DESCRIPCION</th>
-        <TH>CANT</TH>
-        <TH>IMPORTE</TH>
+            <th style="width: 200px;">DESCRIPCION</th>
+            <th>CANT</th>
+            <th>IMPORTE</th>
+        </tr>
+    </thead>
+
+    {{-- Cuerpo --}}
+    <tbody>
+        <tr>
+            <td style="text-align: left;">Personalizado</td>
+            <td><label id="pers"></label></td>
+            <td>$<label id="peri"></label></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Punto fijo</td>
+            <td><label id="punt"></label></td>
+            <td>$<label id="puni"></label></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Casillero</td>
+            <td><label id="casi"></label></td>
+            <td>$<label id="caii"></label></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Personalizado Departamental</td>
+            <td><label id="depa"></label></td>
+            <td>$<label id="depi"></label></td>
+        </tr>
+        <tr>
+            <td style="text-align: left; border-bottom: 2px solid black;">Guias</td>
+            <td style="border-bottom: 2px solid black;">
+                <label id="guia"></label>
+            </td>
+            <td style="border-bottom: 2px solid black;">
+                $<label id="guii"></label>
+            </td>
         </tr>
 
-        <tbody>
-            <tr>
-                <td style="text-align: left;">Personalizado</td>
-                <td><label for="" id="pers"></label></td>
-                <td>$<label for="" id="peri"></label></td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">Punto fijo</td>
-                <td><label for="" id="punt"></label></td>
-                <td>$<label for="" id="puni"></label></td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">Casillero</td>
-                <td><label for="" id="casi"></label></td>
-                <td>$<label for="" id="caii"></label></td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">Personalizado Departamental</td>
-                <td><label for="" id="depa"></label></td>
-                <td>$<label for="" id="depi"></label></td>
-            </tr>
-            <tr >
-                <td style="text-align: left; border-bottom: 2px solid black;"> Guias</td>
-                <td style="border-bottom: 2px solid black;"><label for="" id="guia"></label></td>
-                <td style="border-bottom: 2px solid black;">$<label for="" id="guii"></label></td>
-            </tr>
-            <tr >
-                <td></td>
-                <td>SUBTOTAL</td>
-                <td >$<label for="" id="subt"> </label>
-                 
-                </td>
-                
-            </tr>
-            <tr >
-                <td></td>
-                <td>DESCUENTO</td>
-                <td>$<label for="" id="desc"> </label>
-                 
-                </td>
-                
-            </tr>
-            <tr>
-                <td></td>
-                <td style="font-weight: bolder;">TOTAL</td>
-                <td >$<label for="" id="tota"> </label></td>
-            </tr>
-            <tr>
-                
-                <td colspan="2" style="text-align: right;">ENTREGA EFECTIVO:</td>
-                <td >$<label for="" id="entr"> </label></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>CAMBIO:</td>
-                <td >$<label for="" id="camb"> </label></td>
-            </tr>
-        </tbody>
+        {{-- BLOQUE QR + TOTALES --}}
+        <tr>
+            {{-- QR ocupando 5 filas --}}
+           <td rowspan="5" style="width: 35%; text-align: center; vertical-align: top;">
+    <div id="qrTicket" style="padding: 10px;"></div>
+</td>
 
-    </thead>
+            {{-- SUBTOTAL --}}
+            <td>SUBTOTAL</td>
+            <td>
+                $<label id="subt"></label>
+            </td>
+        </tr>
+        <tr>
+            {{-- fila 2 (DESCUENTO) --}}
+            <td>DESCUENTO</td>
+            <td>
+                $<label id="desc"></label>
+            </td>
+        </tr>
+        <tr>
+            {{-- fila 3 (TOTAL) --}}
+            <td style="font-weight: bolder;">TOTAL</td>
+            <td>
+                $<label id="tota"></label>
+            </td>
+        </tr>
+        <tr>
+            {{-- fila 4 (ENTREGA EFECTIVO) --}}
+            <td colspan="1" style="text-align: right;">ENTREGA EFECTIVO:</td>
+            <td>
+                $<label id="entr"></label>
+            </td>
+        </tr>
+        <tr>
+            {{-- fila 5 (CAMBIO) --}}
+            <td>CAMBIO:</td>
+            <td>
+                $<label id="camb"></label>
+            </td>
+        </tr>
+    </tbody>
 </table>
 
 
@@ -1069,79 +1095,66 @@ if (searchText == "") {
 
 		  
         
-
 <script>
-       
-        
-    $(document).ready(function(){
-        $(document).on('click', '.edit', function(){
-           var cod=$(this).val();
-           var iden=$('#id'+cod).text();
-           var comer=$('#com'+cod).text();
-           var fecha=$('#fec'+cod).text();
-           var horas=$('#hor'+cod).text();
-           var perso=$('#per'+cod).text();
-           var persi=$('#pei'+cod).text();
-           var punto=$('#pun'+cod).text();
-           var punti=$('#pui'+cod).text();
-           var casil=$('#cas'+cod).text();
-           var casill=$('#cai'+cod).text();
-           var depar=$('#dep'+cod).text();
-           var depai=$('#dei'+cod).text();
-           var guias=$('#gui'+cod).text();
-           var guiai=$('#gii'+cod).text();
-           var subto=$('#sub'+cod).text();
-           var total=$('#tot'+cod).text();
-           var entre=$('#ent'+cod).text();
-           var cambi=$('#cam'+cod).text();
-           var desc=$('#des'+cod).text();
-            
-    //alert("HOla");
-            
-        
-            //$('#edit').modal('show');
-           $('#codigo').text(cod);
-           $('#come').text(comer);
-           $('#fech').text(fecha);
-           $('#hora').text(horas);
-           $('#pers').text(perso);
-           $('#peri').text(persi);
-           $('#punt').text(punto);
-           $('#puni').text(punti);
-           $('#casi').text(casil);
-           $('#caii').text(casill);
-           $('#depa').text(depar);
-           $('#depi').text(depai);
-           $('#guia').text(guias);
-           $('#guii').text(guiai);
-           $('#subt').text(subto);
-           $('#tota').text(total);
-           $('#entr').text(entre);
-           $('#camb').text(cambi);
-           $('#cod2').text(cod);
-           $('#desc').text(desc);
-          
-           var ide = '/cobro/ticketlistado/'+cod ;
-		 //  document.getElementById("impri").href = ide;
-           document.getElementById("idticket").value = cod;
-    
-            
-    
-            //$('#impri a').prop("href", ide);
-            //$('.paginacion a').prop('href','http://nuevaUrl.com');
-    
-           // document.getElementById("impri").href = ide;
+$(document).ready(function(){
+    $(document).on('click', '.edit', function(){
+        var cod = $(this).val();
+
+        var iden   = $('#id'  + cod).text();
+        var comer  = $('#com' + cod).text();
+        var fecha  = $('#fec' + cod).text();
+        var horas  = $('#hor' + cod).text();
+        var perso  = $('#per' + cod).text();
+        var persi  = $('#pei' + cod).text();
+        var punto  = $('#pun' + cod).text();
+        var punti  = $('#pui' + cod).text();
+        var casil  = $('#cas' + cod).text();
+        var casill = $('#cai' + cod).text();
+        var depar  = $('#dep' + cod).text();
+        var depai  = $('#dei' + cod).text();
+        var guias  = $('#gui' + cod).text();
+        var guiai  = $('#gii' + cod).text();
+        var subto  = $('#sub' + cod).text();
+        var total  = $('#tot' + cod).text();
+        var entre  = $('#ent' + cod).text();
+        var cambi  = $('#cam' + cod).text();
+        var desc   = $('#des' + cod).text();
+
+        // Llenas tus labels como ya lo hacías
+        $('#codigo').text(cod);
+        $('#come').text(comer);
+        $('#fech').text(fecha);
+        $('#hora').text(horas);
+        $('#pers').text(perso);
+        $('#peri').text(persi);
+        $('#punt').text(punto);
+        $('#puni').text(punti);
+        $('#casi').text(casil);
+        $('#caii').text(casill);
+        $('#depa').text(depar);
+        $('#depi').text(depai);
+        $('#guia').text(guias);
+        $('#guii').text(guiai);
+        $('#subt').text(subto);
+        $('#tota').text(total);
+        $('#entr').text(entre);
+        $('#camb').text(cambi);
+        $('#cod2').text(cod);
+        $('#desc').text(desc);
+
+        var ide = '/cobro/ticketlistado/' + cod;
+        document.getElementById("idticket").value = cod;
+
+        // 👉 Cargar el QR dinámico con AJAX
+        $('#qrTicket').html('<small>Cargando QR...</small>');
+        $.get('/ticket/qr/' + cod, function(html){
+            $('#qrTicket').html(html);
+        }).fail(function(){
+            $('#qrTicket').html('<small>No se pudo cargar el QR</small>');
         });
     });
-     
-    
-    
-    
-    
-    
-    
-        </script>
-
+});
+</script>
 
 
         <!-- Modal para cambiar avatar -->

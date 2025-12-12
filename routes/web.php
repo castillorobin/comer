@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnvioController;
 use App\Http\Controllers\ProfileController;
+use Milon\Barcode\DNS2D;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,6 +61,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     ->name('perfil.avatar.update');
 
     Route::get('/guias/compartir/{id}', [EnvioController::class, 'compartir'])->name('guias.compartir');
+
+
+    
+Route::get('/ticket/qr/{codigo}', function ($codigo) {
+    // Aquí puedes hacer validaciones si quieres (ej: verificar que el ticket exista)
+    $dns = new DNS2D();
+    $dns->setStorPath(storage_path('framework/laravel-dns2d/'));
+
+    // Devolvemos solo el HTML del QR
+    return $dns->getBarcodeHTML((string)$codigo, 'QRCODE', 4, 4);
+})->name('ticket.qr');
 
 
 Route::get('/logout', function () {
