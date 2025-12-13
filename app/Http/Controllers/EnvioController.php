@@ -855,7 +855,7 @@ public function print($id)
         $imageUrl = asset('storage/' . $pngPath);
 
         // 4) Armar el mensaje de WhatsApp
-        $mensaje = "Hola, te comparto la guía {$envio->guia} de Melo Express:\n{$imageUrl}";
+        $mensaje = "Hola! Te saludamos de Melo Express, aqui te compartimos la guía: {$envio->guia} \n{$imageUrl}";
 
         // 5) URL de WhatsApp con mensaje prellenado
         $whatsUrl = 'https://api.whatsapp.com/send?text=' . urlencode($mensaje);
@@ -907,7 +907,7 @@ public function print($id)
         $imageUrl = asset('storage/' . $pngPath);
 
         // 4) Armar el mensaje de WhatsApp
-        $mensaje = "Hola, te comparto el ticket de pago {$ticket->codigo} de Melo Express:\n{$imageUrl}";
+        $mensaje = "Hola! Te saludamos de Melo Express, aqui te compartimos el ticket: {$ticket->codigo} \n{$imageUrl}";
 
         // 5) URL de WhatsApp con mensaje prellenado
         $whatsUrl = 'https://api.whatsapp.com/send?text=' . urlencode($mensaje);
