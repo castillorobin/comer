@@ -747,7 +747,7 @@ if (searchText == "") {
 
                             <td class="text-center">{{ $ticket->created_at->format('d/m/Y') }}</td>
                             
-                           <td class="text-center">
+                           <td class="text-center"> 
   <span class="badge fw-bold px-4 py-3
     {{ $ticket->estado === 'Pagado' ? 'badge-light-success' : 'badge-light-danger' }}">
     {{ $ticket->estado }}
@@ -755,15 +755,17 @@ if (searchText == "") {
 </td>
 
                             <td style="text-align: right;"	>
-                                 <button class="btn btn-active-light-secondary edit " value="{{$ticket->codigo}}" id="kt_drawer_example_basic_button" ><i class="fas fa-eye" style="font-size: 22px;"></i></button>
+                                                            <!-- Ver detalle del ticket -->
+                                 <button class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" value="{{$ticket->codigo}}" id="kt_drawer_example_basic_button" ><i class="fas fa-eye" style="font-size: 22px;"></i></button>
 
                                                             {{-- Compartir por WhatsApp --}}
-  <a href="{{ route('guias.compartir', $ticket->id) }}"
-     class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1"
-     target="_blank"
-     title="Compartir guía por WhatsApp">
-    <i class="fas fa-share-square" style="font-size: 22px;"></i>
-  </a>
+                            <a href="{{ route('guias.compartir', $ticket->id) }}"
+                                class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1"
+                                target="_blank"
+                                title="Compartir guía por WhatsApp">
+                                <i class="fas fa-share-square" style="font-size: 22px;"></i>
+                            </a>
+
                             </td>
 
   

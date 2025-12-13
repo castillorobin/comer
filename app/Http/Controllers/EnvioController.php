@@ -863,4 +863,71 @@ public function print($id)
         // 6) Redirigir a WhatsApp
         return redirect()->away($whatsUrl);
     }
+    public function compartirticket($id)
+    {
+        $ticket = Ticketc::findOrFail($id);
+
+        // Nombre base de archivos (PDF/PNG)
+        $baseName = 'ticket_' . $ticket->id;
+        $pdfPath  = 'tickets/' . $baseName . '.pdf';
+        $pngPath  = 'tickets/' . $baseName . '.png';
+
+        $ticketact = Ticketc::where('codigo', $ticket->codigo)
+        ->get();
+
+        // 1) Generar el PDF (solo si aún no existe guardado)
+        if (!Storage::disk('public')->exists($pdfPath)) {
+             $pdf = PDF::loadView('guias.ticketpagos', ['ticketact'=>$ticketact]);
+            $customPaper = array(0,0,360,650);
+            $pdf->setPaper($customPaper );
+
+            Storage::disk('public')->put($pdfPath, $pdf->output());
+        }
+
+        // 2) Generar la imagen PNG desde el PDF (solo si no existe)
+        if (!Storage::disk('public')->exists($pngPath)) {
+            $pdfFullPath = Storage::disk('public')->path($pdfPath);
+
+            $imagick = new \Imagick();
+
+            // Leer el PDF (solo la primera página: [0])
+            $imagick->setResolution(150, 150);      // calidad
+            $imagick->readImage($pdfFullPath . '[0]');
+            $imagick->setImageFormat('png');
+            $imagick->setImageCompressionQuality(90);
+
+            $imageBlob = $imagick->getImageBlob();
+            $imagick->clear();
+            $imagick->destroy();
+
+            Storage::disk('public')->put($pngPath, $imageBlob);
+        }
+
+        // 3) Obtener URL pública de la imagen
+        $imageUrl = asset('storage/' . $pngPath);
+
+        // 4) Armar el mensaje de WhatsApp
+        $mensaje = "Hola, te comparto el ticket de pago {$ticket->codigo} de Melo Express:\n{$imageUrl}";
+
+        // 5) URL de WhatsApp con mensaje prellenado
+        $whatsUrl = 'https://api.whatsapp.com/send?text=' . urlencode($mensaje);
+
+        // 6) Redirigir a WhatsApp
+        return redirect()->away($whatsUrl);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
