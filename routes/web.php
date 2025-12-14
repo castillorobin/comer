@@ -18,7 +18,7 @@ use Milon\Barcode\DNS2D;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+*/ 
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -61,6 +61,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     ->name('perfil.avatar.update');
 
     Route::get('/guias/compartir/{id}', [EnvioController::class, 'compartir'])->name('guias.compartir');
+    Route::get('/guias/compartirticket/{id}', [EnvioController::class, 'compartirticket'])->name('guias.compartirticket');
 
 
     

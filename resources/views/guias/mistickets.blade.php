@@ -756,10 +756,10 @@ if (searchText == "") {
 
                             <td style="text-align: right;"	>
                                                             <!-- Ver detalle del ticket -->
-                                 <button class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" value="{{$ticket->codigo}}" id="kt_drawer_example_basic_button" ><i class="fas fa-eye" style="font-size: 22px;"></i></button>
+                                 <button class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 edit" value="{{$ticket->codigo}}" id="kt_drawer_example_basic_button" ><i class="fas fa-eye" style="font-size: 22px;"></i></button>
 
                                                             {{-- Compartir por WhatsApp --}}
-                            <a href="{{ route('guias.compartir', $ticket->id) }}"
+                            <a href="{{ route('guias.compartirticket', $ticket->id) }}"
                                 class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1"
                                 target="_blank"
                                 title="Compartir guía por WhatsApp">

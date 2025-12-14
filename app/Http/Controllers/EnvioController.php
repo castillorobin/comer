@@ -868,7 +868,7 @@ public function print($id)
         $ticket = Ticketc::findOrFail($id);
 
         // Nombre base de archivos (PDF/PNG)
-        $baseName = 'ticket_' . $ticket->id;
+        $baseName = 'ticket_' . $ticket->codigo;
         $pdfPath  = 'tickets/' . $baseName . '.pdf';
         $pngPath  = 'tickets/' . $baseName . '.png';
 
@@ -916,14 +916,7 @@ public function print($id)
         return redirect()->away($whatsUrl);
     }
 
-
-
-
-
-
-
-
-
+  
 
 
 
