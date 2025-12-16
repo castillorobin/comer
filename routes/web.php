@@ -64,6 +64,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/guias/compartirticket/{id}', [EnvioController::class, 'compartirticket'])->name('guias.compartirticket');
     Route::get('/guias/notificaciones', [EnvioController::class, 'notificaciones'])->name('envios.notificaciones');
 
+    Route::get('/guias/compartirlista/{id}', [EnvioController::class, 'compartirGuia'])
+    ->name('guias.compartirlista');
+
 
     
 Route::get('/ticket/qr/{codigo}', function ($codigo) {

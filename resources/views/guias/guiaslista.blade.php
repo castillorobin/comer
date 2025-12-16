@@ -742,6 +742,9 @@ if (searchText == "") {
 
 						<th class="min-w-100px text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Fecha</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
 						</th>
+
+                        <th class="min-w-100px text-center" data-dt-column="2" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Accion</span><span class="dt-column-order" role="button" aria-label="Amount: Activate to sort" tabindex="0"></span></div>
+						</th>
 					
 						
 					
@@ -798,6 +801,15 @@ if (searchText == "") {
                             </td>
                             <td class="text-center">
                                 {{ $envio->created_at->format('d/m/Y') }}
+                            </td>
+                            <td class="text-center">
+                                 {{-- Compartir por WhatsApp --}}
+  <a href="{{ route('guias.compartirlista', $envio->id) }}"
+   class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1"
+   target="_blank"
+   title="Compartir guía por WhatsApp">
+  <i class="fas fa-share-square" style="font-size: 22px;"></i>
+</a>
                             </td>
                         </tr>
 				@endforeach

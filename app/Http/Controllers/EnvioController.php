@@ -20,6 +20,8 @@ use App\Exports\EnviolistaExport;
 use App\Exports\TicketlistaExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 use Imagick;
 
@@ -923,6 +925,97 @@ public function print($id)
         return view('guias.notificaciones', compact( 'comercio'));
 
     }
+
+
+
+
+    
+public function compartirGuia($id)
+{
+    $envio = \App\Models\Envio::findOrFail($id);
+    $guia  = (string) $envio->guia;
+
+    // Donde se guardará la imagen final
+    $dir      = "whatsapp/guias";
+    $fileName = $guia . ".png";
+    $path     = "{$dir}/{$fileName}";
+
+    // 1) Si ya existe, solo comparte (evita regenerar)
+    if (!Storage::disk('public')->exists($path)) {
+
+        // --- Generar QR como PNG (base64 -> binario) ---
+        // Ajusta tamaños a tu gusto
+        $qrBase64 = \DNS2D::getBarcodePNG($guia, 'QRCODE', 8, 8);
+        $qrBinary = base64_decode($qrBase64);
+
+        // --- Generar código de barras 1D como PNG ---
+        // C128 suele aceptar letras/números con buena compatibilidad
+        $barBase64 = \DNS1D::getBarcodePNG($guia, 'C128', 2, 80);
+        $barBinary = base64_decode($barBase64);
+
+        // --- Crear canvas y “armar” diseño ---
+        $manager = new ImageManager(new Driver());
+
+        // Tamaño aproximado como tu ejemplo
+        $canvas = $manager->create(600, 700)->fill('#ffffff');
+
+        // Logo (si lo tienes en public/fotos/logomelo.png)
+        // Ojo: asset() es URL, aquí ocupamos path físico
+        $logoPath = public_path('fotos/logomelo.png');
+        if (file_exists($logoPath)) {
+            $logo = $manager->read($logoPath)->scale(width: 140);
+            $canvas->place($logo, 'top-left', 40, 30);
+        }
+
+        // Texto
+        // (si tu versión de Intervention no soporta font() así,
+        // te lo adapto; pero normalmente funciona)
+        $canvas->text('Tu número de guía', 300, 130, function ($font) {
+          //  $font->file(public_path('assets/fonts/Inter-Regular.ttf')); // si existe
+            $font->size(32);
+            $font->color('#111111');
+            $font->align('center');
+            $font->valign('top');
+        });
+
+        $canvas->text($guia, 300, 175, function ($font) {
+            //$font->file(public_path('assets/fonts/Inter-Bold.ttf')); // si existe
+            $font->size(34);
+            $font->color('#111111');
+            $font->align('center');
+            $font->valign('top');
+        });
+
+        // QR centrado
+        $qrImg = $manager->read($qrBinary)->scale(width: 230);
+        $canvas->place($qrImg, 'top-center', 0, 250);
+
+        // Barcode centrado
+        $barImg = $manager->read($barBinary)->scale(width: 420);
+        $canvas->place($barImg, 'top-center', 0, 510);
+
+        // Texto del barcode debajo (solo si quieres)
+        $canvas->text($guia, 300, 605, function ($font) {
+          //  $font->file(public_path('assets/fonts/Inter-Regular.ttf'));
+            $font->size(26);
+            $font->color('#111111');
+            $font->align('center');
+            $font->valign('top');
+        });
+
+        // Guardar en storage public
+        Storage::disk('public')->put($path, (string) $canvas->toPng());
+    }
+
+    // URL pública para compartir
+    $imageUrl = asset("storage/{$path}");
+
+    // WhatsApp share: solo abre chat con texto + link a la imagen
+    $text = "Tu guía: {$guia}\n{$imageUrl}";
+    $waUrl = "https://wa.me/?text=" . urlencode($text);
+
+    return redirect()->away($waUrl);
+}
 
   
 
