@@ -915,6 +915,14 @@ public function print($id)
         // 6) Redirigir a WhatsApp
         return redirect()->away($whatsUrl);
     }
+    public function notificaciones()
+    {
+        $comercio = Comercio::where('comercio', Auth::user()->name)->first();
+       
+
+        return view('guias.notificaciones', compact( 'comercio'));
+
+    }
 
   
 
