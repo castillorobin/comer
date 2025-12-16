@@ -961,7 +961,7 @@ public function compartirGuia($id)
 
         // Logo (si lo tienes en public/fotos/logomelo.png)
         // Ojo: asset() es URL, aquí ocupamos path físico
-        $logoPath = public_path('fotos/logomelo.png');
+        $logoPath = public_path('fotos/logoticket.jpeg');
         if (file_exists($logoPath)) {
             $logo = $manager->read($logoPath)->scale(width: 140);
             $canvas->place($logo, 'top-left', 40, 30);
@@ -971,15 +971,15 @@ public function compartirGuia($id)
         // (si tu versión de Intervention no soporta font() así,
         // te lo adapto; pero normalmente funciona)
         $canvas->text('Tu número de guía', 300, 130, function ($font) {
-          //  $font->file(public_path('assets/fonts/Inter-Regular.ttf')); // si existe
-            $font->size(32);
-            $font->color('#111111');
-            $font->align('center');
-            $font->valign('top');
-        });
+    $font->file(public_path('fonts/Inter-Regular.ttf'));
+    $font->size(42); // sube más
+    $font->color('#111111');
+    $font->align('center');
+    $font->valign('top');
+});
 
         $canvas->text($guia, 300, 175, function ($font) {
-            //$font->file(public_path('assets/fonts/Inter-Bold.ttf')); // si existe
+            $font->file(public_path('fonts/Inter-Bold.ttf'));
             $font->size(34);
             $font->color('#111111');
             $font->align('center');
@@ -996,8 +996,8 @@ public function compartirGuia($id)
 
         // Texto del barcode debajo (solo si quieres)
         $canvas->text($guia, 300, 605, function ($font) {
-          //  $font->file(public_path('assets/fonts/Inter-Regular.ttf'));
-            $font->size(26);
+          $font->file(public_path('fonts/Inter-Bold.ttf'));
+            $font->size(20);
             $font->color('#111111');
             $font->align('center');
             $font->valign('top');
