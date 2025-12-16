@@ -995,7 +995,7 @@ public function compartirGuia($id)
         $canvas->place($barImg, 'top-center', 0, 510);
 
         // Texto del barcode debajo (solo si quieres)
-        $canvas->text($guia, 300, 655, function ($font) {
+        $canvas->text($guia, 300, 645, function ($font) {
           $font->file(public_path('fonts/Inter-Bold.ttf'));
             $font->size(20);
             $font->color('#111111');
