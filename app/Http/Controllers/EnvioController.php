@@ -961,7 +961,7 @@ public function compartirGuia($id)
 
         // Logo (si lo tienes en public/fotos/logomelo.png)
         // Ojo: asset() es URL, aquí ocupamos path físico
-        $logoPath = public_path('fotos/logoticket.jpeg');
+        $logoPath = public_path('fotos/logomelonegro.png');
         if (file_exists($logoPath)) {
             $logo = $manager->read($logoPath)->scale(width: 140);
             $canvas->place($logo, 'top-left', 40, 30);
