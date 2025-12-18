@@ -922,11 +922,16 @@ public function print($id)
     public function notificaciones()
     {
         $comercio = Comercio::where('comercio', Auth::user()->name)->first();
-
+        /*
         $notificaciones = Notificacion::where('created_at', '>=', Carbon::now()->subDays(1))
                             ->orderBy('created_at', 'desc')
                             ->get();
-       //dd( $notificaciones);
+        */
+
+                            $notificaciones = Notificacion::with('ruta')
+    ->where('created_at', '>=', Carbon::now()->subDays(1))
+    ->orderBy('created_at', 'desc')
+    ->get();
 
         return view('guias.notificaciones', compact( 'comercio', 'notificaciones'));
 

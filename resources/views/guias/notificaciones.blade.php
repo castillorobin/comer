@@ -279,6 +279,7 @@ License: For each use you must have a valid license purchased only from above li
 
 
 @foreach($notificaciones as $notificacion)
+@if($notificacion->tipo == 'atraso')
          <!--begin::Timeline*********************************-->
 <div class="timeline timeline-border-dashed">
     <!--begin::Timeline item-->
@@ -297,7 +298,7 @@ License: For each use you must have a valid license purchased only from above li
         <!--begin::Timeline heading-->
         <div class="pe-3 mb-5">
             <!--begin::Title-->
-            <div class="fs-5 fw-semibold mb-2"><span class="badge badge-light-danger " style="padding: 10px 20px 10px 20px; ">{{ $notificacion->tipo }}</span></div>
+            <div class="fs-5 fw-semibold mb-2"><span class="badge badge-light-danger " style="padding: 10px 20px 10px 20px; ">Atraso</span></div>
             <!--end::Title-->
 
             <!--begin::Description-->
@@ -319,7 +320,7 @@ License: For each use you must have a valid license purchased only from above li
             <!--begin::Record-->
             <div class=" align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5">  
                 <!--begin::Title-->                                   
-                <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-semibold w-375px min-w-200px"> {{ $notificacion->punto }}</a>                                  
+                <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-semibold w-375px min-w-200px"> {{ $notificacion->ruta->punto ?? 'Sin ruta' }}</a>                                  
                 <!--end::Title-->
 
                <br>
@@ -351,7 +352,7 @@ License: For each use you must have a valid license purchased only from above li
     <!--end::Timeline content-->    
 </div>
 <!--end::Timeline item *******************************************************-->
-
+@endif
 @endforeach
 
 
