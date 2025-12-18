@@ -275,6 +275,105 @@ License: For each use you must have a valid license purchased only from above li
 
 
 <div id="kt_activity_today" class="card-body p-0 tab-pane fade active show" role="tabpanel" aria-labelledby="kt_activity_today_tab">
+
+
+
+@foreach($notificaciones as $notificacion)
+         <!--begin::Timeline*********************************-->
+<div class="timeline timeline-border-dashed">
+    <!--begin::Timeline item-->
+<div class="timeline-item">
+    <!--begin::Timeline line-->
+    <div class="timeline-line"></div>
+    <!--end::Timeline line-->
+
+    <!--begin::Timeline icon-->
+    <div class="timeline-icon">
+        <i class="fas fa-search-location" style="font-size: 22px;"></i>   </div>
+    <!--end::Timeline icon-->  
+
+    <!--begin::Timeline content-->
+    <div class="timeline-content mb-10 mt-n1">
+        <!--begin::Timeline heading-->
+        <div class="pe-3 mb-5">
+            <!--begin::Title-->
+            <div class="fs-5 fw-semibold mb-2"><span class="badge badge-light-danger " style="padding: 10px 20px 10px 20px; ">{{ $notificacion->tipo }}</span></div>
+            <!--end::Title-->
+
+            <!--begin::Description-->
+            <div class="d-flex align-items-center mt-1 fs-6">
+                <!--begin::Info-->
+                <div class="text-muted me-2 fs-7">Hora: {{ $notificacion->created_at->format('H:i') }}</div>
+                <!--end::Info-->
+
+                <!--begin::User-->
+                
+                <!--end::User--> 
+            </div>
+            <!--end::Description-->
+        </div>
+        <!--end::Timeline heading-->
+
+        <!--begin::Timeline details-->
+        <div class="overflow-auto pb-5">
+            <!--begin::Record-->
+            <div class=" align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5">  
+                <!--begin::Title-->                                   
+                <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-semibold w-375px min-w-200px"> {{ $notificacion->punto }}</a>                                  
+                <!--end::Title-->
+
+               <br>
+                <!--begin::Label-->
+                <div class="min-w-175px">
+                  <br>
+                    Hora aproximada de llegada: {{ $notificacion->horallegada }}
+                    <br>
+                    Nota: {{ $notificacion->nota }}
+                </div>
+                <!--end::Label-->
+                
+                <!--begin::Users-->
+                
+                <!--end::Users-->                                     
+
+               <p></p>
+                
+               
+
+                                           
+            </div>
+            <!--end::Record-->
+
+            
+        </div>
+        <!--end::Timeline details-->
+    </div>
+    <!--end::Timeline content-->    
+</div>
+<!--end::Timeline item *******************************************************-->
+
+@endforeach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <!--begin::Timeline-->
 <div class="timeline timeline-border-dashed">
     <!--begin::Timeline item-->

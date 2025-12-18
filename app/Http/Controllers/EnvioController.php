@@ -22,6 +22,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use App\Models\Notificacion;
+
 
 use Imagick;
 
@@ -920,9 +922,13 @@ public function print($id)
     public function notificaciones()
     {
         $comercio = Comercio::where('comercio', Auth::user()->name)->first();
-       
 
-        return view('guias.notificaciones', compact( 'comercio'));
+        $notificaciones = Notificacion::where('created_at', '>=', Carbon::now()->subDays(1))
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+       //dd( $notificaciones);
+
+        return view('guias.notificaciones', compact( 'comercio', 'notificaciones'));
 
     }
 
