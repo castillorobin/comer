@@ -412,11 +412,13 @@ License: For each use you must have a valid license purchased only from above li
                 </a>
 
                 <div class="min-w-175px mt-3">
-                Avisale a tu cliente que ya estamos por llegar al punto. <br>
+                Avísale a tu cliente que ya estamos por llegar al punto. <br>
                   Hora: {{ $notificacion->horallegada }} <br>
                   Placa: {{ $notificacion->placa }} <br>
                   Color: {{ $notificacion->color }} <br>
+                  @if($notificacion->nota != '')
                   Punto de referencia: {{ $notificacion->nota }}
+                  @endif
                 </div>
               </div>
             </div>
