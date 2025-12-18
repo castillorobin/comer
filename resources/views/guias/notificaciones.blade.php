@@ -242,16 +242,36 @@ License: For each use you must have a valid license purchased only from above li
             <!--begin::Products-->
 <div class="card card-flush">
    <!--begin::Card header-->
+ <!--begin::Card header-->
 <div class="card-header align-items-center py-5 gap-2 gap-md-5 flex-wrap">
     <!--begin::Card title-->
     <div class="card-title w-100 w-md-auto">
-       
+        <!--begin::Search-->
+        <div class="d-flex align-items-center position-relative my-1 w-100">
+            <i class="ki-outline ki-magnifier fs-3 position-absolute ms-4"></i>
+            <input id="searchGuia" type="text"
+                   class="form-control form-control-solid w-100 w-md-250px ps-12"
+                   placeholder="Buscar guía...">
+        </div>
+        <!--end::Search-->
     </div>
     <!--end::Card title-->
 
     <!--begin::Card toolbar-->
     <div class="card-toolbar w-100 w-md-auto flex-row-fluid justify-content-end gap-2 gap-md-5">
-        
+        <form method="GET" action="{{ url('/guias/notificaciones') }}"
+      class="d-flex flex-row gap-2 align-items-center w-100 w-md-auto flex-nowrap">
+
+            <div class="input-group w-100 w-md-250px">
+                <select name="rango" id="fechas" class="form-select form-select-solid w-100">
+                    <option value="hoy" {{ ($rango ?? 'hoy')=='hoy' ? 'selected' : '' }}>Hoy</option>
+                    <option value="ayer" {{ ($rango ?? '')=='ayer' ? 'selected' : '' }}>Ayer</option>
+                    
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary flex-shrink-0">Filtrar</button>
+        </form>
     </div>
     <!--end::Card toolbar-->
 </div>
@@ -276,163 +296,136 @@ License: For each use you must have a valid license purchased only from above li
 
 <div id="kt_activity_today" class="card-body p-0 tab-pane fade active show" role="tabpanel" aria-labelledby="kt_activity_today_tab">
 
-
-
 @foreach($notificaciones as $notificacion)
-@if($notificacion->tipo == 'atraso')
-         <!--begin::Timeline*********************************-->
-<div class="timeline timeline-border-dashed">
-    <!--begin::Timeline item-->
-<div class="timeline-item">
-    <!--begin::Timeline line-->
-    <div class="timeline-line"></div>
-    <!--end::Timeline line-->
 
-    <!--begin::Timeline icon-->
-    <div class="timeline-icon">
-        <i class="fas fa-search-location" style="font-size: 22px;"></i>   </div>
-    <!--end::Timeline icon-->  
+  <div class="notif-item"
+       data-search="{{ mb_strtolower($notificacion->ruta->punto ?? '', 'UTF-8') }}">
 
-    <!--begin::Timeline content-->
-    <div class="timeline-content mb-10 mt-n1">
-        <!--begin::Timeline heading-->
-        <div class="pe-3 mb-5">
-            <!--begin::Title-->
-            <div class="fs-5 fw-semibold mb-2"><span class="badge badge-light-danger " style="padding: 10px 20px 10px 20px; ">Atraso</span></div>
-            <!--end::Title-->
+    @if($notificacion->tipo == 'atraso')
+      <div class="timeline timeline-border-dashed">
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
 
-            <!--begin::Description-->
-            <div class="d-flex align-items-center mt-1 fs-6">
-                <!--begin::Info-->
-                <div class="text-muted me-2 fs-7">Hora: {{ $notificacion->created_at->format('H:i') }}</div>
-                <!--end::Info-->
+          <div class="timeline-icon">
+            <i class="fas fa-search-location" style="font-size: 22px;"></i>
+          </div>
 
-                <!--begin::User-->
-                
-                <!--end::User--> 
-            </div>
-            <!--end::Description-->
-        </div>
-        <!--end::Timeline heading-->
+          <div class="timeline-content mb-10 mt-n1">
+            <div class="pe-3 mb-5">
+              <div class="fs-5 fw-semibold mb-2">
+                <span class="badge badge-light-danger" style="padding: 10px 20px;">Atraso</span>
+              </div>
 
-        <!--begin::Timeline details-->
-        <div class="overflow-auto pb-5">
-            <!--begin::Record-->
-            <div class=" align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5">  
-                <!--begin::Title-->                                   
-                <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-semibold w-375px min-w-200px"> {{ $notificacion->ruta->punto ?? 'Sin ruta' }}</a>                                  
-                <!--end::Title-->
-
-               <br>
-                <!--begin::Label-->
-                <div class="min-w-175px">
-                  <br>
-                    Hora aproximada de llegada: {{ $notificacion->horallegada }}
-                    <br>
-                    Nota: {{ $notificacion->nota }}
+              <div class="d-flex align-items-center mt-1 fs-6">
+                <div class="text-muted me-2 fs-7">
+                  Hora: {{ $notificacion->created_at->format('H:i') }}
                 </div>
-                <!--end::Label-->
-                
-                <!--begin::Users-->
-                
-                <!--end::Users-->                                     
-
-               <p></p>
-                
-               
-
-                                           
+              </div>
             </div>
-            <!--end::Record-->
 
-            
-        </div>
-        <!--end::Timeline details-->
-    </div>
-    <!--end::Timeline content-->    
-</div>
-<!--end::Timeline item *******************************************************-->
-@endif
+            <div class="overflow-auto pb-5">
+              <div class="align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5">
+                <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-semibold w-375px min-w-200px">
+                  {{ $notificacion->ruta->punto ?? 'Sin punto' }}
+                </a>
 
-@if($notificacion->tipo == 'llegada')
-
-<!--end::Timeline item-->
-    <!--begin::Timeline item-->
-<div class="timeline-item">
-   <!--begin::Timeline line-->
-    <div class="timeline-line"></div>
-    <!--end::Timeline line-->
-
-    <!--begin::Timeline icon-->
-    <div class="timeline-icon">
-        <i class="fas fa-flag-checkered" style="font-size: 22px;"></i>   </div>
-    <!--end::Timeline icon--> 
-
-    <!--begin::Timeline content-->
-    <div class="timeline-content mb-10 mt-n1">
-        <!--begin::Timeline heading-->
-        <div class="pe-3 mb-5">
-            <!--begin::Title-->
-            <div class="fs-5 fw-semibold mb-2"><span class="badge badge-light-success " style="padding: 10px 20px 10px 20px; ">Hemos llegado!</span></div>
-            <!--end::Title-->
-
-            <!--begin::Description-->
-            <div class="d-flex align-items-center mt-1 fs-6">
-                <!--begin::Info-->
-                <div class="text-muted me-2 fs-7">Hora: 2:23 PM</div>
-                <!--end::Info-->
-
-                <!--begin::User-->
-                
-                <!--end::User--> 
-            </div>
-            <!--end::Description-->
-        </div>
-        <!--end::Timeline heading-->
-
-        <!--begin::Timeline details-->
-        <div class="overflow-auto pb-5">
-            <!--begin::Record-->
-            <div class=" align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5">  
-                <!--begin::Title-->                                   
-                <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-semibold w-375px min-w-200px">Zacatecoluca</a>                                  
-                <!--end::Title-->
-
-               <br>
-                <!--begin::Label-->
-                <div class="min-w-175px">
-                  
-                    Hora: 2:10 PM
-                    <p></p>
-                    Placa: P1234D
-                    <br>
-                    Color: Blanco
-                    <br>
-                    Punto de referencia: A la vuelta de la esquina.
+                <div class="min-w-175px mt-3">
+                  Hora aproximada de llegada: {{ $notificacion->horallegada }} <br>
+                  Nota: {{ $notificacion->nota }}
                 </div>
-                <!--end::Label-->
-                
-                <!--begin::Users-->
-                
-                <!--end::Users-->                                     
-
-               <p></p>
-                
-               
-
-                                           
+              </div>
             </div>
-            <!--end::Record-->
 
+          </div>
+        </div>
+      </div>
 
-@endif
+    @elseif($notificacion->tipo == 'llegado')
+      <div class="timeline timeline-border-dashed">
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
 
+          <div class="timeline-icon">
+            <i class="fas fa-flag-checkered" style="font-size: 22px;"></i>
+          </div>
 
+          <div class="timeline-content mb-10 mt-n1">
+            <div class="pe-3 mb-5">
+              <div class="fs-5 fw-semibold mb-2">
+                <span class="badge badge-light-success" style="padding: 10px 20px;">¡Hemos llegado!</span>
+              </div>
 
+              <div class="d-flex align-items-center mt-1 fs-6">
+                <div class="text-muted me-2 fs-7">
+                  Hora: {{ $notificacion->created_at->format('H:i') }}
+                </div>
+              </div>
+            </div>
 
+            <div class="overflow-auto pb-5">
+              <div class="align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5">
+                <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-semibold w-375px min-w-200px">
+                  {{ $notificacion->ruta->punto ?? 'Sin punto' }}
+                </a>
+
+                <div class="min-w-175px mt-3">
+                  Hora: {{ $notificacion->horallegada }} <br>
+                  Placa: {{ $notificacion->placa }} <br>
+                  Color: {{ $notificacion->color }} <br>
+                  Punto de referencia: {{ $notificacion->nota }}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    @elseif($notificacion->tipo == 'por_llegar')
+      <div class="timeline timeline-border-dashed">
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
+
+          <div class="timeline-icon">
+            <i class="fas fa-shipping-fast" style="font-size: 22px;"></i>
+          </div>
+
+          <div class="timeline-content mb-10 mt-n1">
+            <div class="pe-3 mb-5">
+              <div class="fs-5 fw-semibold mb-2">
+                <span class="badge badge-light-warning" style="padding: 10px 20px;">¡Por llegar!</span>
+              </div>
+
+              <div class="d-flex align-items-center mt-1 fs-6">
+                <div class="text-muted me-2 fs-7">
+                  Hora: {{ $notificacion->created_at->format('H:i') }}
+                </div>
+              </div>
+            </div>
+
+            <div class="overflow-auto pb-5">
+              <div class="align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5">
+                <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-semibold w-375px min-w-200px">
+                  {{ $notificacion->ruta->punto ?? 'Sin punto' }}
+                </a>
+
+                <div class="min-w-175px mt-3">
+                  Hora: {{ $notificacion->horallegada }} <br>
+                  Placa: {{ $notificacion->placa }} <br>
+                  Color: {{ $notificacion->color }} <br>
+                  Punto de referencia: {{ $notificacion->nota }}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    @endif
+
+  </div>
 
 @endforeach
-
 
 
 
@@ -690,31 +683,29 @@ License: For each use you must have a valid license purchased only from above li
                 <!--end::Javascript-->
 
 		<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const input = document.getElementById('searchGuia');
-    const table = document.getElementById('kt_ecommerce_sales_table');
-    if (!input || !table) return;
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('searchGuia');
+  if (!input) return;
 
-    const tbody = table.querySelector('tbody');
-    const rows = Array.from(tbody.querySelectorAll('tr'));
+  const norm = (s) => (s || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
 
-    input.addEventListener('input', () => {
-      const q = input.value.toLowerCase().trim();
+  const items = Array.from(document.querySelectorAll('.notif-item'));
 
-      rows.forEach(row => {
-        const text = row.innerText.toLowerCase();
-        row.style.display = text.includes(q) ? '' : 'none';
-      });
+  input.addEventListener('input', () => {
+    const q = norm(input.value);
+
+    items.forEach(el => {
+      const hay = norm(el.dataset.search);
+      el.style.display = hay.includes(q) ? '' : 'none';
     });
   });
+});
 </script>
 
-<script>
-
-  window.addEventListener('focus', () => {
-    location.reload();
-  });
-</script>
 
 	</body>
 	<!--end::Body-->

@@ -919,23 +919,27 @@ public function print($id)
         // 6) Redirigir a WhatsApp
         return redirect()->away($whatsUrl);
     }
-    public function notificaciones()
-    {
-        $comercio = Comercio::where('comercio', Auth::user()->name)->first();
-        /*
-        $notificaciones = Notificacion::where('created_at', '>=', Carbon::now()->subDays(1))
-                            ->orderBy('created_at', 'desc')
-                            ->get();
-        */
+    public function notificaciones(Request $request)
+{
+    $comercio = Comercio::where('comercio', Auth::user()->name)->first();
 
-                            $notificaciones = Notificacion::with('ruta')
-    ->where('created_at', '>=', Carbon::now()->subDays(1))
-    ->orderBy('created_at', 'desc')
-    ->get();
+    $rango = $request->get('rango', 'hoy');
 
-        return view('guias.notificaciones', compact( 'comercio', 'notificaciones'));
-
+    if ($rango === 'ayer') {
+        $inicio = Carbon::yesterday()->startOfDay();
+        $fin    = Carbon::yesterday()->endOfDay();
+    } else { // hoy
+        $inicio = Carbon::today()->startOfDay();
+        $fin    = Carbon::today()->endOfDay();
     }
+
+    $notificaciones = Notificacion::with('ruta')
+        ->whereBetween('created_at', [$inicio, $fin])
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return view('guias.notificaciones', compact('comercio', 'notificaciones', 'rango'));
+}
 
 
 
