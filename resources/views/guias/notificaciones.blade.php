@@ -307,7 +307,9 @@ License: For each use you must have a valid license purchased only from above li
           <div class="timeline-line"></div>
 
           <div class="timeline-icon">
-           <img alt="Logo" src="/fotos/delay.png" class="h-25px" />
+            <i class="fas fa-frown" style="font-size: 22px;"></i>
+
+      
           </div>
 
           <div class="timeline-content mb-10 mt-n1">
