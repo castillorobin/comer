@@ -13,4 +13,12 @@ class Notificacion extends Model
 {
     return $this->belongsTo(Rutas::class, 'punto'); // 'punto' = FK en notificaciones
 }
+
+public function getHorallegadaHmAttribute()
+{
+    return $this->horallegada
+        ? \Carbon\Carbon::createFromFormat('H:i:s', $this->horallegada)->format('H:i')
+        : null;
+}
+
 }

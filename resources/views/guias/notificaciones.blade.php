@@ -315,7 +315,7 @@ License: For each use you must have a valid license purchased only from above li
           <div class="timeline-content mb-10 mt-n1">
             <div class="pe-3 mb-5">
               <div class="fs-5 fw-semibold mb-2">
-                <span class="badge badge-light-danger" style="padding: 10px 20px;">Atraso</span>
+                <span class="badge badge-light-danger" style="padding: 10px 20px;">¡Atraso!</span>
               </div>
 
               <div class="d-flex align-items-center mt-1 fs-6">
@@ -332,7 +332,7 @@ License: For each use you must have a valid license purchased only from above li
                 </a>
 
                 <div class="min-w-175px mt-3">
-                  Hora aproximada de llegada: {{ $notificacion->horallegada }} <br>
+                  Hora aproximada de llegada: {{ $notificacion->horallegada_hm }}<br>
                   Nota: {{ $notificacion->nota }}
                 </div>
               </div>
@@ -412,6 +412,7 @@ License: For each use you must have a valid license purchased only from above li
                 </a>
 
                 <div class="min-w-175px mt-3">
+                Avisale a tu cliente que ya estamos por llegar al punto. <br>
                   Hora: {{ $notificacion->horallegada }} <br>
                   Placa: {{ $notificacion->placa }} <br>
                   Color: {{ $notificacion->color }} <br>
