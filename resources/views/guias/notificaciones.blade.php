@@ -353,99 +353,9 @@ License: For each use you must have a valid license purchased only from above li
 </div>
 <!--end::Timeline item *******************************************************-->
 @endif
-@endforeach
 
+@if($notificacion->tipo == 'llegada')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <!--begin::Timeline-->
-<div class="timeline timeline-border-dashed">
-    <!--begin::Timeline item-->
-<div class="timeline-item">
-    <!--begin::Timeline line-->
-    <div class="timeline-line"></div>
-    <!--end::Timeline line-->
-
-    <!--begin::Timeline icon-->
-    <div class="timeline-icon">
-        <i class="fas fa-search-location" style="font-size: 22px;"></i>   </div>
-    <!--end::Timeline icon-->  
-
-    <!--begin::Timeline content-->
-    <div class="timeline-content mb-10 mt-n1">
-        <!--begin::Timeline heading-->
-        <div class="pe-3 mb-5">
-            <!--begin::Title-->
-            <div class="fs-5 fw-semibold mb-2"><span class="badge badge-light-danger " style="padding: 10px 20px 10px 20px; ">Atraso</span></div>
-            <!--end::Title-->
-
-            <!--begin::Description-->
-            <div class="d-flex align-items-center mt-1 fs-6">
-                <!--begin::Info-->
-                <div class="text-muted me-2 fs-7">Hora: 11:23 PM</div>
-                <!--end::Info-->
-
-                <!--begin::User-->
-                
-                <!--end::User--> 
-            </div>
-            <!--end::Description-->
-        </div>
-        <!--end::Timeline heading-->
-
-        <!--begin::Timeline details-->
-        <div class="overflow-auto pb-5">
-            <!--begin::Record-->
-            <div class=" align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5">  
-                <!--begin::Title-->                                   
-                <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-semibold w-375px min-w-200px">Zacatecoluca</a>                                  
-                <!--end::Title-->
-
-               <br>
-                <!--begin::Label-->
-                <div class="min-w-175px">
-                  <br>
-                    Hora aproximada de llegada: 2:30 PM
-                    <br>
-                    Nota: El conductor tuvo un inconveniente en el camino.
-                </div>
-                <!--end::Label-->
-                
-                <!--begin::Users-->
-                
-                <!--end::Users-->                                     
-
-               <p></p>
-                
-               
-
-                                           
-            </div>
-            <!--end::Record-->
-
-            
-        </div>
-        <!--end::Timeline details-->
-    </div>
-    <!--end::Timeline content-->    
-</div>
 <!--end::Timeline item-->
     <!--begin::Timeline item-->
 <div class="timeline-item">
@@ -513,6 +423,36 @@ License: For each use you must have a valid license purchased only from above li
                                            
             </div>
             <!--end::Record-->
+
+
+@endif
+
+
+
+
+
+@endforeach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
