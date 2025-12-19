@@ -21,4 +21,11 @@ public function getHorallegadaHmAttribute()
         : null;
 }
 
+public function getHorasalidaHmAttribute()
+{
+    return $this->horasalida
+        ? \Carbon\Carbon::createFromFormat('H:i:s', $this->horasalida)->format('H:i')
+        : null;
+}
+
 }

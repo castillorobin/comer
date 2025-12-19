@@ -371,11 +371,62 @@ License: For each use you must have a valid license purchased only from above li
                 </a>
 
                 <div class="min-w-175px mt-3">
-                  Hora: {{ $notificacion->horallegada }} <br>
+                  Hora de llegada: {{ $notificacion->horallegada_hm }} <br>
+                  Hora de retirada: {{ $notificacion->horasalida_hm }} <br>
+                  Tipo de carro: {{ $notificacion->tipocarro }} <br>
                   Placa: {{ $notificacion->placa }} <br>
                   Color: {{ $notificacion->color }} <br>
                   Punto de referencia: {{ $notificacion->nota }}
                 </div>
+<br>
+
+
+
+
+    @if($notificacion->foto1)
+                <div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-700px p-7">
+
+                <!--begin::Item-->
+                <div class="overlay me-10">  
+                    <!--begin::Image-->                                      
+                    <div class="overlay-wrapper">
+                        <img alt="img" class="rounded w-150px" src=" https://meloexpresspuntofijo.site/storage/{{ $notificacion->foto1 }}">  
+                    </div>
+                    <!--end::Image-->                                              
+                </div>
+                <!--end::Item-->
+@if($notificacion->foto2)
+                <!--begin::Item-->
+                <div class="overlay me-10">   
+                    <!--begin::Image-->                                     
+                    <div class="overlay-wrapper">
+                        <img alt="img" class="rounded w-150px" src=" https://meloexpresspuntofijo.site/storage/{{ $notificacion->foto2 }}"> 
+                    </div>
+                    <!--end::Image-->
+                             
+                </div>
+                <!--end::Item-->                        
+                @endif
+@if($notificacion->foto3)
+                <!--begin::Item-->
+                <div class="overlay">   
+                    <!--begin::Image-->                                     
+                    <div class="overlay-wrapper">
+                        <img alt="img" class="rounded w-150px" src=" https://meloexpresspuntofijo.site/storage/{{ $notificacion->foto3 }}">
+                    </div>
+                    <!--end::Image-->
+                                  
+                </div>
+                @endif
+                <!--end::Item-->
+            </div>
+
+@endif
+
+
+
+
+
               </div>
             </div>
 
@@ -453,56 +504,7 @@ License: For each use you must have a valid license purchased only from above li
 
 
 
-            <div class="overflow-auto pb-5">
-            <div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-700px p-7">
-                <!--begin::Item-->
-                <div class="overlay me-10">  
-                    <!--begin::Image-->                                      
-                    <div class="overlay-wrapper">
-                        <img alt="img" class="rounded w-150px" src="https://marketplace.canva.com/EAFcLpiTbQU/2/0/800w/canva-fondo-de-pantalla-abstracto-formas-org%C3%A1nicas-rosado-llDqHMxUtgM.jpg">  
-                    </div>
-                    <!--end::Image-->
-
-                    <!--begin::Link-->
-                    <div class="overlay-layer bg-dark bg-opacity-10 rounded">
-                        <a href="#" class="btn btn-sm btn-primary btn-shadow">Explore</a>                                         
-                    </div>   
-                    <!--end::Link-->                                     
-                </div>
-                <!--end::Item-->
-
-                <!--begin::Item-->
-                <div class="overlay me-10">   
-                    <!--begin::Image-->                                     
-                    <div class="overlay-wrapper">
-                        <img alt="img" class="rounded w-150px" src="https://img.pikbest.com/wp/202408/rustic-vintage-vertical-wooden-texture-background-a-and-feel_9909667.jpg!w700wp"> 
-                    </div>
-                    <!--end::Image-->
-
-                    <!--begin::Link-->
-                    <div class="overlay-layer bg-dark bg-opacity-10 rounded">
-                        <a href="#" class="btn btn-sm btn-primary btn-shadow">Explore</a>                                         
-                    </div>        
-                    <!--end::Link-->                                
-                </div>
-                <!--end::Item-->                        
-                
-                <!--begin::Item-->
-                <div class="overlay">   
-                    <!--begin::Image-->                                     
-                    <div class="overlay-wrapper">
-                        <img alt="img" class="rounded w-150px" src="https://es.digitaltrends.com/tachyon/sites/13/2024/11/Microsoft-presenta-una-version-en-4K-del-legendario-fondo-de-pantalla-Bliss-de-Windows-XP-1.jpg?fit=800%2C449">
-                    </div>
-                    <!--end::Image-->
-
-                    <!--begin::Link-->
-                    <div class="overlay-layer bg-dark bg-opacity-10 rounded">
-                        <a href="#" class="btn btn-sm btn-primary btn-shadow">Explore</a>                                         
-                    </div>   
-                    <!--end::Link-->                                     
-                </div>
-                <!--end::Item-->
-            </div>
+            
         </div>
 
             
