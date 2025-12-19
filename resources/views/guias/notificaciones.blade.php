@@ -380,47 +380,52 @@ License: For each use you must have a valid license purchased only from above li
                 </div>
 <br>
 
+@php
+  $baseStorage = 'https://meloexpresspuntofijo.site/storage/';
+@endphp
 
 
+
+      @if($notificacion->foto1 || $notificacion->foto2 || $notificacion->foto3)
+  <div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-700px p-7 flex-wrap gap-3">
 
     @if($notificacion->foto1)
-                <div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-700px p-7">
+      <img
+        class="rounded w-150px js-zoom-img"
+        style="cursor: zoom-in; object-fit: cover;"
+        src="{{ $baseStorage.$notificacion->foto1 }}"
+        data-src="{{ $baseStorage.$notificacion->foto1 }}"
+        data-bs-toggle="modal"
+        data-bs-target="#modalZoomFoto"
+        alt="foto1"
+      >
+    @endif
 
-                <!--begin::Item-->
-                <div class="overlay me-10">  
-                    <!--begin::Image-->                                      
-                    <div class="overlay-wrapper">
-                        <img alt="img" class="rounded w-150px" src=" https://meloexpresspuntofijo.site/storage/{{ $notificacion->foto1 }}">  
-                    </div>
-                    <!--end::Image-->                                              
-                </div>
-                <!--end::Item-->
-@if($notificacion->foto2)
-                <!--begin::Item-->
-                <div class="overlay me-10">   
-                    <!--begin::Image-->                                     
-                    <div class="overlay-wrapper">
-                        <img alt="img" class="rounded w-150px" src=" https://meloexpresspuntofijo.site/storage/{{ $notificacion->foto2 }}"> 
-                    </div>
-                    <!--end::Image-->
-                             
-                </div>
-                <!--end::Item-->                        
-                @endif
-@if($notificacion->foto3)
-                <!--begin::Item-->
-                <div class="overlay">   
-                    <!--begin::Image-->                                     
-                    <div class="overlay-wrapper">
-                        <img alt="img" class="rounded w-150px" src=" https://meloexpresspuntofijo.site/storage/{{ $notificacion->foto3 }}">
-                    </div>
-                    <!--end::Image-->
-                                  
-                </div>
-                @endif
-                <!--end::Item-->
-            </div>
+    @if($notificacion->foto2)
+      <img
+        class="rounded w-150px js-zoom-img"
+        style="cursor: zoom-in; object-fit: cover;"
+        src="{{ $baseStorage.$notificacion->foto2 }}"
+        data-src="{{ $baseStorage.$notificacion->foto2 }}"
+        data-bs-toggle="modal"
+        data-bs-target="#modalZoomFoto"
+        alt="foto2"
+      >
+    @endif
 
+    @if($notificacion->foto3)
+      <img
+        class="rounded w-150px js-zoom-img"
+        style="cursor: zoom-in; object-fit: cover;"
+        src="{{ $baseStorage.$notificacion->foto3 }}"
+        data-src="{{ $baseStorage.$notificacion->foto3 }}"
+        data-bs-toggle="modal"
+        data-bs-target="#modalZoomFoto"
+        alt="foto3"
+      >
+    @endif
+
+  </div>
 @endif
 
 
@@ -656,6 +661,50 @@ License: For each use you must have a valid license purchased only from above li
   </div>
 </div>
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="modalZoomFoto" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Foto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body p-0">
+        <div class="d-flex justify-content-center align-items-center bg-light" style="min-height: 60vh;">
+          <img id="zoomFotoImg" src="" alt="Zoom" class="img-fluid"
+               style="max-height: 80vh; width:auto;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 	
 		 
         <!--begin::Javascript-->
@@ -710,6 +759,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modalEl = document.getElementById('modalZoomFoto');
+  const imgZoom = document.getElementById('zoomFotoImg');
+  if (!modalEl || !imgZoom) return;
+
+  modalEl.addEventListener('show.bs.modal', (event) => {
+    const trigger = event.relatedTarget;
+    const src = trigger?.getAttribute('data-src');
+    if (src) imgZoom.src = src;
+  });
+
+  modalEl.addEventListener('hidden.bs.modal', () => {
+    imgZoom.src = '';
+  });
+});
+</script>
+
 
 
 	</body>
