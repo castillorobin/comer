@@ -933,12 +933,20 @@ public function print($id)
         $fin    = Carbon::today()->endOfDay();
     }
 
+    $inicio2 = Carbon::today()->startOfDay();
+    $fin2   = Carbon::today()->endOfDay();
+
     $notificaciones = Notificacion::with('ruta')
         ->whereBetween('created_at', [$inicio, $fin])
         ->orderBy('created_at', 'desc')
         ->get();
+    
+    $notis = Notificacion::with('ruta')
+        ->whereBetween('created_at', [$inicio2, $fin2])
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-    return view('guias.notificaciones', compact('comercio', 'notificaciones', 'rango'));
+    return view('guias.notificaciones', compact('comercio', 'notificaciones', 'rango', 'notis'));
 }
 
 
