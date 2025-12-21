@@ -210,7 +210,7 @@ License: For each use you must have a valid license purchased only from above li
                                                     @endif
 
 
-                                                    @if($noti->tipo == 'llegado')
+                                                    @if($noti->tipo == 'por_llegar')
 
                                                     <div class="d-flex flex-stack py-4">
 														<!--begin::Section-->
