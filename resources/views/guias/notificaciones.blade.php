@@ -41,6 +41,9 @@ License: For each use you must have a valid license purchased only from above li
 		<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
 <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
 	
+<style>
+
+</style>
 
 	</head>
 
@@ -125,13 +128,27 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin::Notifications-->
 								<div class="app-navbar-item ms-1 ms-lg-5">
 									<!--begin::Menu- wrapper-->
-									<div class="btn btn-icon btn-custom btn-active-color-primary w-35px h-35px w-md-40px h-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom">
-										<i class="ki-outline ki-calendar fs-1"></i>
-									</div>
+									<div
+    class="btn btn-icon btn-custom btn-active-color-primary w-35px h-35px w-md-40px h-md-40px position-relative"
+    data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+    data-kt-menu-attach="parent"
+    data-kt-menu-placement="bottom"
+  >
+    <i class="ki-outline ki-calendar fs-1" ></i>
+
+    @if(count($notis) > 0)
+      <span class="position-absolute start-75 translate-middle badge badge-circle badge-danger" style="margin-top: 10px;">
+        {{ count($notis) }}
+      </span>
+    @endif
+  </div>
+
+
+
 									<!--begin::Menu-->
 									<div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true" id="kt_menu_notifications">
 										<!--begin::Heading-->
-										<div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-image:url('assets/media/misc/menu-header-bg.jpg')">
+										<div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-color: rgb(212, 212, 212);">
 											<!--begin::Title-->
 											<h3 class="text-white fw-semibold px-9 mt-10 mb-6">Notificaciones
 											<span class="fs-8 opacity-75 ps-3">{{ count($notis) }}</span></h3>
@@ -162,9 +179,11 @@ License: For each use you must have a valid license purchased only from above li
 														<div class="d-flex align-items-center">
 															<!--begin::Symbol-->
 															<div class="symbol symbol-35px me-4">
-																<span class="symbol-label bg-light-danger">
-																	 <i class="fas fa-frown" style="font-size: 22px;"></i>
+																
+																<span class="symbol-label">
+																	<i class="fas fa-frown fs-2 text-muted"></i>
 																</span>
+																
 															</div>
 															<!--end::Symbol-->
 															<!--begin::Title-->
@@ -189,8 +208,8 @@ License: For each use you must have a valid license purchased only from above li
 														<div class="d-flex align-items-center">
 															<!--begin::Symbol-->
 															<div class="symbol symbol-35px me-4">
-																<span class="symbol-label bg-light-success">
-																	 <i class="fas fa-flag-checkered" style="font-size: 22px;"></i>
+																<span class="symbol-label">
+																	 <i class="fas fa-flag-checkered text-muted" style="font-size: 22px;"></i>
 																</span>
 															</div>
 															<!--end::Symbol-->
@@ -217,8 +236,8 @@ License: For each use you must have a valid license purchased only from above li
 														<div class="d-flex align-items-center">
 															<!--begin::Symbol-->
 															<div class="symbol symbol-35px me-4">
-																<span class="symbol-label bg-light-warning">
-																	 <i class="fas fa-shipping-fast" style="font-size: 22px;"></i>
+																<span class="symbol-label" style="color: gray;">
+																	 <i class="fas fa-shipping-fast text-muted" style="font-size: 22px;"></i>
 																</span>
 															</div>
 															<!--end::Symbol-->
@@ -243,10 +262,16 @@ License: For each use you must have a valid license purchased only from above li
 													
                                                     @endforeach
 													<!--end::Item-->
+
+
+													
 												
 												</div>
 												<!--end::Items-->
-												
+												<div class="py-3 text-center border-top">
+													<a href="/guias/notificaciones" class="btn btn-color-gray-600 btn-active-color-primary">Ver todas 
+													<i class="ki-outline ki-arrow-right fs-5"></i></a>
+													</div>
 											</div>
 											<!--end::Tab panel-->
 											
@@ -459,8 +484,6 @@ License: For each use you must have a valid license purchased only from above li
 
           <div class="timeline-icon">
             <i class="fas fa-frown" style="font-size: 22px;"></i>
-
-      
           </div>
 
           <div class="timeline-content mb-10 mt-n1">
