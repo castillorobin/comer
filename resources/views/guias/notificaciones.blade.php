@@ -429,7 +429,7 @@ License: For each use you must have a valid license purchased only from above li
             <i class="ki-outline ki-magnifier fs-3 position-absolute ms-4"></i>
             <input id="searchGuia" type="text"
                    class="form-control form-control-solid w-100 w-md-250px ps-12"
-                   placeholder="Buscar guía...">
+                   placeholder="Buscar punto...">
         </div>
         <!--end::Search-->
     </div>
