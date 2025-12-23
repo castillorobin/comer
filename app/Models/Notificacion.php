@@ -9,6 +9,21 @@ class Notificacion extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+    'tipo',
+    'placa',
+    'color',
+    'tipocarro',
+    'punto',
+    'nota',
+    'horallegada',
+    'horasalida',
+    'foto1',
+    'foto2',
+    'foto3',
+    'leida','leida_at',
+];
+
     public function ruta()
 {
     return $this->belongsTo(Rutas::class, 'punto'); // 'punto' = FK en notificaciones

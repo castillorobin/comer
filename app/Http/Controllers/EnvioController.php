@@ -946,7 +946,25 @@ public function print($id)
         ->orderBy('created_at', 'desc')
         ->get();
 
-    return view('guias.notificaciones', compact('comercio', 'notificaciones', 'rango', 'notis'));
+        $noLeidas = Notificacion::where('leida', false)
+    ->whereBetween('created_at', [$inicio2, $fin2])   // si querés solo hoy
+    ->count();
+
+    return view('guias.notificaciones', compact('comercio', 'notificaciones', 'rango', 'notis', 'noLeidas'));
+}
+
+public function marcarLeidas(Request $request)
+{
+
+  
+    Notificacion::where('leida', false)
+        ->whereDate('created_at', now()) // si solo quieres hoy
+        ->update([
+            'leida' => true,
+            'leida_at' => now(),
+        ]);
+
+    return response()->json(['ok' => true]);
 }
 
 

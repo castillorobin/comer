@@ -128,20 +128,22 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin::Notifications-->
 								<div class="app-navbar-item ms-1 ms-lg-5">
 									<!--begin::Menu- wrapper-->
-									<div
-    class="btn btn-icon btn-custom btn-active-color-primary w-35px h-35px w-md-40px h-md-40px position-relative"
-    data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-    data-kt-menu-attach="parent"
-    data-kt-menu-placement="bottom"
-  >
-    <i class="ki-outline ki-calendar fs-1" ></i>
+									<div id="btnNotifs"
+										class="btn btn-icon btn-custom btn-active-color-primary w-35px h-35px w-md-40px h-md-40px position-relative"
+										data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+										data-kt-menu-attach="parent"
+										data-kt-menu-placement="bottom"
+									>
+										<i class="ki-outline ki-calendar fs-1" ></i>
 
-    @if(count($notis) > 0)
-      <span class="position-absolute start-75 translate-middle badge badge-circle badge-danger" style="margin-top: 10px;">
-        {{ count($notis) }}
-      </span>
-    @endif
-  </div>
+										
+
+										@if($noLeidas > 0)
+										<span id="notifBadge" class="position-absolute top-25 translate-middle badge badge-circle badge-danger" >
+											{{ $noLeidas > 99 ? '99+' : $noLeidas }}
+										</span>
+										@endif
+									</div>
 
 
 
@@ -150,7 +152,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin::Heading-->
 										<div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-color: rgb(212, 212, 212);">
 											<!--begin::Title-->
-											<h3 class="text-white fw-semibold px-9 mt-10 mb-6">Notificaciones
+											<h3 class="text-white fw-semibold px-9 mt-10 mb-6" style="font-weight: bolder;">Notificaciones
 											<span class="fs-8 opacity-75 ps-3">{{ count($notis) }}</span></h3>
 											<!--end::Title-->
 											<!--begin::Tabs-->
@@ -952,6 +954,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   modalEl.addEventListener('hidden.bs.modal', () => {
     imgZoom.src = '';
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('btnNotifs');
+
+  btn?.addEventListener('click', async () => {
+    console.log('click notifs'); // <- si no aparece, no está entrando
+
+    try {
+      const res = await fetch("{{ route('notificaciones.marcarLeidas') }}", {
+        method: "POST",
+        headers: {
+          "X-CSRF-TOKEN": "{{ csrf_token() }}",
+          "Accept": "application/json"
+        }
+      });
+
+      const data = await res.json();
+      console.log('respuesta:', data);
+
+      if (data.ok) {
+        document.getElementById('notifBadge')?.remove();
+      }
+    } catch (e) {
+      console.error('error fetch:', e);
+    }
   });
 });
 </script>
