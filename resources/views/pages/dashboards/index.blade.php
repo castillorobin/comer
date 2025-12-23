@@ -268,7 +268,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Col-->
 												<div class="col-6">
 													<!--begin::Card-->
-													<a class="card flex-column justfiy-content-start align-items-start text-start w-100 text-gray-800 text-hover-primary p-10" href="apps/customers/view.html">
+													<a class="card flex-column justfiy-content-start align-items-start text-start w-100 text-gray-800 text-hover-primary p-10" href="/guias/destinos">
 														<i class="ki-outline ki-abstract-26 fs-2tx mb-5 ms-n1 text-gray-500"></i>
 														<span class="fs-4 fw-bold">Destinos</span>
 													</a>

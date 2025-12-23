@@ -1058,7 +1058,26 @@ public function compartirGuia($id)
     return redirect()->away($waUrl);
 }
 
+public function destinos()
+{
+   $inicio2 = Carbon::today()->startOfDay();
+    $fin2   = Carbon::today()->endOfDay();
+
   
+    
+    $notis = Notificacion::with('ruta')
+        ->whereBetween('created_at', [$inicio2, $fin2])
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        $noLeidas = Notificacion::where('leida', false)
+    ->whereBetween('created_at', [$inicio2, $fin2])   // si querés solo hoy
+    ->count();
+
+    return view('guias.destinos', compact('notis', 'noLeidas'));
+
+  
+}
 
 
 
