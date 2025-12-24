@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\Notificacion;
+use App\Models\Destino;
 
 
 use Imagick;
@@ -1074,7 +1075,14 @@ public function destinos()
     ->whereBetween('created_at', [$inicio2, $fin2])   // si querés solo hoy
     ->count();
 
-    return view('guias.destinos', compact('notis', 'noLeidas'));
+    $destinos = Destino::with('ruta')
+        ->whereBetween('created_at', [$inicio2, $fin2])
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+
+
+    return view('guias.destinos', compact('notis', 'noLeidas', 'destinos'));
 
   
 }

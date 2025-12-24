@@ -467,8 +467,46 @@ License: For each use you must have a valid license purchased only from above li
 
 
 
+@foreach($destinos as $destino)
+
+<div class="row">
+	
+	<div class="col-md-12">
+			<!--begin::Timeline item-->
+	<div class="d-flex flex-stack mb-6">
+		<!--begin::Timeline content-->
+		<div class="d-flex flex-column align-items-start me-3">
+			<!--begin::Timeline details-->
+			<div class="d-flex flex-column">
+				<div class="d-flex align-items-center mb-1">
+					<!--begin::Title-->
+					<a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bold me-2">{{ $destino->ruta->punto ?? 'Sin punto' }}</a>
+					<!--end::Title-->
+					
+				</div>
+				<div class="d-flex flex-column">
+	<div class="d-flex align-items-center mb-1">
+		<!--begin::Label-->
+		Llegada de llegada: {{ $destino->hora_llegada_hm }}
+		<br>
+		Hora de retirada: {{ $destino->hora_retirada_hm }}
+		<!--end::Label-->
+		<br>
+		Lugar de entrega: {{ $destino->lugar_entrega }}
+		<br>
+		Entrega: {{ $destino->dias }}
+	</div>
+
+	
+</div>
+
+<p></p>
 
 
+
+
+
+@endforeach
 
 
 
@@ -496,7 +534,9 @@ License: For each use you must have a valid license purchased only from above li
 
 
 
-
+ </div>
+  </div>
+   </div>
 
 
 
