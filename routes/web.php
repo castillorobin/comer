@@ -72,6 +72,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/guias/destinos', [EnvioController::class, 'destinos'])->name('envios.destinos');
+
+    Route::get('/guias/compartirdestinos', [EnvioController::class, 'compartirdestinos'])->name('envios.compartirdestinos');
     
 Route::get('/ticket/qr/{codigo}', function ($codigo) {
     // Aquí puedes hacer validaciones si quieres (ej: verificar que el ticket exista)

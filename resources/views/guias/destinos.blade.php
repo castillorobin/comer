@@ -470,8 +470,16 @@ License: For each use you must have a valid license purchased only from above li
 @foreach($destinos as $destino)
 
 <div class="row">
-	
-	<div class="col-md-12">
+	<div class="col-md-1" style="margin-top: 50px;">
+		  <a href="{{ route('envios.compartirdestinos', $destino->id) }}"
+                                class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1"
+                                target="_blank"
+                                title="Compartir guía por WhatsApp">
+                                <i class="fas fa-share-square" style="font-size: 22px;"></i>
+                            </a>
+		</div>
+		<!--begin::Timeline-->
+	<div class="col-md-6">
 			<!--begin::Timeline item-->
 	<div class="d-flex flex-stack mb-6">
 		<!--begin::Timeline content-->
@@ -485,15 +493,19 @@ License: For each use you must have a valid license purchased only from above li
 					
 				</div>
 				<div class="d-flex flex-column">
-	<div class="d-flex align-items-center mb-1">
-		<!--begin::Label-->
-		Llegada de llegada: {{ $destino->hora_llegada_hm }}
+	<div class=" mb-1" >
 		<br>
-		Hora de retirada: {{ $destino->hora_retirada_hm }}
+		
+		<!--begin::Label-->
+		<span style="font-size: 20px; color: #5083bd; font-weight: bolder;">{{ $destino->hora_llegada_hm }} - {{ $destino->hora_retirada_hm }}</span>
+		<br>
+		
 		<!--end::Label-->
 		<br>
 		Lugar de entrega: {{ $destino->lugar_entrega }}
 		<br>
+		
+		<p></p>
 		Entrega: {{ $destino->dias }}
 	</div>
 
