@@ -1153,13 +1153,13 @@ public function compartirDestino($id)
             $canvas->text($item['label'], 60, $yPos, function ($font) {
                 $font->file(public_path('fonts/Inter-Bold.ttf'));
                 $font->size(20);
-                $font->color('#333333');
+                $font->color('#000000ff');
             });
             // Valor
             $canvas->text($item['value'], 250, $yPos, function ($font) {
                 $font->file(public_path('fonts/Inter-Regular.ttf'));
                 $font->size(22);
-                $font->color('#5083bd');
+                $font->color('#000000ff');
             });
             $yPos += 40;
         }
@@ -1173,7 +1173,7 @@ public function compartirDestino($id)
         $canvas->text($destino->dias, 60, $yPos + 80, function ($font) {
             $font->file(public_path('fonts/Inter-Bold.ttf'));
             $font->size(28);
-            $font->color('#666666');
+            $font->color('#000000ff');
         });
 
         // Guardar la imagen

@@ -497,9 +497,9 @@ License: For each use you must have a valid license purchased only from above li
 		<br>
 		
 		<!--begin::Label-->
-		<span style="font-weight: bolder;"> Hora de llegada:</span> <span style="font-size: 16px; color: #5083bd; font-weight: bolder;"> {{ $destino->hora_llegada_ampm }}</span>
+		<span style="font-weight: bolder;"> Hora de llegada:</span> <span style="font-size: 16px; color: #000000; font-weight: bolder;"> {{ $destino->hora_llegada_ampm }}</span>
 		<br>
-		<span style="font-weight: bolder;"> Hora de retirada:</span> <span style="font-size: 16px; color: #5083bd; font-weight: bolder;">{{ $destino->hora_retirada_ampm }}</span>
+		<span style="font-weight: bolder;"> Hora de retirada:</span> <span style="font-size: 16px; color: #000000; font-weight: bolder;">{{ $destino->hora_retirada_ampm }}</span>
 		<br>
 		
 		<span style="font-weight: bolder;"> Lugar de entrega:</span> <span class="text-muted"> {{ $destino->lugar_entrega }}</span>
