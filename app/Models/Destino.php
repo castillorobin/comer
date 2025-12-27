@@ -15,17 +15,17 @@ class Destino extends Model
     return $this->belongsTo(Rutas::class, 'punto'); // 'punto' = FK en notificaciones
 }
 
-public function getHoraLlegadaHmAttribute()
+public function getHoraLlegadaAmpmAttribute()
 {
     return $this->hora_llegada
-        ? \Carbon\Carbon::createFromFormat('H:i:s', $this->hora_llegada)->format('H:i')
+        ? \Carbon\Carbon::parse($this->hora_llegada)->format('g:i A')
         : null;
 }
 
-public function getHoraRetiradaHmAttribute()
+public function getHoraRetiradaAmpmAttribute()
 {
     return $this->hora_retirada
-        ? \Carbon\Carbon::createFromFormat('H:i:s', $this->hora_retirada)->format('H:i')
+        ? \Carbon\Carbon::parse($this->hora_retirada)->format('g:i A')
         : null;
 
 }

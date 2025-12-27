@@ -469,7 +469,7 @@ License: For each use you must have a valid license purchased only from above li
 
 @foreach($destinos as $destino)
 
-<div class="row">
+<div class="row" style="font-size: 14px;">
 	<div class="col-md-1" style="margin-top: 50px;">
 		  <a href="{{ route('envios.compartirdestinos', $destino->id) }}"
                                 class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1"
@@ -483,12 +483,12 @@ License: For each use you must have a valid license purchased only from above li
 			<!--begin::Timeline item-->
 	<div class="d-flex flex-stack mb-6">
 		<!--begin::Timeline content-->
-		<div class="d-flex flex-column align-items-start me-3">
+		<div class="d-flex flex-column align-items-start me-3 ">
 			<!--begin::Timeline details-->
-			<div class="d-flex flex-column">
-				<div class="d-flex align-items-center mb-1">
+			<div class="d-flex flex-column ">
+				<div class="text-center mb-1">
 					<!--begin::Title-->
-					<a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bold me-2">{{ $destino->ruta->punto ?? 'Sin punto' }}</a>
+					<span class="fs-6 text-gray-800 text-hover-primary fw-bold me-2 ">{{ $destino->ruta->punto ?? 'Sin punto' }}</span>
 					<!--end::Title-->
 					
 				</div>
@@ -497,16 +497,17 @@ License: For each use you must have a valid license purchased only from above li
 		<br>
 		
 		<!--begin::Label-->
-		<span style="font-size: 20px; color: #5083bd; font-weight: bolder;">{{ $destino->hora_llegada_hm }} - {{ $destino->hora_retirada_hm }}</span>
+		<span style="font-weight: bolder;"> Hora de llegada:</span> <span style="font-size: 16px; color: #5083bd; font-weight: bolder;"> {{ $destino->hora_llegada_ampm }}</span>
+		<br>
+		<span style="font-weight: bolder;"> Hora de retirada:</span> <span style="font-size: 16px; color: #5083bd; font-weight: bolder;">{{ $destino->hora_retirada_ampm }}</span>
 		<br>
 		
-		<!--end::Label-->
-		<br>
-		Lugar de entrega: {{ $destino->lugar_entrega }}
+		<span style="font-weight: bolder;"> Lugar de entrega:</span> <span class="text-muted"> {{ $destino->lugar_entrega }}</span>
 		<br>
 		
 		<p></p>
-		Entrega: {{ $destino->dias }}
+		<span style="font-weight: bolder;"> Dias de entrega:</span> <br> 
+		<span style="font-size: 20px;" class="text-muted">{{ $destino->dias }}</span>
 	</div>
 
 	

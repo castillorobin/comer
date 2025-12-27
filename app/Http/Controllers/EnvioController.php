@@ -1088,6 +1088,108 @@ public function destinos()
 }
 
 
+public function compartirDestino($id)
+{
+    $destino = Destino::with('ruta')->findOrFail($id);
+    
+    // Configuración de archivo
+    $dir = "whatsapp/destinos";
+    $fileName = "destino_" . $id . ".png";
+    $path = "{$dir}/{$fileName}";
+
+    // 1) Generar imagen si no existe
+    if (!Storage::disk('public')->exists($path)) {
+        
+        $manager = new ImageManager(new Driver());
+        // Creamos un canvas más alto para que quepa todo el texto cómodamente
+        $canvas = $manager->create(600, 700)->fill('#ffffff');
+
+        // --- 1. Logo Centrado ---
+        $logoPath = public_path('fotos/logoticket.jpeg');
+        if (file_exists($logoPath)) {
+            $logo = $manager->read($logoPath)->scale(width: 250);
+            $canvas->place($logo, 'top-center', 0, 40);
+        }
+
+        // --- 2. Texto de Saludo ---
+       // $saludo = "¡Hola! Te saludamos de Melo Express,\nte compartimos nuestro punto de entrega:";
+        /*
+        $canvas->text($saludo, 300, 220, function ($font) {
+            $font->file(public_path('fonts/Inter-Regular.ttf'));
+            $font->size(22);
+            $font->color('#444444');
+            $font->align('center');
+            $font->lineHeight(1.5);
+        });
+        */
+
+        // --- 3. Punto de Entrega (Título) ---
+        $puntoNombre = $destino->ruta->punto ?? 'Sin punto';
+        $canvas->text(strtoupper($puntoNombre), 60, 220, function ($font) {
+            $font->file(public_path('fonts/Inter-Bold.ttf'));
+            $font->size(25);
+            $font->color('#111111');
+            
+        });
+
+        // --- 4. Detalles (Horas y Lugar) ---
+        // Dibujamos una línea separadora opcional
+        /*
+        $canvas->drawRectangle(50, 380, function ($draw) {
+            $draw->background('#5083bd');
+            $draw->size(500, 2);
+        });
+        */
+
+        $yPos = 300;
+        $detalles = [
+            ['label' => 'Hora de llegada:', 'value' => $destino->hora_llegada_ampm],
+            ['label' => 'Hora de retirada:', 'value' => $destino->hora_retirada_ampm],
+            ['label' => 'Lugar de entrega:', 'value' => $destino->lugar_entrega],
+        ];
+
+        foreach ($detalles as $item) {
+            // Etiqueta (Label)
+            $canvas->text($item['label'], 60, $yPos, function ($font) {
+                $font->file(public_path('fonts/Inter-Bold.ttf'));
+                $font->size(20);
+                $font->color('#333333');
+            });
+            // Valor
+            $canvas->text($item['value'], 250, $yPos, function ($font) {
+                $font->file(public_path('fonts/Inter-Regular.ttf'));
+                $font->size(22);
+                $font->color('#5083bd');
+            });
+            $yPos += 40;
+        }
+
+        // --- 5. Días de Entrega ---
+        $canvas->text("Días de entrega:", 60, $yPos + 40, function ($font) {
+            $font->file(public_path('fonts/Inter-Bold.ttf'));
+            $font->size(20);
+        });
+
+        $canvas->text($destino->dias, 60, $yPos + 80, function ($font) {
+            $font->file(public_path('fonts/Inter-Bold.ttf'));
+            $font->size(28);
+            $font->color('#666666');
+        });
+
+        // Guardar la imagen
+        Storage::disk('public')->put($path, (string) $canvas->toPng());
+    }
+
+    // 2) Preparar Link de WhatsApp
+    $imageUrl = asset("storage/{$path}");
+    $mensajeWa = "Hola! Te saludamos de Melo Express, te compartimos nuestro punto de entrega:\n\n" . $imageUrl;
+    
+    $waUrl = "https://wa.me/?text=" . urlencode($mensajeWa);
+
+    return redirect()->away($waUrl);
+}
+
+
 
 
 
