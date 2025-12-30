@@ -466,62 +466,52 @@ License: For each use you must have a valid license purchased only from above li
 
 
 
-
 @foreach($destinos as $destino)
-
-<div class="row" style="font-size: 14px;">
-	<div class="col-md-1" style="margin-top: 50px;">
-		  <a href="{{ route('envios.compartirdestinos', $destino->id) }}"
-                                class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1"
-                                target="_blank"
-                                title="Compartir guía por WhatsApp">
-                                <i class="fas fa-share-square" style="font-size: 22px;"></i>
-                            </a>
-		</div>
-		<!--begin::Timeline-->
-	<div class="col-md-6">
-			<!--begin::Timeline item-->
-	<div class="d-flex flex-stack mb-6">
-		<!--begin::Timeline content-->
-		<div class="d-flex flex-column align-items-start me-3 ">
-			<!--begin::Timeline details-->
-			<div class="d-flex flex-column ">
-				<div class="text-center mb-1">
-					<!--begin::Title-->
-					<span class="fs-6 text-gray-800 text-hover-primary fw-bold me-2 ">{{ $destino->ruta->punto ?? 'Sin punto' }}</span>
-					<!--end::Title-->
-					
-				</div>
-				<div class="d-flex flex-column">
-	<div class=" mb-1" >
-		<br>
-		
-		<!--begin::Label-->
-		<span style="font-weight: bolder;"> Hora de llegada:</span> <span style="font-size: 16px; color: #000000; font-weight: bolder;"> {{ $destino->hora_llegada_ampm }}</span>
-		<br>
-		<span style="font-weight: bolder;"> Hora de retirada:</span> <span style="font-size: 16px; color: #000000; font-weight: bolder;">{{ $destino->hora_retirada_ampm }}</span>
-		<br>
-		
-		<span style="font-weight: bolder;"> Lugar de entrega:</span> <span class="text-muted"> {{ $destino->lugar_entrega }}</span>
-		<br>
-		
-		<p></p>
-		<span style="font-weight: bolder;"> Dias de entrega:</span> <br> 
-		<span style="font-size: 20px;" class="text-muted">{{ $destino->dias }}</span>
-	</div>
-
-	
-</div>
-
-<p></p>
-
-
-
-</div>
-</div>
-</div>
-</div>
-
+    {{-- Agregamos la clase 'notif-item' y el atributo 'data-search' con el nombre del punto --}}
+    <div class="row notif-item" 
+         style="font-size: 14px;" 
+         data-search="{{ $destino->ruta->punto ?? 'Sin punto' }}">
+         
+        <div class="col-md-1" style="margin-top: 50px;">
+            <a href="{{ route('envios.compartirdestinos', $destino->id) }}"
+               class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1"
+               target="_blank"
+               title="Compartir guía por WhatsApp">
+                <i class="fas fa-share-square" style="font-size: 22px;"></i>
+            </a>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="d-flex flex-stack mb-6">
+                <div class="d-flex flex-column align-items-start me-3">
+                    <div class="d-flex flex-column">
+                        <div class="text-center mb-1">
+                            <span class="fs-6 text-gray-800 text-hover-primary fw-bold me-2">
+                                {{ $destino->ruta->punto ?? 'Sin punto' }}
+                            </span>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <div class="mb-1">
+                                <br>
+                                <span style="font-weight: bolder;"> Hora de llegada:</span> 
+                                <span style="font-size: 16px; color: #000000; font-weight: bolder;"> {{ $destino->hora_llegada_ampm }}</span>
+                                <br>
+                                <span style="font-weight: bolder;"> Hora de retirada:</span> 
+                                <span style="font-size: 16px; color: #000000; font-weight: bolder;">{{ $destino->hora_retirada_ampm }}</span>
+                                <br>
+                                <span style="font-weight: bolder;"> Lugar de entrega:</span> 
+                                <span class="text-muted"> {{ $destino->lugar_entrega }}</span>
+                                <br>
+                                <p></p>
+                                <span style="font-weight: bolder;"> Dias de entrega:</span> <br> 
+                                <span style="font-size: 20px;" class="text-muted">{{ $destino->dias }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endforeach
 
 
@@ -759,28 +749,28 @@ License: For each use you must have a valid license purchased only from above li
 
 		<script>
 document.addEventListener('DOMContentLoaded', () => {
-  const input = document.getElementById('searchGuia');
-  if (!input) return;
+    const input = document.getElementById('searchGuia');
+    if (!input) return;
 
-  const norm = (s) => (s || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .trim();
+    const norm = (s) => (s || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // Quita acentos
+        .trim();
 
-  const items = Array.from(document.querySelectorAll('.notif-item'));
+    input.addEventListener('input', () => {
+        const q = norm(input.value);
+        // Buscamos los items cada vez o los guardamos en una variable
+        const items = document.querySelectorAll('.notif-item');
 
-  input.addEventListener('input', () => {
-    const q = norm(input.value);
-
-    items.forEach(el => {
-      const hay = norm(el.dataset.search);
-      el.style.display = hay.includes(q) ? '' : 'none';
+        items.forEach(el => {
+            const hay = norm(el.dataset.search);
+            // Si el texto del input está incluido en el data-search, se muestra
+            el.style.display = hay.includes(q) ? '' : 'none';
+        });
     });
-  });
 });
 </script>
-
 
 
 
