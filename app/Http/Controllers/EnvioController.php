@@ -1085,7 +1085,7 @@ public function destinos()
     ->count();
 
     $destinos = Destino::with('ruta')
-        ->whereBetween('created_at', [$inicio2, $fin2])
+        
         ->orderBy('created_at', 'desc')
         ->get();
 
