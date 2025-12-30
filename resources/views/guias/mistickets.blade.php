@@ -116,6 +116,19 @@ License: For each use you must have a valid license purchased only from above li
 #kt_ecommerce_report_shipping_table thead th::after{
   display:none !important;
 }
+
+
+.modal-backdrop {
+    z-index: 1050 !important;
+}
+#modalSolicitarPago {
+    z-index: 1060 !important;
+}
+
+body.modal-open {
+    overflow: hidden !important;
+}
+
     </style>
 
 	</head>
@@ -755,6 +768,14 @@ if (searchText == "") {
 </td>
 
                             <td style="text-align: right;"	>
+                            <button type="button" 
+        class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-solicitar-pago" 
+        data-id="{{ $ticket->id }}" 
+        data-codigo="{{ $ticket->codigo }}"
+        title="Solicitar pago del ticket">
+    <i class="fas fa-money-check-alt" style="font-size: 22px;"></i>
+</button>
+
                                                             <!-- Ver detalle del ticket -->
                                  <button class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 edit" value="{{$ticket->codigo}}" id="kt_drawer_example_basic_button" ><i class="fas fa-eye" style="font-size: 22px;"></i></button>
 
@@ -1098,7 +1119,9 @@ if (searchText == "") {
 		  
         
 <script>
-$(document).ready(function(){
+$(document).ready(function() {
+    
+    // --- LÓGICA PARA VER DETALLE (Botón Ojo) ---
     $(document).on('click', '.edit', function(){
         var cod = $(this).val();
 
@@ -1122,7 +1145,6 @@ $(document).ready(function(){
         var cambi  = $('#cam' + cod).text();
         var desc   = $('#des' + cod).text();
 
-        // Llenas tus labels como ya lo hacías
         $('#codigo').text(cod);
         $('#come').text(comer);
         $('#fech').text(fecha);
@@ -1144,10 +1166,8 @@ $(document).ready(function(){
         $('#cod2').text(cod);
         $('#desc').text(desc);
 
-        var ide = '/cobro/ticketlistado/' + cod;
         document.getElementById("idticket").value = cod;
 
-        // 👉 Cargar el QR dinámico con AJAX
         $('#qrTicket').html('<small>Cargando QR...</small>');
         $.get('/ticket/qr/' + cod, function(html){
             $('#qrTicket').html(html);
@@ -1155,7 +1175,56 @@ $(document).ready(function(){
             $('#qrTicket').html('<small>No se pudo cargar el QR</small>');
         });
     });
+
+    // --- LÓGICA PARA SOLICITAR PAGO (MODAL) ---
+    // Usamos delegación de eventos $(document).on('click', ...) 
+    // para que funcione incluso si cambias de página en la tabla.
+    $(document).on('click', '.btn-solicitar-pago', function(e) {
+    e.preventDefault();
+    
+    var id = $(this).data('id');
+    var codigo = $(this).data('codigo');
+    
+    // Llenamos los inputs
+    $('#input_ticket_id').val(id);
+    $('#display_ticket_codigo').val(codigo);
+    
+    // Localizamos el elemento
+    var modalElement = document.getElementById('modalSolicitarPago');
+    
+    // PASO 1: Mover el modal al final del body para evitar bloqueos de contenedores (Z-Index)
+    document.body.appendChild(modalElement);
+    
+    // PASO 2: Obtener o crear la instancia
+    var miModal = bootstrap.Modal.getInstance(modalElement);
+    if (!miModal) {
+        miModal = new bootstrap.Modal(modalElement, {
+            baseZIndex: 10000, // Forzamos un z-index muy alto
+            focus: false       // Evitamos el conflicto de foco de Metronic
+        });
+    }
+    
+    // PASO 3: Mostrar
+    miModal.show();
 });
+
+    // Cambio dinámico de selects Punto/Agencia
+    $(document).on('change', '#tipo_lugar', function() {
+        const seleccion = $(this).val();
+        
+        $('#div_puntos, #div_agencias').addClass('d-none');
+        $('#div_puntos select, #div_agencias select').removeAttr('required').val('');
+
+        if (seleccion === 'Punto fijo') {
+            $('#div_puntos').removeClass('d-none');
+            $('#div_puntos select').attr('required', 'required');
+        } else if (seleccion === 'Agencia') {
+            $('#div_agencias').removeClass('d-none');
+            $('#div_agencias select').attr('required', 'required');
+        }
+    });
+});
+	
 </script>
 
 
@@ -1202,8 +1271,102 @@ $(document).ready(function(){
   </div>
 </div>
 <!-- End Modal para cambiar avatar -->
-	
 
+
+
+<!-- Inicio Modal para solicitar pago -->
+<div class="modal fade" id="modalSolicitarPago" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-focus="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Solicitud de pago</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('solicitud.pago.store') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-5">
+                        <label class="form-label">Código de Ticket</label>
+                        <input type="text" id="display_ticket_codigo" class="form-control form-control-solid" readonly>
+                        <input type="hidden" name="ticket_id" id="input_ticket_id">
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="form-label">Lugar de cobro</label>
+                        <select class="form-select form-select-solid" name="tipo_lugar" id="tipo_lugar" required>
+                            <option value="">Seleccione una opción</option>
+                            <option value="Punto fijo">Punto fijo</option>
+                            <option value="Agencia">Agencia</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-5 d-none" id="div_puntos">
+                        <label class="form-label">Seleccionar Punto Fijo</label>
+                        <select class="form-select form-select-solid" name="lugar_punto" id="select_punto">
+                            <option value="">Seleccionar punto</option>
+                            @foreach ($puntos as $punto)
+                                <option value="{{ $punto->id }}">{{ $punto->punto }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-5 d-none" id="div_agencias">
+                        <label class="form-label">Seleccionar Agencia</label>
+                        <select class="form-select form-select-solid" name="lugar_agencia" id="select_agencia">
+                            <option value="">Seleccionar agencia</option>
+                            @foreach ($agencias as $agencia)
+                                <option value="{{ $agencia->nombre }}">{{ $agencia->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="form-label">Fecha de cobro</label>
+                        <input type="date" class="form-control form-control-solid" name="fecha_cobro" required value="{{ date('Y-m-d') }}">
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="form-label">Nota</label>
+                        <textarea class="form-control form-control-solid" name="nota" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Modal para solicitar pago -->
+
+@if(session('success'))
+<script>
+    Swal.fire({
+        text: "{{ session('success') }}",
+        icon: "success",
+        buttonsStyling: false,
+        confirmButtonText: "Entendido",
+        customClass: {
+            confirmButton: "btn btn-primary"
+        }
+    });
+</script>
+@endif
+
+@if(session('error'))
+<script>
+    Swal.fire({
+        text: "{{ session('error') }}",
+        icon: "error",
+        buttonsStyling: false,
+        confirmButtonText: "Cerrar",
+        customClass: {
+            confirmButton: "btn btn-danger"
+        }
+    });
+</script>
+@endif
 	</body>
 	<!--end::Body-->
 </html>

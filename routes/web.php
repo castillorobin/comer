@@ -75,6 +75,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/guias/compartirdestinos', [EnvioController::class, 'compartirdestinos'])->name('envios.compartirdestinos');
     Route::get('/compartir-destino/{id}', [EnvioController::class, 'compartirDestino'])->name('envios.compartirdestinos');
+    Route::get('/ticket/solicitarpago/{id}', [EnvioController::class, 'solicitarPago'])->name('ticket.solicitarpago');
+
+    Route::post('/solicitud-pago/guardar', [EnvioController::class, 'storeSolicitud'])->name('solicitud.pago.store');
     
 Route::get('/ticket/qr/{codigo}', function ($codigo) {
     // Aquí puedes hacer validaciones si quieres (ej: verificar que el ticket exista)

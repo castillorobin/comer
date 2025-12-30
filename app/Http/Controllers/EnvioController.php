@@ -24,6 +24,9 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\Notificacion;
 use App\Models\Destino;
+use App\Models\Solicitud;
+
+
 
 
 use Imagick;
@@ -179,7 +182,10 @@ public function reporteticketpdf(Request $request)
     ->take(10)
     ->get();
 
-        return view('guias.mistickets', compact('envios', 'comercio', 'ticketpago'));
+    $puntos = Rutas::all();
+    $agencias = Agencia::all();
+
+        return view('guias.mistickets', compact('envios', 'comercio', 'ticketpago', 'puntos', 'agencias'));
     }
 
     public function misenvios($id)
@@ -237,8 +243,11 @@ public function reporteticketpdf(Request $request)
 
     $ticketpago = $query->orderBy('created_at', 'desc')->take(10)->get();
 
+    $puntos = Rutas::all();
+    $agencias = Agencia::all();
+
     // Regresas la misma vista que lista tickets
-    return view('guias.mistickets', compact('ticketpago' , 'comercio', ));
+    return view('guias.mistickets', compact('ticketpago' , 'comercio', 'puntos', 'agencias'));
 }
 
 
@@ -1187,6 +1196,32 @@ public function compartirDestino($id)
     $waUrl = "https://wa.me/?text=" . urlencode($mensajeWa);
 
     return redirect()->away($waUrl);
+}
+
+
+public function storeSolicitud(Request $request)
+{
+    $request->validate([
+        'ticket_id' => 'required',
+        'tipo_lugar' => 'required',
+        'fecha_cobro' => 'required|date',
+    ]);
+
+    // Determinamos el valor del lugar dependiendo de la elección
+    $lugarFinal = ($request->tipo_lugar === 'Punto fijo') 
+                  ? $request->lugar_punto 
+                  : $request->lugar_agencia;
+
+    Solicitud::create([
+        'ticket_id'   => $request->ticket_id,
+        'tipo_lugar'  => $request->tipo_lugar,
+        'lugar'       => $lugarFinal,
+        'fecha_cobro' => $request->fecha_cobro,
+        'nota'        => $request->nota,
+        //'user_id'     => auth()->id(), // Opcional: saber quién la creó
+    ]);
+
+    return redirect()->back()->with('success', 'Solicitud de pago enviada correctamente.');
 }
 
 
