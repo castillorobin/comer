@@ -11,9 +11,11 @@ class Solicitud extends Model
 
     protected $fillable = [
         'ticket_id',
+        'comercio',
         'tipo_lugar',
         'lugar',
         'fecha_cobro',
+        'estado',
         'nota',
         // 'user_id', // Descoméntalo si decides usarlo después
     ];

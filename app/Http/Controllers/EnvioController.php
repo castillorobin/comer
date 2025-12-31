@@ -1211,9 +1211,12 @@ public function storeSolicitud(Request $request)
     $lugarFinal = ($request->tipo_lugar === 'Punto fijo') 
                   ? $request->lugar_punto 
                   : $request->lugar_agencia;
+    $ticket = Ticketc::find($request->ticket_id);
+    $comercio = $ticket->comercio;
 
     Solicitud::create([
-        'ticket_id'   => $request->ticket_id,
+        'ticket_id'   => $ticket->codigo,
+        'comercio'    => $comercio,
         'tipo_lugar'  => $request->tipo_lugar,
         'lugar'       => $lugarFinal,
         'fecha_cobro' => $request->fecha_cobro,
