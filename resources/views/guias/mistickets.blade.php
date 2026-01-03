@@ -726,7 +726,7 @@ if (searchText == "") {
 			<table id="kt_ecommerce_report_shipping_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bold dataTable" style="width: 100%;">
                 <thead class="fs-7 text-gray-500 text-uppercase">
                     <tr>
-						<th class="min-w-100px text-center" >ID Ticket
+						<th class="min-w-100px " >ID Ticket
 						</th>
 					
 						<th class="min-w-100px text-center" data-dt-column="1" rowspan="1" colspan="1"><div class="dt-column-header"><span class="dt-column-title">Fecha</span><span class="dt-column-order" role="button" aria-label="Date: Activate to sort" tabindex="0"></span></div>
