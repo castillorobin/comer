@@ -1255,7 +1255,7 @@ public function redevo(Request $request)
 
     $envios = Envio::where('comercio', $comercio->comercio)
     ->where('estado', 'No entregado')
-    ->whereBetween('created_at', [$inicio, $fin])
+    ->whereBetween('fecha_entrega', [$inicio, $fin])
     ->with('rutaPunto:id,punto') // solo lo necesario
     ->orderBy('created_at', 'desc')
     ->take(10)

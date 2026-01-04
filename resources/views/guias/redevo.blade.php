@@ -421,7 +421,7 @@ Guias generadas</span>
 
     <!--begin::Card toolbar-->
     <div class="card-toolbar w-100 w-md-auto flex-row-fluid justify-content-end gap-2 gap-md-5">
-        <form method="GET" action="{{ url('/guias/generadas') }}"
+        <form method="GET" action="{{ url('/guias/redevo') }}"
       class="d-flex flex-row gap-2 align-items-center w-100 w-md-auto flex-nowrap">
 
             <div class="input-group w-100 w-md-250px">
@@ -498,7 +498,7 @@ Guias generadas</span>
                 <td class="text-center dt-type-date" >
       
   
-               <span class="fw-bold">{{ $envio->created_at->format('d/m/Y') }}</span>
+               <span class="fw-bold">{{ date('d/m/Y', strtotime($envio->fecha_entrega)) }}</span>
                     
                 </td>
               
