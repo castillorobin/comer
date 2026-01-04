@@ -1228,6 +1228,42 @@ public function storeSolicitud(Request $request)
 }
 
 
+public function redevo(Request $request)
+{
+    $tz = 'America/El_Salvador';
+
+    $comercio = Comercio::where('comercio', Auth::user()->name)->first();
+
+    // Por defecto: hoy
+    $rango = $request->get('rango', 'hoy');
+
+    // Calculamos inicio/fin según selección
+    $hoy = now($tz);
+
+    switch ($rango) {
+        case 'ayer':
+            $inicio = $hoy->copy()->subDay()->startOfDay();
+            $fin    = $hoy->copy()->subDay()->endOfDay();
+            break;
+
+        case 'hoy':
+        default:
+            $inicio = $hoy->copy()->startOfDay();
+            $fin    = $hoy->copy()->endOfDay();
+            break;
+    }
+
+    $envios = Envio::where('comercio', $comercio->comercio)
+    ->where('estado', 'No entregado')
+    ->whereBetween('created_at', [$inicio, $fin])
+    ->with('rutaPunto:id,punto') // solo lo necesario
+    ->orderBy('created_at', 'desc')
+    ->take(10)
+    ->get();
+
+    return view('guias.redevo', compact('envios', 'comercio', 'rango'));
+}
+
 
 
 

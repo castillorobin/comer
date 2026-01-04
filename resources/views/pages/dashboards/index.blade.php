@@ -278,7 +278,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Col-->
 												<div class="col-12 text-center">
 													<!--begin::Card-->
-													<a class="card flex-column w-100 text-gray-800 text-hover-primary p-10" href="apps/projects/project.html">
+													<a class="card flex-column w-100 text-gray-800 text-hover-primary p-10" href="/guias/redevo">
 														<i class="ki-outline ki-basket fs-2tx mb-5 ms-n1 text-gray-500"></i>
 														<span class="fs-4 fw-bold">Reenvios y Devoluciones</span>
 													</a>
