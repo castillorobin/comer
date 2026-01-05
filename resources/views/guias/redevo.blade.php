@@ -528,30 +528,37 @@ Guias generadas</span>
                 </td>
               
                 <td class="text-center">
+@php
+        $horaActual = now()->hour;
+        // El acceso se permite si la hora NO está entre las 22 (10pm) y las 5 (hasta las 6am)
+        $permitido = ($horaActual >= 6 && $horaActual < 22);
+    @endphp
 
-                 {{-- Reenvio--}}
-  <button type="button" 
-   class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-abrir-reenvior edit"
-   data-id="{{ $envio->id }}" 
-   value="{{$envio->id}}"
-   data-bs-toggle="modal" 
-   data-bs-target="#kt_modal_1"
-   title="Reenvio">
-    <i class="fas fa-sync" style="font-size: 22px;"></i>
-</button>
+    @if($permitido)
+        {{-- Reenvio--}}
+        <button type="button" 
+            class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-abrir-reenvior edit"
+            data-id="{{ $envio->id }}" 
+            value="{{$envio->id}}"
+            data-bs-toggle="modal" 
+            data-bs-target="#kt_modal_1"
+            title="Reenvio">
+            <i class="fas fa-sync" style="font-size: 22px;"></i>
+        </button>
 
-  {{-- Devolucion--}}
-
-  <button type="button" 
-   class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-abrir-devolucion edit2"
-   data-id="{{ $envio->id }}" 
-   value="{{$envio->id}}"
-   data-bs-toggle="modal" 
-   data-bs-target="#kt_modal_2"
-   title="Devolución">
-    <i class="fas fa-sign-in-alt" style="font-size: 22px;"></i>
-</button>
- 
+        {{-- Devolucion--}}
+        <button type="button" 
+            class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-abrir-devolucion edit2"
+            data-id="{{ $envio->id }}" 
+            value="{{$envio->id}}"
+            data-bs-toggle="modal" 
+            data-bs-target="#kt_modal_2"
+            title="Devolución">
+            <i class="fas fa-sign-in-alt" style="font-size: 22px;"></i>
+        </button>
+    @else
+        <span class="badge badge-light-dark text-muted">Fuera de horario</span>
+    @endif
  
 </td>
             </tr>
@@ -851,8 +858,22 @@ Guias generadas</span>
 </script>
 
 <script>
-    $("#kt_datepicker_1" ).flatpickr();
-    $("#kt_datepicker_2" ).flatpickr();
+    // Calculamos la fecha de mañana
+    var mañana = new Date();
+    mañana.setDate(mañana.getDate() + 1);
+
+    // Inicializamos Flatpickr con la restricción de fecha mínima
+    $("#kt_datepicker_1").flatpickr({
+        minDate: mañana,          // No permite hoy ni días pasados
+        dateFormat: "d/m/Y",      // Formato visual
+        disableMobile: "true"
+    });
+
+    $("#kt_datepicker_2").flatpickr({
+        minDate: mañana,          // No permite hoy ni días pasados
+        dateFormat: "d/m/Y",
+        disableMobile: "true"
+    });
 </script>
 
 
