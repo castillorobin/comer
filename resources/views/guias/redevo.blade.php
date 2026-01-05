@@ -506,8 +506,9 @@ Guias generadas</span>
 
                  {{-- Reenvio--}}
   <button type="button" 
-   class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-abrir-reenvior"
+   class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-abrir-reenvior edit"
    data-id="{{ $envio->id }}" 
+   value="{{$envio->id}}"
    data-bs-toggle="modal" 
    data-bs-target="#kt_modal_1"
    title="Reenvio">
@@ -517,8 +518,9 @@ Guias generadas</span>
   {{-- Devolucion--}}
 
   <button type="button" 
-   class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-abrir-devolucion"
+   class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-abrir-devolucion edit2"
    data-id="{{ $envio->id }}" 
+   value="{{$envio->id}}"
    data-bs-toggle="modal" 
    data-bs-target="#kt_modal_2"
    title="Devolución">
@@ -827,6 +829,39 @@ Guias generadas</span>
     $("#kt_datepicker_1" ).flatpickr();
     $("#kt_datepicker_2" ).flatpickr();
 </script>
+
+
+
+<script>
+       
+        
+    $(document).ready(function(){
+        $(document).on('click', '.edit', function(){
+           var cod=$(this).val();
+         
+
+           document.getElementById("idenvio").value = cod;
+           
+      
+        });
+    });
+     
+    
+     $(document).ready(function(){
+        $(document).on('click', '.edit2', function(){
+           var cod=$(this).val();
+         
+
+           document.getElementById("idenvio2").value = cod;
+           
+      
+        });
+    });
+    
+    
+    
+    
+        </script>
 
 	</body>
 	<!--end::Body-->

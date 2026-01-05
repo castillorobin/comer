@@ -80,6 +80,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/solicitud-pago/guardar', [EnvioController::class, 'storeSolicitud'])->name('solicitud.pago.store');
     Route::get('/guias/redevo', [EnvioController::class, 'redevo'])->name('envios.redevo');
     Route::get('/guias/devolver', [EnvioController::class, 'devolver'])->name('envios.devolver');
+
+    Route::get('/stocks/guardarreenvio', [App\Http\Controllers\EnvioController::class, 'guardarreenvio'] )->name('guardarreenvio');
+Route::get('/stocks/guardardevol', [App\Http\Controllers\EnvioController::class, 'guardardevol'] )->name('guardardevol');
     
 Route::get('/ticket/qr/{codigo}', function ($codigo) {
     // Aquí puedes hacer validaciones si quieres (ej: verificar que el ticket exista)

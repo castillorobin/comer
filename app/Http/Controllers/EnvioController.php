@@ -25,6 +25,8 @@ use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\Notificacion;
 use App\Models\Destino;
 use App\Models\Solicitud;
+use App\Models\Orden;
+
 
 
 
@@ -1263,6 +1265,148 @@ public function redevo(Request $request)
 
     return view('guias.redevo', compact('envios', 'comercio', 'rango'));
 }
+
+
+
+
+
+    public function guardarreenvio(Request $request)
+    {
+        $usuario = $request->get('usuariore') ;
+        $reenvi = $request->get('reenvi') ;
+        $nota = $request->get('nota') ;
+        $idenvio = $request->get('idenvio') ;
+        $reenvi = $request->get('reenvi') ;
+
+        //dd($usuario);
+
+        //dd($idenvio);
+
+        $envio = Envio::find($idenvio);
+        $envio->ordenado = 1;
+        $envio->save();
+
+       // dd($envio->comercio);
+
+        $ticketc = Orden::where('guia', $envio->guia)
+        ->get();
+
+        foreach ($ticketc as $tick) {
+          $tickid = $tick->id;
+            Orden::find($tickid)->delete();
+        }
+
+        $entrega = new Orden();
+        $entrega->comercio = $envio->comercio;
+        $entrega->guia = $envio->guia;
+        $entrega->destinatario = $envio->destinatario;
+        $entrega->tipo = "Reenvio";
+        $entrega->fecha_pro = $reenvi;
+        $entrega->ubicacion = $envio->agenciaubi;
+        $entrega->estado = "Pendiente";
+        $entrega->nota = $nota;
+        $entrega->save();
+
+/*
+
+        $tick = $envio->ticketc ;
+
+        $pedidos = Envio::where('ticketc', $tick)
+        ->where('estado', "No entregado")
+        ->where('ordenado', 0)
+        ->get();
+
+         if($pedidos->isEmpty()){
+            //dd("no hay envio");
+            $nota = "El ticket que se ingreso no existe"; 
+            return view('stocks.generarp', compact('nota'));
+
+        }
+
+        */
+
+            $hesta = new Hestado();
+            $hesta->idenvio = $idenvio;
+            $hesta->estado = "Reenvio en proceso";
+            $hesta->usuario = $usuario;
+            $hesta->nota = $nota;
+            $hesta->freprogra = $reenvi;
+            $hesta->save();
+
+$nota = " ";
+      //   return view('guias.redevo', compact('pedidos', 'nota'));
+         //return route('envios.redevo');
+        return redirect()->route('envios.redevo');
+
+    }
+
+     public function guardardevol(Request $request)
+    {
+        $usuario = $request->get('usuario') ;
+        $reenvi = $request->get('reenvi') ;
+        $nota = $request->get('nota') ;
+        $idenvio = $request->get('idenvio2') ;
+        $reenvi = $request->get('devolucion') ;
+        $lugar = $request->get('lugar') ;
+
+        //dd($idenvio);
+
+        $envio = Envio::find($idenvio);
+        $envio->ordenado = 1;
+        $envio->save();
+       // dd($envio->comercio);
+
+ $ticketc = Orden::where('guia', $envio->guia)
+        ->get();
+
+        foreach ($ticketc as $tick) {
+          $tickid = $tick->id;
+            Orden::find($tickid)->delete();
+        }
+
+        $entrega = new Orden();
+        $entrega->comercio = $envio->comercio;
+        $entrega->guia = $envio->guia;
+        $entrega->destinatario = $envio->destinatario;
+        $entrega->tipo = "Devolucion";
+        $entrega->fecha_pro = $reenvi;
+        $entrega->ubicacion = $envio->agenciaubi;
+        $entrega->estado = "Pendiente";
+        $entrega->nota = $nota;
+        $entrega->lugar = $lugar;
+        $entrega->save();
+
+/*
+        $tick = $envio->ticketc ;
+
+        $pedidos = Envio::where('ticketc', $tick)
+        ->where('estado', "No entregado")
+        ->where('ordenado', 0)
+        ->get();
+
+         if($pedidos->isEmpty()){
+            //dd("no hay envio");
+            $nota = "El ticket que se ingreso no existe"; 
+            return view('stocks.generarp', compact('nota'));
+
+        }
+            */
+
+
+            $hesta = new Hestado();
+            $hesta->idenvio = $idenvio;
+            $hesta->estado = "Devolucion en proceso";
+            $hesta->usuario = $usuario;
+            $hesta->nota = $nota;
+            $hesta->freprogra = $reenvi;
+            $hesta->save();
+$nota = " ";
+
+         //return view('stocks.generarpdatos', compact('pedidos', 'nota'));
+
+         return redirect()->route('envios.redevo');
+
+    }
 
 
 
