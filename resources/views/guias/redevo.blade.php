@@ -504,14 +504,28 @@ Guias generadas</span>
               
                 <td class="text-center">
 
-  {{-- Compartir por WhatsApp --}}
-  <a href="{{ route('envios.devolver', $envio->id) }}"
-     class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1"
-     
-     title="Compartir guía por WhatsApp">
-    
-    <i class="fas fa-undo-alt" style="font-size: 22px;"></i>
-  </a>
+                 {{-- Reenvio--}}
+  <button type="button" 
+   class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-abrir-reenvior"
+   data-id="{{ $envio->id }}" 
+   data-bs-toggle="modal" 
+   data-bs-target="#kt_modal_1"
+   title="Reenvio">
+    <i class="fas fa-sync" style="font-size: 22px;"></i>
+</button>
+
+  {{-- Devolucion--}}
+
+  <button type="button" 
+   class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-abrir-devolucion"
+   data-id="{{ $envio->id }}" 
+   data-bs-toggle="modal" 
+   data-bs-target="#kt_modal_2"
+   title="Devolución">
+    <i class="fas fa-sign-in-alt" style="font-size: 22px;"></i>
+</button>
+ 
+ 
 </td>
             </tr>
             @endforeach
@@ -623,6 +637,140 @@ Guias generadas</span>
     </div>
   </div>
 </div>
+
+
+
+
+
+<form action="/stocks/guardarreenvio/" method="GET">
+                            <!--Start::Reenvio-->
+                            <div class="modal fade" tabindex="-1" id="kt_modal_1">
+                           
+                                <div class="modal-dialog modal-dialog-centered ">
+                                    <div class="modal-content">
+                                        <div class="modal-header mt-5 m-5" >
+                                            <h3 class="modal-title">Reenvio</h3>
+                                            <!--begin::Close-->
+                                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                                <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                                            </div>
+                                            <!--end::Close-->
+
+                                           
+
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row my-2 mx-2 justify-content-center" >
+                                                <div class="form-floating col-lg-6 mb-4">
+                                                    <input type="text" class="form-control form-control-solid" name="usuariore" id="usuariore" value="{{ Auth::user()->name }}" readonly />
+                                                    <label for="rack" style="padding-left: 25px;">Usuario</label>
+                                                    <div class="invalid-feedback">Este campo es obligatorio y solo se permiten números.</div>
+                                                </div>
+                                                <div class="form-floating col-lg-6 mb-4">
+                                                    <input type="text" class="form-control form-control-solid" name="fecha" id="fecha" value="{{ now()->Format('d/m/Y H:i A')}}" readonly/>
+                                                    <label for="nivel" style="padding-left: 25px;">Fecha y hora</label>
+                                                    <div class="invalid-feedback">Este campo es obligatorio y solo se permiten números.</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <input type="text" name="idenvio" id="idenvio" hidden>
+
+                                            
+                                                <div class="row my-2 mx-2 justify-content-center" name="caja1" id="caja1">
+                                                    <div class="form col-lg-12 mb-4">
+                                                      
+                                                         <input class="form-control form-control-solid" placeholder="Fecha de reenvio" id="kt_datepicker_1" name="reenvi"/>
+                                                       <p></p>
+                                                        <textarea class="form-control form-control-solid" name="nota" id="nota" placeholder="Nota"></textarea>
+                                                        
+                                                    </div>
+                                              
+                                                </div>
+                                               
+                                               
+                                            </div>
+
+                                            
+                                       
+                                        <div class="modal-footer m-5">
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            
+                        </div>
+                        <!--end::Card body-->
+</form>
+
+
+
+
+
+
+
+<form action="/stocks/guardardevol/" method="GET">
+                         <!--Start::Devolucion-->
+                            <div class="modal fade" tabindex="-1" id="kt_modal_2">
+                           
+                                <div class="modal-dialog modal-dialog-centered ">
+                                    <div class="modal-content">
+                                        <div class="modal-header mt-5 m-5" >
+                                            <h3 class="modal-title">Devolución</h3>
+                                            <!--begin::Close-->
+                                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                                <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                                            </div>
+                                            <!--end::Close-->
+
+                                           
+
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row my-2 mx-2 justify-content-center" >
+                                                <div class="form-floating col-lg-6 mb-4">
+                                                    <input type="text" class="form-control form-control-solid" name="usuario" id="usuario" value="{{ Auth::user()->name }}" readonly />
+                                                    <label for="rack" style="padding-left: 25px;">Usuario</label>
+                                                    <div class="invalid-feedback">Este campo es obligatorio y solo se permiten números.</div>
+                                                </div>
+                                                <div class="form-floating col-lg-6 mb-4">
+                                                    <input type="text" class="form-control form-control-solid" name="fecha" id="fecha" value="{{ now()->Format('d/m/Y H:i A')}}" readonly/>
+                                                    <label for="nivel" style="padding-left: 25px;">Fecha y hora</label>
+                                                    <div class="invalid-feedback">Este campo es obligatorio y solo se permiten números.</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <input type="text" name="idenvio2" id="idenvio2" hidden>
+
+                                            
+                                                <div class="row my-2 mx-2 justify-content-center" name="caja1" id="caja1">
+                                                    <div class="form col-lg-12 mb-4">
+                                                      <input type="text" class="form-control form-control-solid" placeholder="Lugar de devolución" id="lugar" name="lugar">
+                                                      <br>
+                                                         <input class="form-control form-control-solid" placeholder="Fecha de devolución" id="kt_datepicker_2" name="devolucion"/>
+                                                       <p></p>
+                                                        <textarea class="form-control form-control-solid" name="nota" id="nota" placeholder="Nota"></textarea>
+                                                        
+                                                    </div>
+                                              
+                                                </div>
+                                               
+                                               
+                                            </div>
+
+                                       
+                                        <div class="modal-footer m-5">
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            </form>
+                        </div>
+                     
+
 	
 	
 		 
@@ -675,7 +823,10 @@ Guias generadas</span>
   });
 </script>
 
-
+<script>
+    $("#kt_datepicker_1" ).flatpickr();
+    $("#kt_datepicker_2" ).flatpickr();
+</script>
 
 	</body>
 	<!--end::Body-->
