@@ -89,6 +89,8 @@ Reenvios y Devoluciones</title>
 .select2-container--default .select2-dropdown {
   border-radius: .475rem;
 }
+
+    
 </style>
 
 <style>
@@ -111,7 +113,30 @@ Reenvios y Devoluciones</title>
             display: none;
         }
             */
+
+
+
+/* Seleccionamos específicamente los labels flotantes dentro de inputs sólidos */
+.form-floating > .form-control-solid ~ label {
+    background-color: transparent !important; /* Eliminamos el fondo del label */
+    padding-left: 25px !important; /* Ajustamos para que no pegue al borde izquierdo */
+}
+
+/* Metronic/Bootstrap usa un pseudo-elemento ::after para crear el recuadro blanco detrás del texto */
+/* Es vital ponerlo en transparent o darle el color del input */
+.form-floating > .form-control-solid ~ label::after {
+    background-color: transparent !important; 
+}
+
+/* Ajuste cuando el input está enfocado o tiene texto (el label sube) */
+.form-floating > .form-control-solid:focus ~ label,
+.form-floating > .form-control-solid:not(:placeholder-shown) ~ label {
+    background-color: transparent !important;
+    opacity: 0.7; /* Lo hace ver más integrado con el estilo Metronic */
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem); /* Ajuste de posición al flotar */
+}
     </style>
+
 
 	</head>
 
