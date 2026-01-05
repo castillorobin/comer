@@ -834,6 +834,8 @@ Guias generadas</span>
 
 							    <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
     <script src="assets/js/custom/apps/ecommerce/reports/shipping/shipping.js"></script>
+
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
                         <!--end::Custom Javascript-->
                 <!--end::Javascript-->
 
@@ -862,18 +864,17 @@ Guias generadas</span>
     var mañana = new Date();
     mañana.setDate(mañana.getDate() + 1);
 
-    // Inicializamos Flatpickr con la restricción de fecha mínima
-    $("#kt_datepicker_1").flatpickr({
+    // Configuración común para ambos calendarios
+    var configFlatpickr = {
+        locale: "es",             // <--- Idioma Español
         minDate: mañana,          // No permite hoy ni días pasados
-        dateFormat: "d/m/Y",      // Formato visual
-        disableMobile: "true"
-    });
+        dateFormat: "d/m/Y",      // Formato visual día/mes/año
+        disableMobile: "true",    // Evita que el móvil use el calendario nativo
+    };
 
-    $("#kt_datepicker_2").flatpickr({
-        minDate: mañana,          // No permite hoy ni días pasados
-        dateFormat: "d/m/Y",
-        disableMobile: "true"
-    });
+    // Inicializamos
+    $("#kt_datepicker_1").flatpickr(configFlatpickr);
+    $("#kt_datepicker_2").flatpickr(configFlatpickr);
 </script>
 
 
