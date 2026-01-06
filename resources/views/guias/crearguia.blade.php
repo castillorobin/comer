@@ -382,7 +382,7 @@ License: For each use you must have a valid license purchased only from above li
 
 															<div class="col-md-6">
 																<!--begin::Input-->
-																<input type="date" class="form-control form-control-solid" name="fecha_entrega" value="" placeholder="Fecha de entrega"/>
+																<input type="date" id="fecha_entrega" class="form-control form-control-solid" name="fecha_entrega" value="" placeholder="Fecha de entrega"/>
 																<!--end::Input-->
 															</div>
 														</div>
@@ -411,7 +411,7 @@ License: For each use you must have a valid license purchased only from above li
 																	<span class="text-nowrap text-muted">Total a Cobrar: </span>
 																</label>
 																
-																<input type="text" class="form-control form-control-solid" name="total" value="" placeholder="$0.00"/>
+																<input type="text" class="form-control form-control-solid" name="total" value="" placeholder="$0.00" />
 															</div>
 														</div>
 														</div>
@@ -565,6 +565,26 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
+
+		<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+		
+
+		
+
+		
+<script>
+    
+    var configFlatpickr = {
+        locale: "es",             // <--- Idioma Español
+        
+       // dateFormat: "d/m/Y",      // Formato visual día/mes/año
+       
+    };
+
+    // Inicializamos
+    $("#fecha_entrega").flatpickr(configFlatpickr);
+    
+</script>
 
 		<script>
 document.addEventListener("DOMContentLoaded", function () {

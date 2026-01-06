@@ -645,7 +645,7 @@ public function store(Request $request)
         'direccionp' => 'nullable|required_if:tipo,Personalizado|required_if:tipo,Personalizado departamental',
         'fecha_entrega' => 'nullable|date',
         'nota' => 'nullable|string',
-        'total' => 'required|numeric|min:0',
+        'total' => 'nullable|numeric|min:0',
     ]);
 
     // Armar la "direccion final" según el tipo
