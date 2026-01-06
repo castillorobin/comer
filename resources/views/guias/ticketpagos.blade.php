@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             </tr>
             <tr>
                 
-                <td style="text-align: right;">ENTREGA EFECTIVO:</td>
+                <td style="text-align: left; margin-left: -50px;">ENTREGA EFECTIVO:</td>
                 <td style="text-align: left; padding-left: 25px;">${{ $ticketact[0]->entrega }}</td>
             </tr>
             <tr >
