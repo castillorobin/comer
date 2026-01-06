@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         <tr>
             {{-- QR ocupando 5 filas --}}
            <td rowspan="5" style="width: 35%; text-align: center; vertical-align: top;">
-    <div id="qrTicket" style="padding: 10px;"></div>
+    <div id="qrTicket" style="padding: 10px;"> {!! DNS2D::getBarcodeHTML((string)($ticketact[0]->codigo ?? ''), 'QRCODE', 4, 4) !!}</div>
 </td>
                 <td></td>
                 <td>SUBTOTAL</td>
