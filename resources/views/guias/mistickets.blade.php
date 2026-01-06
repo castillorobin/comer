@@ -815,6 +815,7 @@ if (searchText == "") {
                                                     <span hidden id="ent{{ $ticket->codigo }}"> {{ $ticket->entrega }}</span>
                                                     <span hidden id="cam{{ $ticket->codigo }}"> {{ $ticket->cambio }}</span>
                                                     <span hidden id="des{{ $ticket->codigo }}"> {{ $ticket->descuento }}</span>
+                                                    <span hidden id="met{{ $ticket->codigo }}"> {{ $ticket->metodo }}</span>
 
 
 
@@ -996,6 +997,19 @@ if (searchText == "") {
             </td>
         </tr>
 
+        <tr style="text-align: left;">
+                    
+                    
+                    <td style=" " >Método de pago:  </td>
+                    <td style="" class="centrar">
+                     <label id="meto"></label>
+                    </td>
+                    
+                    
+                </tr>
+
+        
+
         {{-- BLOQUE QR + TOTALES --}}
         <tr>
             {{-- QR ocupando 5 filas --}}
@@ -1144,6 +1158,7 @@ $(document).ready(function() {
         var entre  = $('#ent' + cod).text();
         var cambi  = $('#cam' + cod).text();
         var desc   = $('#des' + cod).text();
+        var meto   = $('#met' + cod).text();
 
         $('#codigo').text(cod);
         $('#come').text(comer);
@@ -1165,6 +1180,7 @@ $(document).ready(function() {
         $('#camb').text(cambi);
         $('#cod2').text(cod);
         $('#desc').text(desc);
+        $('#meto').text(meto);
 
         document.getElementById("idticket").value = cod;
 

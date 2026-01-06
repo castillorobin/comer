@@ -113,7 +113,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     
                     
                 </tr>
-            <tr >
+
+
+
+
+
+
+ {{-- BLOQUE QR + TOTALES --}}
+        <tr>
+            {{-- QR ocupando 5 filas --}}
+           <td rowspan="5" style="width: 35%; text-align: center; vertical-align: top;">
+    <div id="qrTicket" style="padding: 10px;"></div>
+</td>
                 <td></td>
                 <td>SUBTOTAL</td>
                 <td style="text-align: left; padding-left: 25px;">${{ $ticketact[0]->persoi + $ticketact[0]->puntoi + $ticketact[0]->casili + $ticketact[0]->depari + $ticketact[0]->guias }}
