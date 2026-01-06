@@ -922,7 +922,7 @@ if (searchText == "") {
 
 
 <div style="width:100%; " class="text-center centrar">
-    <img src="/fotos/logoticket.jpeg" width="150px">
+    <img src="/fotos/logomelonegro.png" width="150px">
     
     <div class="margen "> <span>Expertos en paqueteria</span></div>
 

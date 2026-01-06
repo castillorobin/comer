@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     </style>
 <div style="width:100%; " class="text-center centrar">
-    <img src="../public/fotos/logoticket.jpeg" alt="Melo Express" style="max-width: 55mm; height: auto;">
+    <img src="../public/fotos/logomelonegro.png" alt="Melo Express" style="max-width: 55mm; height: auto;">
     <br>
             <div class="margen "> <span class="page__heading melo" >Expertos en paqueteria</span></div>
             
