@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 
             </tr>
             <tr >
-                <td></td>
+               
                 <td>DESCUENTO</td>
                 <td style="text-align: left; padding-left: 25px;">${{ $ticketact[0]->descuento }}
                  
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 
             </tr>
             <tr>
-                <td></td>
+                
                 <td style="font-weight: bolder;">TOTAL</td>
                 <td style="text-align: left; padding-left: 25px;">${{ $ticketact[0]->total }}</td>
             </tr>
@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 <td style="text-align: left; padding-left: 25px;">${{ $ticketact[0]->entrega }}</td>
             </tr>
             <tr >
-                <td></td>
+               
                 <td>CAMBIO:</td>
                 <td style="text-align: left; padding-left: 25px;">${{ $ticketact[0]->cambio }}</td>
             </tr>
