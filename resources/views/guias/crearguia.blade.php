@@ -493,7 +493,7 @@ License: For each use you must have a valid license purchased only from above li
 															
 															<div class="col-md-6 mb-4">
 																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="destinatario" value="" placeholder="Destinatario"/>
+																<input type="text" class="form-control form-control-solid" name="destinatario" value="" placeholder="Destinatario" required/>
 																<!--end::Input-->
 															</div>
 															<div class="col-md-3 mb-4">
@@ -593,7 +593,7 @@ License: For each use you must have a valid license purchased only from above li
   <div class="col-12">
     <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
       
-      <a href="/dashboard" class="w-100 w-md-auto">
+      <a href="/guias/inicio" class="w-100 w-md-auto">
         <button type="button"
                 data-kt-ecommerce-settings-type="cancel"
                 class="btn btn-light w-100">
@@ -747,7 +747,7 @@ License: For each use you must have a valid license purchased only from above li
     // Inicializamos
     $("#fecha_entrega").flatpickr(configFlatpickr);
     
-</script>
+</script> 
 
 		<script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -782,7 +782,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const tplPersonalizado = `
         <div class="form-floating col-lg-12">
-            <input type="text" class="form-control form-control-solid" name="direccionp" id="direccionp" placeholder="Dirección" value="" />
+            <input type="text" class="form-control form-control-solid" name="direccionp" id="direccionp" placeholder="Dirección" value="" required/>
             <label for="direccionp" style="padding-left: 25px;">Dirección</label>
         </div>
     `;
