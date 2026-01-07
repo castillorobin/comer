@@ -929,7 +929,7 @@ if (searchText == "") {
   </span>
 </td>
 
-                            <td style="text-align: right; min-width: 150px;">
+                            <td style="text-align: center; min-width: 150px;">
                             <button type="button" 
         class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-solicitar-pago" 
         data-id="{{ $ticket->id }}" 
