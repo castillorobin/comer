@@ -511,7 +511,7 @@ License: For each use you must have a valid license purchased only from above li
 														<!--begin::Input group-->
 														<div class="row fv-row ">
 
-														<div class="col-md-4 mb-4">
+														<div class="col-md-4 mb-8">
 																<!--begin::Input-->
 																
 																<select name="tipo" id="tipo" class="form-control form-control-solid placeholder-select">
