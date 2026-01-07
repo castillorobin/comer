@@ -66,6 +66,7 @@ License: For each use you must have a valid license purchased only from above li
   display: flex !important;
   align-items: center !important;
   padding: 0 12px !important;
+  
 }
 
 /* texto */
@@ -87,6 +88,28 @@ License: For each use you must have a valid license purchased only from above li
 .select2-container--bootstrap5 .select2-dropdown,
 .select2-container--default .select2-dropdown {
   border-radius: .475rem;
+}
+
+/* Altura uniforme para evitar que la fila se vea más delgada en PC */
+#tipo, 
+#contenedor-direccion .form-control, 
+#contenedor-direccion .form-select,
+#contenedor-direccion .select2-container--bootstrap5 .select2-selection--single {
+    height: 45px !important;
+    min-height: 45px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Forzamos el margen entre filas para que no dependa solo del sistema de Metronic */
+.row.mb-md-7 {
+    margin-bottom: 1.75rem !important; /* Espacio extra para PC */
+}
+
+@media (max-width: 767px) {
+    .row.mb-5 {
+        margin-bottom: 1.25rem !important; /* Espacio normal para móvil */
+    }
 }
 </style>
 	</head>
@@ -509,27 +532,19 @@ License: For each use you must have a valid license purchased only from above li
 														</div>
 
 														<!--begin::Input group-->
-														<div class="row fv-row ">
-
-														<div class="col-md-4 mb-8">
-																<!--begin::Input-->
-																
-																<select name="tipo" id="tipo" class="form-control form-control-solid placeholder-select">
-																	<option value="" disabled hidden>Seleccionar tipo</option>
-																	<option value="Punto fijo" selected>Punto fijo</option>
-																	<option value="Personalizado">Personalizado</option>
-																	<option value="Personalizado departamental">Personalizado departamental</option>
-																	<option value="Casillero">Casillero</option>
-																</select>
-																<!--end::Input-->
-															</div>
-															
-															<div class="col-md-8 mb-4">
-																<!-- Aquí se inyecta el campo según el tipo -->
-																<div id="contenedor-direccion"></div>
-															</div>
-															
-														</div>
+													<div class="row mb-5 mb-md-7 align-items-center"> <div class="col-md-4 mb-5 mb-md-0"> <select name="tipo" id="tipo" class="form-control form-control-solid">
+            <option value="" disabled hidden>Seleccionar tipo</option>
+            <option value="Punto fijo" selected>Punto fijo</option>
+            <option value="Personalizado">Personalizado</option>
+            <option value="Personalizado departamental">Personalizado departamental</option>
+            <option value="Casillero">Casillero</option>
+        </select>
+    </div>
+    
+    <div class="col-md-8">
+        <div id="contenedor-direccion" class="w-100"></div>
+    </div>
+</div>
 														<!--end::Input group-->
 
 
@@ -754,36 +769,31 @@ document.addEventListener("DOMContentLoaded", function () {
     const tipo = document.getElementById("tipo");
     const contenedor = document.getElementById("contenedor-direccion");
 
-    // Templates (Blade dentro de strings)
     const tplPuntoFijo = `
-        <div class="form-floating col-lg-12" style="height: 45px;">
-            <select class="form-select form-select-solid mi-selector" data-control="select2" name="punto" id="punto">
-                <option value="seleccionar">Seleccionar punto</option>
+        <div class="w-100">
+            <select class="form-select form-select-solid mi-selector" data-control="select2" name="punto" id="punto" data-placeholder="Seleccionar punto">
+                <option></option>
                 @foreach ($puntos as $punto)
                     <option value="{{ $punto->id }}">{{ $punto->punto }}</option>
                 @endforeach
             </select>
-            
-            <br>
         </div>
     `;
 
     const tplCasillero = `
-        <div class="form-floating col-lg-12">
-            <select class="form-select form-select-solid" name="agencia" id="agencia" aria-label="Floating label select example">
-			<option value="seleccionar">Seleccionar agencia</option>
+        <div class="w-100">
+            <select class="form-select form-select-solid" name="agencia" id="agencia">
+                <option value="seleccionar">Seleccionar agencia</option>
                 @foreach($agencias as $agencia)
                     <option value="{{ $agencia->nombre }}">{{ $agencia->nombre }}</option>
                 @endforeach
             </select>
-           
         </div>
     `;
 
     const tplPersonalizado = `
-        <div class="form-floating col-lg-12">
-            <input type="text" class="form-control form-control-solid" name="direccionp" id="direccionp" placeholder="Dirección" value="" required/>
-            <label for="direccionp" style="padding-left: 25px;">Dirección</label>
+        <div class="w-100">
+            <input type="text" class="form-control form-control-solid" name="direccionp" id="direccionp" placeholder="Dirección" required/>
         </div>
     `;
 
