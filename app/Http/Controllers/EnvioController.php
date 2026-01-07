@@ -1317,7 +1317,7 @@ public function redevo(Request $request)
     ->take(10)
     ->get();
 
-
+//dd($envios);
     $inicio2 = Carbon::today()->startOfDay();
     $fin2   = Carbon::today()->endOfDay();
 

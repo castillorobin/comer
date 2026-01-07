@@ -1031,7 +1031,7 @@ Guias generadas</span>
     var configFlatpickr = {
         locale: "es",             // <--- Idioma Español
         minDate: mañana,          // No permite hoy ni días pasados
-        dateFormat: "d/m/Y",      // Formato visual día/mes/año
+       
         disableMobile: "true",    // Evita que el móvil use el calendario nativo
     };
 
