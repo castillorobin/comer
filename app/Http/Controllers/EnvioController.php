@@ -45,7 +45,26 @@ class EnvioController extends Controller
         $comercio = Comercio::where('comercio', Auth::user()->name)->first();
         $agencias = Agencia::all();
 
-        return view('guias.crearguia', compact('comercio', 'agencias', 'puntos'));
+         $inicio2 = Carbon::today()->startOfDay();
+    $fin2   = Carbon::today()->endOfDay();
+
+  
+    
+    $notis = Notificacion::with('ruta')
+        ->whereBetween('created_at', [$inicio2, $fin2])
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        $noLeidas = Notificacion::where('leida', false)
+    ->whereBetween('created_at', [$inicio2, $fin2])   // si querés solo hoy
+    ->count();
+
+    $destinos = Destino::with('ruta')
+        
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        return view('guias.crearguia', compact('comercio', 'agencias', 'puntos', 'notis', 'noLeidas', 'destinos'));
     }
 
     public function generadas(Request $request)
@@ -187,7 +206,27 @@ public function reporteticketpdf(Request $request)
     $puntos = Rutas::all();
     $agencias = Agencia::all();
 
-        return view('guias.mistickets', compact('envios', 'comercio', 'ticketpago', 'puntos', 'agencias'));
+
+     $inicio2 = Carbon::today()->startOfDay();
+    $fin2   = Carbon::today()->endOfDay();
+
+  
+    
+    $notis = Notificacion::with('ruta')
+        ->whereBetween('created_at', [$inicio2, $fin2])
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        $noLeidas = Notificacion::where('leida', false)
+    ->whereBetween('created_at', [$inicio2, $fin2])   // si querés solo hoy
+    ->count();
+
+    $destinos = Destino::with('ruta')
+        
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        return view('guias.mistickets', compact('envios', 'comercio', 'ticketpago', 'puntos', 'agencias', 'notis', 'noLeidas', 'destinos'));
     }
 
     public function misenvios($id)
@@ -1263,7 +1302,27 @@ public function redevo(Request $request)
     ->take(10)
     ->get();
 
-    return view('guias.redevo', compact('envios', 'comercio', 'rango'));
+
+    $inicio2 = Carbon::today()->startOfDay();
+    $fin2   = Carbon::today()->endOfDay();
+
+  
+    
+    $notis = Notificacion::with('ruta')
+        ->whereBetween('created_at', [$inicio2, $fin2])
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        $noLeidas = Notificacion::where('leida', false)
+    ->whereBetween('created_at', [$inicio2, $fin2])   // si querés solo hoy
+    ->count();
+
+    $destinos = Destino::with('ruta')
+        
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return view('guias.redevo', compact('envios', 'comercio', 'rango', 'notis', 'noLeidas', 'destinos'));
 }
 
 
