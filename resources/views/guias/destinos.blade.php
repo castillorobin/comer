@@ -481,7 +481,7 @@ License: For each use you must have a valid license purchased only from above li
             </a>
         </div>
         
-        <div class="col-md-6" style="border: 1px solid #979494ff;">
+        <div class="col-md-8" style="border: 1px dotted #979494ff;">
             <div class="d-flex flex-stack mb-6">
                 <div class="d-flex flex-column align-items-start me-3">
                     <div class="d-flex flex-column">
