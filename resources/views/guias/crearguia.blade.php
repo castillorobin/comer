@@ -852,6 +852,13 @@ document.addEventListener("DOMContentLoaded", function () {
   })();
 </script>
 
+<script>
+
+  window.addEventListener('focus', () => {
+    location.reload();
+  });
+</script>
+
 	</body>
 	<!--end::Body-->
 </html>
