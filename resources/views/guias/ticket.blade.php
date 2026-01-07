@@ -90,7 +90,7 @@
   {{-- Header --}}
   <div class="center">
     {{-- Ajusta ruta del logo según tu proyecto --}}
-    <img src="../public/fotos/logoticket.jpeg" alt="Melo Express" style="max-width: 55mm; height: auto;">
+    <img src="../public/fotos/logomelonegro.png" alt="Melo Express" style="max-width: 55mm; height: auto;">
 
     <div class="sm" style="margin-top: 16px;">
       <div class="bold">www.meloexpress.com.sv</div>
