@@ -283,12 +283,27 @@ public function reporteticketpdf(Request $request)
     }
 
     $ticketpago = $query->orderBy('created_at', 'desc')->take(10)->get();
-
+$inicio2 = Carbon::today()->startOfDay();
+    $fin2   = Carbon::today()->endOfDay();
     $puntos = Rutas::all();
     $agencias = Agencia::all();
 
+    $notis = Notificacion::with('ruta')
+        ->whereBetween('created_at', [$inicio2, $fin2])
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        $noLeidas = Notificacion::where('leida', false)
+    ->whereBetween('created_at', [$inicio2, $fin2])   // si querés solo hoy
+    ->count();
+
+    $destinos = Destino::with('ruta')
+        
+        ->orderBy('created_at', 'desc')
+        ->get();
+
     // Regresas la misma vista que lista tickets
-    return view('guias.mistickets', compact('ticketpago' , 'comercio', 'puntos', 'agencias'));
+    return view('guias.mistickets', compact('ticketpago' , 'comercio', 'puntos', 'agencias', 'notis', 'noLeidas', 'destinos'));
 }
 
 
