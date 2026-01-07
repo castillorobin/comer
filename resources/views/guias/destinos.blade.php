@@ -524,8 +524,16 @@ License: For each use you must have a valid license purchased only from above li
             
         </div>
         <!--end::Timeline details-->
+
+		<div class="w-100 text-end" style="margin-top: 15px;">
+			<a href="/dashboard">
+  <button class="btn btn-secondary">Cerrar</button>
+  </a>
+</div>
     </div>
     <!--end::Timeline content--> 
+
+	
 </div>
 <!--end::Timeline item-->
    
@@ -534,63 +542,30 @@ License: For each use you must have a valid license purchased only from above li
 
 
  </div>
-<!--end::Timeline-->            </div>
-
-
-
-
-
- </div>
-  </div>
-   </div>
+<!--end::Timeline-->          
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+  
 
 
 <div id="" class="row">
 
 <!--end::Table-->    </div>
-<div class="w-100 text-end" style="margin-top: 15px;">
-			<a href="/dashboard">
-  <button class="btn btn-secondary">Cerrar</button>
-  </a>
-</div>
+
     <!--end::Card body-->
 </div>
 <!--end::Products-->        
     </div>
 <!--end::Content-->	
 
-                                    </div>
-                <!--end::Content wrapper-->
-
-                                    
-                         </div>
-            <!--end:::Main-->
-
+                      
             
-                            </div>
+                         
 
                                     
 <!--begin::Footer-->
