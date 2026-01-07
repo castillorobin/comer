@@ -758,7 +758,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tplPuntoFijo = `
         <div class="form-floating col-lg-12" style="height: 45px;">
             <select class="form-select form-select-solid mi-selector" data-control="select2" name="punto" id="punto">
-                <option value="" style="height: 45px;"> </option>
+                <option value="seleccionar">Seleccionar punto</option>
                 @foreach ($puntos as $punto)
                     <option value="{{ $punto->id }}">{{ $punto->punto }}</option>
                 @endforeach
@@ -771,6 +771,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tplCasillero = `
         <div class="form-floating col-lg-12">
             <select class="form-select form-select-solid" name="agencia" id="agencia" aria-label="Floating label select example">
+			<option value="seleccionar">Seleccionar agencia</option>
                 @foreach($agencias as $agencia)
                     <option value="{{ $agencia->nombre }}">{{ $agencia->nombre }}</option>
                 @endforeach

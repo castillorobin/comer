@@ -476,6 +476,13 @@ License: For each use you must have a valid license purchased only from above li
 
 @foreach($notificaciones as $notificacion)
 
+
+
+
+
+
+
+
   <div class="notif-item"
        data-search="{{ mb_strtolower($notificacion->ruta->punto ?? '', 'UTF-8') }}">
 

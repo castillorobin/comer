@@ -472,7 +472,7 @@ License: For each use you must have a valid license purchased only from above li
          style="font-size: 14px;" 
          data-search="{{ $destino->ruta->punto ?? 'Sin punto' }}">
          
-        <div class="col-md-1" style="margin-top: 50px;">
+        <div class="col-md-1" style="margin-top: 60px;">
             <a href="{{ route('envios.compartirdestinos', $destino->id) }}"
                class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1"
                target="_blank"
@@ -481,11 +481,11 @@ License: For each use you must have a valid license purchased only from above li
             </a>
         </div>
         
-        <div class="col-md-8" style="border: 1px dotted #979494ff;">
+        <div class="col-md-10" style="border: 1px dotted #979494ff; margin-top: 10px; border-radius: 10px; padding-left: 20px;">
             <div class="d-flex flex-stack mb-6">
                 <div class="d-flex flex-column align-items-start me-3">
                     <div class="d-flex flex-column">
-                        <div class="text-center mb-1">
+                        <div class="text-center mb-1 " style="margin-top: 10px;">
                             <span class="fs-6 text-gray-800 text-hover-primary fw-bold me-2">
                                 {{ $destino->ruta->punto ?? 'Sin punto' }}
                             </span>
