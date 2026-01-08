@@ -457,16 +457,37 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin::Col-->
 										<div class="col-xl-8 ps-xl-12">
 											<!--begin::Engage widget 1-->
-											<div class="card bgi-position-y-bottom bgi-position-x-end bgi-no-repeat bgi-size-cover min-h-250px bg-body mb-5 mb-xl-8" style="background-position: 100% 50px;background-size: 500px auto;background-image:url('assets/media/misc/city.png')" dir="ltr">
+											<div class="card bgi-position-y-bottom bgi-position-x-end bgi-no-repeat bgi-size-cover min-h-250px bg-body mb-5 mb-xl-8"  dir="ltr">
 												<!--begin::Body-->
 												<div class="card-body d-flex flex-column justify-content-center ps-lg-12">
 													<!--begin::Title-->
-													<h3 class="text-gray-900 fs-2qx fw-bold mb-7">Melo express
+													<h6 class="text-gray-700 fs-2qx fw-bold mb-7">Estadisticas de envíos</h6>
 													
 													<!--end::Title-->
 													<!--begin::Action-->
 													<div class="m-0">
 														
+														<div class="row " style="padding-top: 20px;">
+
+															<div class="col-md-1">
+																<i class="fas fa-chart-line" style="font-size: 44px;"></i>
+															</div>
+															<div class="col-md-5">
+																<span style=" font-weight: bolder; font-size: 22px">$700</span>
+																<br>
+																<span style="" class="text-muted">Ventas totales</span>
+															</div>
+															<div class="col-md-1">
+																
+																<i class="fas fa-clipboard-list" style="font-size: 44px;"></i>
+															</div>
+															<div class="col-md-3">
+																<span style=" font-weight: bolder; font-size: 22px">75</span>
+																<br>
+																<span style="" class="text-muted">Entregados</span>
+															</div>
+															
+														</div>
 													</div>
 													<!--begin::Action-->
 												</div>
