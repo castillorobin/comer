@@ -477,7 +477,9 @@ License: For each use you must have a valid license purchased only from above li
 																		<!--begin::Icon--> 
 																		<div class="m-0">
 																			
-																			<i class="fas fa-file-invoice-dollar" style="font-size: 30px;"></i>                    
+																			<img src="/fotos/cajas.png" alt="" style="width: 50px; height: 50px;">  
+																			
+																			
 																					
 																		</div>                           
 																		<!--end::Icon-->
@@ -568,7 +570,7 @@ License: For each use you must have a valid license purchased only from above li
 																	<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 																		<!--begin::Icon--> 
 																		<div class="m-0">
-																			<i class="fas fa-times-circle" style="font-size: 30px;"></i>                    
+																			<img src="/fotos/noentregado.png" alt="" style="width: 50px; height: 50px;">                 
 																					
 																		</div>                           
 																		<!--end::Icon-->
