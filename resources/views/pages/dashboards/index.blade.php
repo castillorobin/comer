@@ -477,7 +477,7 @@ License: For each use you must have a valid license purchased only from above li
 																		<!--begin::Icon--> 
 																		<div class="m-0">
 																			
-																			<img src="/fotos/cajas.png" alt="" style="width: 50px; height: 50px;">  
+																			<img src="/fotos/total.svg" alt="" style="width: 50px; height: 50px;">  
 																			
 																			
 																					
@@ -526,7 +526,7 @@ License: For each use you must have a valid license purchased only from above li
 																	<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 																		<!--begin::Icon--> 
 																		<div class="m-0">
-																			<i class="far fa-calendar-check" style="font-size: 30px;"></i>                    
+																			<img src="/fotos/entregados.svg" alt="" style="width: 50px; height: 50px;">                    
 																					
 																		</div>                           
 																		<!--end::Icon-->
@@ -570,7 +570,7 @@ License: For each use you must have a valid license purchased only from above li
 																	<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 																		<!--begin::Icon--> 
 																		<div class="m-0">
-																			<img src="/fotos/noentregado.png" alt="" style="width: 50px; height: 50px;">                 
+																			<img src="/fotos/noentregados.svg" alt="" style="width: 50px; height: 50px;">                 
 																					
 																		</div>                           
 																		<!--end::Icon-->
@@ -613,7 +613,7 @@ License: For each use you must have a valid license purchased only from above li
 																	<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 																		<!--begin::Icon--> 
 																		<div class="m-0">
-																			<i class="fas fa-map-marked-alt" style="font-size: 30px;"></i>                  
+																			<img src="/fotos/enruta.svg" alt="" style="width: 50px; height: 50px;">                   
 																					
 																		</div>                           
 																		<!--end::Icon-->
