@@ -457,17 +457,19 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin::Col-->
 										<div class="col-xl-8 ps-xl-12">
 											<!--begin::Engage widget 1-->
-											<div class="card "  dir="ltr">
+											<div class=""  dir="ltr">
 												<!--begin::Body-->
 												<div class="card-body d-flex flex-column justify-content-center ">
 													
 													<div class="m-0">
 														
 														<div class="row ">
+
+
 															<!--Inicio::Fila-->		
 															
 
-															<div class="col-sm-6 col-xl-3 mb-xl-10">
+															<div class="col-sm-6 col-xl-3 mb-xl-10 " style="margin-bottom: 20px;">
 																<!--begin::Card widget 2-->
 																<div class="card h-lg-100">
 																	<!--begin::Body-->
@@ -515,7 +517,7 @@ License: For each use you must have a valid license purchased only from above li
 
 
 
-															<div class="col-sm-6 col-xl-3 mb-xl-10">
+															<div class="col-sm-6 col-xl-3 mb-xl-10" style="margin-bottom: 20px;">
 																<!--begin::Card widget 2-->
 																<div class="card h-lg-100">
 																	<!--begin::Body-->
@@ -559,14 +561,14 @@ License: For each use you must have a valid license purchased only from above li
 
 
 
-															<div class="col-sm-6 col-xl-3 mb-xl-10">
+															<div class="col-sm-6 col-xl-3 mb-xl-10" style="margin-bottom: 20px;">
 																<!--begin::Card widget 2-->
 																<div class="card h-lg-100">
 																	<!--begin::Body-->
 																	<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 																		<!--begin::Icon--> 
 																		<div class="m-0">
-																			<i class="ki-outline ki-compass fs-2hx text-gray-600"></i>                     
+																			<i class="fas fa-times-circle" style="font-size: 30px;"></i>                    
 																					
 																		</div>                           
 																		<!--end::Icon-->
@@ -602,14 +604,14 @@ License: For each use you must have a valid license purchased only from above li
 
 
 
-															<div class="col-sm-6 col-xl-3 mb-xl-10">
+															<div class="col-sm-6 col-xl-3 mb-xl-10" style="margin-bottom: 20px;">
 																<!--begin::Card widget 2-->
 																<div class="card h-lg-100">
 																	<!--begin::Body-->
 																	<div class="card-body d-flex justify-content-between align-items-start flex-column">         
 																		<!--begin::Icon--> 
 																		<div class="m-0">
-																			<i class="ki-outline ki-compass fs-2hx text-gray-600"></i>                     
+																			<i class="fas fa-map-marked-alt" style="font-size: 30px;"></i>                  
 																					
 																		</div>                           
 																		<!--end::Icon-->
