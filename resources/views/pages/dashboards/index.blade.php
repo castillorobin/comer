@@ -767,12 +767,12 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin::Table head-->
                             <thead>
                                 <tr class="fs-7 fw-bold text-gray-500 border-bottom-0">                                    
-                                    <th class=" w-150px ">Guia</th>
+                                    <th class=" min-w-150px ">Guia</th>
                                     <th class=" min-w-150px">Destinatario</th>
                                     <th class="min-w-150px">Destino</th>
                                     <th class="min-w-100px text-center">Tipo</th>                                     
-                                    <th class="w-100px text-center">Estado</th>
-									<th class="w-100px text-center">Nota</th>
+                                    <th class="min-w-100px text-center">Estado</th>
+									<th class="min-w-100px text-center">Nota</th>
                                 </tr>
                             </thead>
                             <!--end::Table head-->
