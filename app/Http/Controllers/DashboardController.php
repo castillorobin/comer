@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Envio;
+use App\Models\Rutas;
 use App\Models\Empleado;
 use App\Models\Notificacion;
 use App\Models\Destino;
 use Carbon\Carbon;
+
 
 class DashboardController extends Controller
 {
@@ -60,10 +62,12 @@ $inicio2 = Carbon::today()->startOfDay();
         'en_ruta'       => (clone $queryHoy)->where('estado', 'En ruta')->count(),
     ];
 
+    $queryLista = (clone $queryHoy)->with('rutaPunto');
+
     // 2. Listados para las pestañas (Tabs)
-    $enviosEntregados   = (clone $queryHoy)->where('estado', 'Entregado')->get();
-    $enviosNoEntregados = (clone $queryHoy)->where('estado', 'No entregado')->get();
-    $enviosEnRuta       = (clone $queryHoy)->where('estado', 'En ruta')->get();
+    $enviosEntregados   = (clone $queryLista)->where('estado', 'Entregado')->get();
+    $enviosNoEntregados = (clone $queryLista)->where('estado', 'No entregado')->get();
+    $enviosEnRuta       = (clone $queryLista)->where('estado', 'En ruta')->get();
 
 return view('pages.dashboards.index', compact('envios', 'notis', 'noLeidas', 'destinos', 'totales', 'enviosEntregados', 'enviosNoEntregados', 'enviosEnRuta'));
 

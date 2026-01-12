@@ -783,7 +783,7 @@ License: For each use you must have a valid license purchased only from above li
                 <tr>
                     <td>{{ $envio->guia }}</td>
                     <td>{{ $envio->destinatario }}</td>
-                    <td>{{ $envio->direccion }}</td>
+                    <td>{{ $envio->direccion_mostrar }}</td>
                     <td class="text-center"><span class="badge text-bg-dark">{{ $envio->tipo }}</span></td>
                     <td class="text-center"><span class="badge badge-success">{{ $envio->estado }}</span></td>
                     <td class="text-center">{{ $envio->nota ?? '---' }}</td>
