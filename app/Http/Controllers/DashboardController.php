@@ -41,7 +41,31 @@ $inicio2 = Carbon::today()->startOfDay();
         ->orderBy('created_at', 'desc')
         ->get();
 
-return view('pages.dashboards.index', compact('envios', 'notis', 'noLeidas', 'destinos'));
+
+
+        // Capturamos la fecha de hoy
+    $hoy = \Carbon\Carbon::now()->format('Y-m-d');
+
+    //dd($hoy);
+
+    // Consulta base para los envíos de hoy del comercio autenticado
+    $queryHoy = Envio::where('comercio', Auth::user()->name)
+                     ->whereDate('fecha_entrega', $hoy);
+
+    // 1. Totales para los widgets superiores
+    $totales = [
+        'todos'         => (clone $queryHoy)->count(),
+        'entregados'    => (clone $queryHoy)->where('estado', 'Entregado')->count(),
+        'no_entregados' => (clone $queryHoy)->where('estado', 'No entregado')->count(),
+        'en_ruta'       => (clone $queryHoy)->where('estado', 'En ruta')->count(),
+    ];
+
+    // 2. Listados para las pestañas (Tabs)
+    $enviosEntregados   = (clone $queryHoy)->where('estado', 'Entregado')->get();
+    $enviosNoEntregados = (clone $queryHoy)->where('estado', 'No entregado')->get();
+    $enviosEnRuta       = (clone $queryHoy)->where('estado', 'En ruta')->get();
+
+return view('pages.dashboards.index', compact('envios', 'notis', 'noLeidas', 'destinos', 'totales', 'enviosEntregados', 'enviosNoEntregados', 'enviosEnRuta'));
 
 
     }
