@@ -1039,6 +1039,43 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
+
+
+
+		<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('btnNotifs');
+
+  btn?.addEventListener('click', async () => {
+    console.log('click notifs'); // <- si no aparece, no está entrando
+
+    try {
+      const res = await fetch("{{ route('notificaciones.marcarLeidas') }}", {
+        method: "POST",
+        headers: {
+          "X-CSRF-TOKEN": "{{ csrf_token() }}",
+          "Accept": "application/json"
+        }
+      });
+
+      const data = await res.json();
+      console.log('respuesta:', data);
+
+      if (data.ok) {
+        document.getElementById('notifBadge')?.remove();
+      }
+    } catch (e) {
+      console.error('error fetch:', e);
+    }
+  });
+});
+</script>
+
+
+
+
+
+
 	</body>
 	<!--end::Body-->
 </html>
