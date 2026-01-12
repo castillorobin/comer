@@ -773,6 +773,7 @@ License: For each use you must have a valid license purchased only from above li
                                     <th class="min-w-100px text-center">Tipo</th>                                     
                                     <th class="min-w-100px text-center">Estado</th>
 									<th class="min-w-100px text-center">Nota</th>
+									
                                 </tr>
                             </thead>
                             <!--end::Table head-->
@@ -787,6 +788,7 @@ License: For each use you must have a valid license purchased only from above li
                     <td class="text-center"><span class="badge text-bg-dark">{{ $envio->tipo }}</span></td>
                     <td class="text-center"><span class="badge badge-success">{{ $envio->estado }}</span></td>
                     <td class="text-center">{{ $envio->nota ?? '---' }}</td>
+					
                 </tr>
                 @endforeach              
                             </tbody>
@@ -811,6 +813,7 @@ License: For each use you must have a valid license purchased only from above li
                                     <th class="min-w-100px text-center">Tipo</th>                                     
                                     <th class="min-w-100px text-center">Estado</th>
 									<th class="min-w-100px text-center">Nota</th>
+									<th class="min-w-100px text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <!--end::Table head-->
@@ -825,6 +828,40 @@ License: For each use you must have a valid license purchased only from above li
                     <td class="text-center"><span class="badge text-bg-dark">{{ $envio->tipo }}</span></td>
                     <td class="text-center"><span class="badge badge-danger">{{ $envio->estado }}</span></td>
                     <td class="text-center">{{ $envio->nota ?? '---' }}</td>
+					<td class="text-center">
+@php
+        $horaActual = now()->hour;
+        // El acceso se permite si la hora NO está entre las 22 (10pm) y las 5 (hasta las 6am)
+        $permitido = ($horaActual >= 6 && $horaActual < 22);
+    @endphp
+
+    @if($permitido)
+        {{-- Reenvio--}}
+        <button type="button" 
+            class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-abrir-reenvior edit"
+            data-id="{{ $envio->id }}" 
+            value="{{$envio->id}}"
+            data-bs-toggle="modal" 
+            data-bs-target="#kt_modal_1"
+            title="Reenvio">
+            <i class="fas fa-sync" style="font-size: 22px;"></i>
+        </button>
+
+        {{-- Devolucion--}}
+        <button type="button" 
+            class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1 btn-abrir-devolucion edit2"
+            data-id="{{ $envio->id }}" 
+            value="{{$envio->id}}"
+            data-bs-toggle="modal" 
+            data-bs-target="#kt_modal_2"
+            title="Devolución">
+            <i class="fas fa-sign-in-alt" style="font-size: 22px;"></i>
+        </button>
+    @else
+        <span class="badge badge-light-dark text-muted">Fuera de horario</span>
+    @endif
+ 
+</td>
                 </tr>
                 @endforeach         
                             </tbody>
@@ -849,6 +886,7 @@ License: For each use you must have a valid license purchased only from above li
                                     <th class="min-w-100px text-center">Tipo</th>                                     
                                     <th class="min-w-100px text-center">Estado</th>
 									<th class="min-w-100px text-center">Nota</th>
+									
                                 </tr>
                             </thead>
                             <!--end::Table head-->
@@ -863,6 +901,7 @@ License: For each use you must have a valid license purchased only from above li
 										<td class="text-center"><span class="badge text-bg-dark">{{ $envio->tipo }}</span></td>
 										<td class="text-center"><span class="badge badge-warning">{{ $envio->estado }}</span></td>
 										<td class="text-center">{{ $envio->nota ?? '---' }}</td>
+										
 									</tr>
 								@endforeach              
                             </tbody>
@@ -1004,6 +1043,151 @@ License: For each use you must have a valid license purchased only from above li
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form action="/stocks/guardarreenvio/" method="GET">
+                            <!--Start::Reenvio-->
+                            <div class="modal fade" tabindex="-1" id="kt_modal_1">
+                           
+                                <div class="modal-dialog modal-dialog-centered ">
+                                    <div class="modal-content">
+                                        <div class="modal-header mt-5 m-5" >
+                                            <h3 class="modal-title">Reenvio</h3>
+                                            <!--begin::Close-->
+                                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                                <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                                            </div>
+                                            <!--end::Close-->
+
+                                           
+
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row my-2 mx-2 justify-content-center" >
+                                                <div class="form-floating col-lg-6 mb-4">
+                                                    <input type="text" class="form-control form-control-solid" name="usuariore" id="usuariore" value="{{ Auth::user()->name }}" readonly />
+                                                    <label for="rack" style="padding-left: 25px;">Usuario</label>
+                                                    <div class="invalid-feedback">Este campo es obligatorio y solo se permiten números.</div>
+                                                </div>
+                                                <div class="form-floating col-lg-6 mb-4">
+                                                    <input type="text" class="form-control form-control-solid" name="fecha" id="fecha" value="{{ now()->Format('d/m/Y H:i A')}}" readonly/>
+                                                    <label for="nivel" style="padding-left: 25px;">Fecha y hora</label>
+                                                    <div class="invalid-feedback">Este campo es obligatorio y solo se permiten números.</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <input type="text" name="idenvio" id="idenvio" hidden>
+
+                                            
+                                                <div class="row my-2 mx-2 justify-content-center" name="caja1" id="caja1">
+                                                    <div class="form col-lg-12 mb-4">
+                                                      
+                                                         <input class="form-control form-control-solid" placeholder="Fecha de reenvio" id="kt_datepicker_1" name="reenvi"/>
+                                                       <p></p>
+                                                        <textarea class="form-control form-control-solid" name="nota" id="nota" placeholder="Nota"></textarea>
+                                                        
+                                                    </div>
+                                              
+                                                </div>
+                                               
+                                               
+                                            </div>
+
+                                            
+                                       
+                                        <div class="modal-footer m-5">
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            
+                        </div>
+                        <!--end::Card body-->
+</form>
+
+
+
+
+
+
+
+<form action="/stocks/guardardevol/" method="GET">
+                         <!--Start::Devolucion-->
+                            <div class="modal fade" tabindex="-1" id="kt_modal_2">
+                           
+                                <div class="modal-dialog modal-dialog-centered ">
+                                    <div class="modal-content">
+                                        <div class="modal-header mt-5 m-5" >
+                                            <h3 class="modal-title">Devolución</h3>
+                                            <!--begin::Close-->
+                                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                                <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                                            </div>
+                                            <!--end::Close-->
+
+                                           
+
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row my-2 mx-2 justify-content-center" >
+                                                <div class="form-floating col-lg-6 mb-4">
+                                                    <input type="text" class="form-control form-control-solid" name="usuario" id="usuario" value="{{ Auth::user()->name }}" readonly />
+                                                    <label for="rack" style="padding-left: 25px;">Usuario</label>
+                                                    <div class="invalid-feedback">Este campo es obligatorio y solo se permiten números.</div>
+                                                </div>
+                                                <div class="form-floating col-lg-6 mb-4">
+                                                    <input type="text" class="form-control form-control-solid" name="fecha" id="fecha" value="{{ now()->Format('d/m/Y H:i A')}}" readonly/>
+                                                    <label for="nivel" style="padding-left: 25px;">Fecha y hora</label>
+                                                    <div class="invalid-feedback">Este campo es obligatorio y solo se permiten números.</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <input type="text" name="idenvio2" id="idenvio2" hidden>
+
+                                            
+                                                <div class="row my-2 mx-2 justify-content-center" name="caja1" id="caja1">
+                                                    <div class="form col-lg-12 mb-4">
+                                                      <input type="text" class="form-control form-control-solid" placeholder="Lugar de devolución" id="lugar" name="lugar">
+                                                      <br>
+                                                         <input class="form-control form-control-solid" placeholder="Fecha de devolución" id="kt_datepicker_2" name="devolucion"/>
+                                                       <p></p>
+                                                        <textarea class="form-control form-control-solid" name="nota" id="nota" placeholder="Nota"></textarea>
+                                                        
+                                                    </div>
+                                              
+                                                </div>
+                                               
+                                               
+                                            </div>
+
+                                       
+                                        <div class="modal-footer m-5">
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            </form>
+                        </div>
+                     
 	
 	
 		
