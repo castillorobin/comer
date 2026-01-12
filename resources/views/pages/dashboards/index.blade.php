@@ -39,6 +39,24 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 		<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+		<style>
+			/* Estilo para el input de búsqueda de DataTables */
+.dataTables_filter input {
+    margin-left: 0 !important; /* Quita el margen que dejaba el texto anterior */
+    padding: 0.5rem 1rem;
+    background-color: #f5f8fa; /* Gris sólido estilo Metronic */
+    border: 1px solid #e1e3ea;
+    border-radius: 0.475rem;
+    color: #5E6278;
+    width: 250px !important; /* Ancho fijo para que no sea muy corto */
+}
+
+.dataTables_filter input:focus {
+    outline: none;
+    border-color: #001d7e; /* Color azul de tu marca */
+    background-color: #ffffff;
+}
+		</style>
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -763,7 +781,7 @@ License: For each use you must have a valid license purchased only from above li
                     <!--begin::Table container-->
                     <div class="table-responsive">
                         <!--begin::Table-->
-                        <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
+                        <table class="table table-row-dashed align-middle gs-0 gy-4 my-0" id="tablaEntregados">
                             <!--begin::Table head-->
                             <thead>
                                 <tr class="fs-7 fw-bold text-gray-500 border-bottom-0">                                    
@@ -803,7 +821,7 @@ License: For each use you must have a valid license purchased only from above li
                     <!--begin::Table container-->
                     <div class="table-responsive">
                         <!--begin::Table-->
-                        <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
+                        <table class="table table-row-dashed align-middle gs-0 gy-4 my-0" id="tablaNoEntregados">
                             <!--begin::Table head-->
                             <thead>
                                 <tr class="fs-7 fw-bold text-gray-500 border-bottom-0">                                    
@@ -876,7 +894,7 @@ License: For each use you must have a valid license purchased only from above li
                     <!--begin::Table container-->
                     <div class="table-responsive">
                         <!--begin::Table-->
-                        <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
+                        <table class="table table-row-dashed align-middle gs-0 gy-4 my-0" id="tablaEnRuta">
                             <!--begin::Table head-->
                             <thead>
                                 <tr class="fs-7 fw-bold text-gray-500 border-bottom-0">                                    
@@ -1255,6 +1273,36 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+<script>
+$(document).ready(function() {
+    // Configuración común para las 3 tablas
+    const configDataTable = {
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json",
+            // Personalizamos los textos de búsqueda
+            "search": "", // Esto quita la palabra "Buscar:"
+            "searchPlaceholder": "Buscar..." // Esto pone el texto dentro del input
+        },
+        "pageLength": 10,
+        "lengthMenu": [5, 10, 25, 50, 100],
+        "order": [],
+        "info": true,
+        "paging": true,
+        "responsive": true
+    };
+
+    // Inicializamos cada tabla por su ID
+    $('#tablaEntregados').DataTable(configDataTable);
+    $('#tablaNoEntregados').DataTable(configDataTable);
+    $('#tablaEnRuta').DataTable(configDataTable);
+
+    // Ajuste de columnas al cambiar de pestaña
+    $('a[data-bs-toggle="pill"]').on('shown.bs.tab', function (e) {
+        $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+    });
+});
+</script>
 
 
 
