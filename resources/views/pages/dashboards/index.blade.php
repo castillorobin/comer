@@ -42,19 +42,25 @@ License: For each use you must have a valid license purchased only from above li
 		<style>
 			/* Estilo para el input de búsqueda de DataTables */
 .dataTables_filter input {
-    margin-left: 0 !important; /* Quita el margen que dejaba el texto anterior */
-    padding: 0.5rem 1rem;
-    background-color: #f5f8fa; /* Gris sólido estilo Metronic */
+    margin-left: 0 !important;
+    padding: 0.5rem 0.75rem;
+    background-color: #f5f8fa;
     border: 1px solid #e1e3ea;
     border-radius: 0.475rem;
     color: #5E6278;
-    width: 250px !important; /* Ancho fijo para que no sea muy corto */
+    
+    /* Cambia este valor para ajustar el ancho exacto */
+    width: 150px !important; 
+    
+    transition: width 0.3s ease-in-out; /* Opcional: animación al hacer clic */
 }
 
+/* Opcional: que se alargue un poco cuando el usuario haga clic para escribir */
 .dataTables_filter input:focus {
     outline: none;
-    border-color: #001d7e; /* Color azul de tu marca */
+    border-color: #001d7e;
     background-color: #ffffff;
+    width: 200px !important; 
 }
 		</style>
 	</head>
